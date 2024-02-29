@@ -1,0 +1,15 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UE4Editor-MonsterQuest.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"D:\UnrealProject\MonsterQuest\MonsterQuest\Intermediate\Build\Win64\MonsterQuestEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h.obj"
+"D:\UnrealProject\MonsterQuest\MonsterQuest\Intermediate\Build\Win64\UE4Editor\Development\MonsterQuest\MonsterQuest.cpp.obj"
+"D:\UnrealProject\MonsterQuest\MonsterQuest\Intermediate\Build\Win64\UE4Editor\Development\MonsterQuest\MonsterQuestGameModeBase.cpp.obj"
+"D:\UnrealProject\MonsterQuest\MonsterQuest\Intermediate\Build\Win64\UE4Editor\Development\MonsterQuest\MonsterQuest.init.gen.cpp.obj"
+"D:\UnrealProject\MonsterQuest\MonsterQuest\Intermediate\Build\Win64\UE4Editor\Development\MonsterQuest\MonsterQuestGameModeBase.gen.cpp.obj"
+"D:\UnrealProject\MonsterQuest\MonsterQuest\Intermediate\Build\Win64\UE4Editor\Development\MonsterQuest\Default.rc2.res"
+/OUT:"D:\UnrealProject\MonsterQuest\MonsterQuest\Intermediate\Build\Win64\UE4Editor\Development\MonsterQuest\UE4Editor-MonsterQuest.lib"

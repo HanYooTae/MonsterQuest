@@ -1,0 +1,2 @@
+D:\UnrealProject\MonsterQuest\MonsterQuest\Intermediate\Build\Win64\UE4Editor\Development\MonsterQuest\Definitions.MonsterQuest.h
+D:\UnrealProject\MonsterQuest\MonsterQuest\Source\MonsterQuest\MonsterQuest.h

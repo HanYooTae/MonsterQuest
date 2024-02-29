@@ -1,0 +1,14 @@
+{
+	"Targets": [
+		{
+			"Name": "MonsterQuest",
+			"Path": "D:\\UnrealProject\\MonsterQuest\\MonsterQuest\\Source\\MonsterQuest.Target.cs",
+			"Type": "Game"
+		},
+		{
+			"Name": "MonsterQuestEditor",
+			"Path": "D:\\UnrealProject\\MonsterQuest\\MonsterQuest\\Source\\MonsterQuestEditor.Target.cs",
+			"Type": "Editor"
+		}
+	]
+}
