@@ -1,8 +1,0 @@
-{
-	"SourceFiles": [
-		"D:\\UnrealProject\\MonsterQuest\\MonsterQuest\\Source\\MonsterQuest\\MonsterQuest.Build.cs",
-		"D:\\UnrealProject\\MonsterQuest\\MonsterQuest\\Source\\MonsterQuest.Target.cs",
-		"D:\\UnrealProject\\MonsterQuest\\MonsterQuest\\Source\\MonsterQuestEditor.Target.cs"
-	],
-	"EngineVersion": "4.27.2"
-}
