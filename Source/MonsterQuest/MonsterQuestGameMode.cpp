@@ -1,7 +1,7 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "MonsterQuestGameMode.h"
-#include "MonsterQuestCharacter.h"
+#include "CPlayer.h"
 #include "UObject/ConstructorHelpers.h"
 
 AMonsterQuestGameMode::AMonsterQuestGameMode()
