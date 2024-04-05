@@ -6,6 +6,8 @@
 #include "GameFramework/Character.h"
 #include "CPlayer.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FBeginOverlapSignature, class ACharacter*, InAttacker, class AActor*, InCauser, class ACharacter*, InOtherCharacter);
+
 UCLASS(config=Game)
 class ACPlayer : public ACharacter
 {
@@ -68,5 +70,8 @@ public:
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
+
+public:
+	FBeginOverlapSignature OnBeginOverlap;
 };
 
