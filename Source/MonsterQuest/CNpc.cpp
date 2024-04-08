@@ -2,6 +2,7 @@
 #include "CPlayer.h"
 
 #include "Components/SphereComponent.h"
+#include "Components/CapsuleComponent.h"
 
 #include "Widgets/CInteract.h"
 
@@ -12,7 +13,7 @@ ACNpc::ACNpc()
 	PrimaryActorTick.bCanEverTick = true;
 
 	Sphere = CreateDefaultSubobject<USphereComponent>("Sphere");
-	SetRootComponent(Sphere);
+	//SetRootComponent(Sphere);
 
 	Sphere->SetSphereRadius(300.f);
 
