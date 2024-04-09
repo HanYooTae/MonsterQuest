@@ -12,9 +12,10 @@ ACNpc::ACNpc()
 {
 	PrimaryActorTick.bCanEverTick = true;
 
+	// Sphere Settings
 	Sphere = CreateDefaultSubobject<USphereComponent>("Sphere");
-	//SetRootComponent(Sphere);
-
+	Sphere->SetupAttachment(RootComponent);
+	Sphere->SetRelativeLocation(FVector(0, 0, 0));
 	Sphere->SetSphereRadius(300.f);
 
 	// SkeletalMesh Settings
