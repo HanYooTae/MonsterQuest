@@ -1,4 +1,4 @@
-#include "CPlayer.h"
+#include "CPlayer/CPlayer.h"
 #include "HeadMountedDisplayFunctionLibrary.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
@@ -6,6 +6,8 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/Controller.h"
 #include "GameFramework/SpringArmComponent.h"
+
+#include "CHelpers.h"
 
 ACPlayer::ACPlayer()
 {
@@ -43,9 +45,14 @@ void ACPlayer::SetupPlayerInputComponent(class UInputComponent* PlayerInputCompo
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
 	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
 
+	// Draw Weapon
+	PlayerInputComponent->BindAction("Draw", IE_Pressed, this, &ACPlayer::DrawWeapon);
+
+	// Move
 	PlayerInputComponent->BindAxis("MoveForward", this, &ACPlayer::MoveForward);
 	PlayerInputComponent->BindAxis("MoveRight", this, &ACPlayer::MoveRight);
 
+	// Turn
 	PlayerInputComponent->BindAxis("Turn", this, &ACPlayer::TurnAtRate);
 	PlayerInputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
 }
@@ -58,6 +65,11 @@ void ACPlayer::TurnAtRate(float Rate)
 void ACPlayer::LookUpAtRate(float Rate)
 {
 	AddControllerPitchInput(Rate * BaseLookUpRate * GetWorld()->GetDeltaSeconds());
+}
+
+void ACPlayer::DrawWeapon()
+{
+	//PlayAnimMontage()
 }
 
 void ACPlayer::MoveForward(float Value)

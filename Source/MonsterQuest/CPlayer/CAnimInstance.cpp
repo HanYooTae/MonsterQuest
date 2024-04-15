@@ -1,4 +1,4 @@
-#include "CAnimInstance.h"
+#include "CPlayer/CAnimInstance.h"
 
 #include "CHelpers.h"
 

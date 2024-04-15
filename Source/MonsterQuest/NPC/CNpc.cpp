@@ -1,5 +1,5 @@
-#include "CNpc.h"
-#include "CPlayer.h"
+#include "NPC/CNpc.h"
+#include "CPlayer/CPlayer.h"
 
 #include "Components/SphereComponent.h"
 #include "Components/CapsuleComponent.h"
