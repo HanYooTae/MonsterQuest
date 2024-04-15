@@ -1,6 +1,6 @@
 #include "CPlayer/CAnimInstance.h"
 
-#include "CHelpers.h"
+#include "Global.h"
 
 #include "GameFramework/Character.h"
 #include "GameFramework/CharacterMovementComponent.h"

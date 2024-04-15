@@ -6,7 +6,7 @@
 
 #include "Widgets/CInteract.h"
 
-#include "CHelpers.h"
+#include "Global.h"
 
 ACNpc::ACNpc()
 {

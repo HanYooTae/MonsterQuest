@@ -7,7 +7,7 @@
 #include "GameFramework/Controller.h"
 #include "GameFramework/SpringArmComponent.h"
 
-#include "CHelpers.h"
+#include "Global.h"
 
 ACPlayer::ACPlayer()
 {
