@@ -1,34 +1,51 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
-
 #include "ActorComponents/CMontagesComponent.h"
+#include "GameFramework/Character.h"
 
-// Sets default values for this component's properties
-UCMontagesComponent::UCMontagesComponent()
-{
-	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
-	// off to improve performance if you don't need them.
-	PrimaryComponentTick.bCanEverTick = true;
+#include "Global.h"
 
-	// ...
-}
+UCMontagesComponent::UCMontagesComponent() {}
 
 
-// Called when the game starts
 void UCMontagesComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// ...
-	
+	if (DataTable == nullptr)
+		CLog::Log("DataTable is not set yet");
+
+	TArray<FMontageData*> datas;
+	DataTable->GetAllRows<FMontageData>("", datas);
+
+	for (int8 i = 0; i < (int8)EStateType::Max; i++)
+	{
+		for (const auto& data : datas)
+		{
+			if ((EStateType)i == data->Type)
+			{
+				Datas[i] = data;
+				break;
+			}
+		}
+	}
 }
 
-
-// Called every frame
-void UCMontagesComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+void UCMontagesComponent::PlayHitted()
 {
-	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
-	// ...
+	PlayMontage(EStateType::Hitted);
 }
 
+void UCMontagesComponent::PlayDead()
+{
+	PlayMontage(EStateType::Dead);
+}
+
+void UCMontagesComponent::PlayMontage(EStateType InStateType)
+{
+	ACharacter* ownerCharacter = Cast<ACharacter>(GetOwner());
+	CheckNull(ownerCharacter);
+
+	const FMontageData* data = Datas[(int32)InStateType];
+
+	if (!!data && !!data->AnimMontage)
+		ownerCharacter->PlayAnimMontage(data->AnimMontage, data->PlayRate, data->StateSection);
+}
