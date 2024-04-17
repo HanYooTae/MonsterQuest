@@ -1,5 +1,6 @@
 #include "ActorComponents/CStatusComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
+
 #include "Global.h"
 
 UCStatusComponent::UCStatusComponent() {}

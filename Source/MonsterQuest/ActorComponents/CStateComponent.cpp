@@ -1,5 +1,7 @@
 #include "ActorComponents/CStateComponent.h"
 
+#include "Global.h"
+
 UCStateComponent::UCStateComponent() {}
 
 void UCStateComponent::BeginPlay()
