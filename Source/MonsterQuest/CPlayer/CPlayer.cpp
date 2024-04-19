@@ -1,4 +1,10 @@
 #include "CPlayer/CPlayer.h"
+
+#include "ActorComponents/CStatusComponent.h"
+#include "ActorComponents/CStateComponent.h"
+#include "ActorComponents/CMontagesComponent.h"
+#include "ActorComponents/CActionComponent.h"
+
 #include "HeadMountedDisplayFunctionLibrary.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
@@ -11,6 +17,12 @@
 
 ACPlayer::ACPlayer()
 {
+	// Create CharacterComponent
+	CHelpers::CreateActorComponent(this, &Action, "Action");
+	CHelpers::CreateActorComponent(this, &Status, "Status");
+	CHelpers::CreateActorComponent(this, &Montages, "Montages");
+	CHelpers::CreateActorComponent(this, &State, "State");
+
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
 
 	// set our turn rates for input

@@ -66,5 +66,18 @@ public:
 
 public:
 	FCharacterBeginOverlapSignature OnCharacterBeginOverlap;
+
+private:    // Character Component
+	UPROPERTY(VisibleDefaultsOnly)
+		class UCStatusComponent* Status;
+
+	UPROPERTY(VisibleDefaultsOnly)
+		class UCStateComponent* State;
+
+	UPROPERTY(VisibleDefaultsOnly)
+		class UCMontagesComponent* Montages;
+
+	UPROPERTY(VisibleDefaultsOnly)
+		class UCActionComponent* Action;
 };
 
