@@ -14,8 +14,13 @@ void ACWeapon::BeginPlay()
 {
 	OwnerCharacter = Cast<ACharacter>(GetOwner());
 
-	Collision->OnComponentBeginOverlap.AddDynamic(this, &ACWeapon::BeginOverlap);
-	Collision->OnComponentEndOverlap.AddDynamic(this, &ACWeapon::EndOverlap);
+	GetComponents(Collisions);
+
+	for (const auto& collision : Collisions)
+	{
+		collision->OnComponentBeginOverlap.AddDynamic(this, &ACWeapon::BeginOverlap);
+		collision->OnComponentEndOverlap.AddDynamic(this, &ACWeapon::EndOverlap);
+	}
 
 	OffCollision();
 
@@ -34,12 +39,14 @@ void ACWeapon::Attachment(FName InSocketName)
 
 void ACWeapon::OnCollision()
 {
-	Collision->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+	for (const auto& collision : Collisions)
+		collision->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 }
 
 void ACWeapon::OffCollision()
 {
-	Collision->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	for (const auto& collision : Collisions)
+		collision->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 }
 
 void ACWeapon::BeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)

@@ -52,5 +52,5 @@ public:
 	FEndOverlapSignature OnEndOverlap;
 
 private:
-	class UShapeComponent* Collision;
+	TArray<class UShapeComponent*> Collisions;
 };
