@@ -29,7 +29,10 @@ void ACEquipment::Equip_Implementation()
 
 	// Play Draw Montage
 	if (!!EquipmentData.AnimMontage)
+	{
 		OwnerCharacter->PlayAnimMontage(EquipmentData.AnimMontage, EquipmentData.PlayRate, EquipmentData.StartSection);
+		CLog::Log(EquipmentData.AnimMontage);
+	}
 
 	else
 	{

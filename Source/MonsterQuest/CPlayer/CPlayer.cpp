@@ -81,7 +81,9 @@ void ACPlayer::LookUpAtRate(float Rate)
 
 void ACPlayer::DrawWeapon()
 {
-	//PlayAnimMontage()
+	CheckFalse(State->IsIdleMode());
+
+	Action->SetSwordMode();
 }
 
 void ACPlayer::MoveForward(float Value)
