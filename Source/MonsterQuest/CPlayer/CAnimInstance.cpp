@@ -4,6 +4,7 @@
 
 #include "GameFramework/Character.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "CAnimInstance.h"
 
 UCAnimInstance::UCAnimInstance()
 {
@@ -15,7 +16,10 @@ void UCAnimInstance::NativeBeginPlay()
 
 	OwnerCharacter = Cast<ACharacter>(TryGetPawnOwner());
 
+	UCActionComponent* actionComp = CHelpers::GetComponent<UCActionComponent>(OwnerCharacter);
+	CheckNull(actionComp);
 
+	actionComp->OnActionTypeChanged.AddDynamic(this, &UCAnimInstance::OnActionTypeChanged);
 }
 
 void UCAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
@@ -29,4 +33,9 @@ void UCAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 	Direction = CalculateDirection(OwnerCharacter->GetVelocity(), OwnerCharacter->GetControlRotation());
 	Pitch = OwnerCharacter->GetBaseAimRotation().Pitch;
 	Falling = OwnerCharacter->GetCharacterMovement()->IsFalling();
+}
+
+void UCAnimInstance::OnActionTypeChanged(EActionType InPrevType, EActionType InNewType)
+{
+	ActionType = InNewType;
 }
