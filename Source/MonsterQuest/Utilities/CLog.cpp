@@ -27,6 +27,20 @@ void CLog::Print(const FRotator& InValue, int32 InKey, float InDuration, FColor 
 	GEngine->AddOnScreenDebugMessage(InKey, InDuration, InColor, InValue.ToString());
 }
 
+void CLog::Print(const UObject* InValue, int32 InKey, float InDuration, FColor InColor)
+{
+	FString str;
+
+	if (!!InValue)
+	{
+		str.Append(InValue->GetName());
+		str.Append(" is Valid");
+		UE_LOG(GameProject, Display, L"%s", *str);
+	}
+
+	GEngine->AddOnScreenDebugMessage(InKey, InDuration, InColor, *str);
+}
+
 void CLog::Log(int32 InValue)
 {
 	UE_LOG(GameProject, Display, L"%d", InValue);

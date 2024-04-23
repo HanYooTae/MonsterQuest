@@ -12,6 +12,8 @@ public:
 	static void Print(const FString& InValue, int32 InKey = -1, float InDuration = 2.f, FColor InColor = FColor::Magenta);
 	static void Print(const FVector& InValue, int32 InKey = -1, float InDuration = 2.f, FColor InColor = FColor::Magenta);
 	static void Print(const FRotator& InValue, int32 InKey = -1, float InDuration = 2.f, FColor InColor = FColor::Magenta);
+	static void Print(const UObject* InValue, int32 InKey = -1, float InDuration = 2.f, FColor InColor = FColor::Magenta);
+
 
 	static void Log(int32 InValue);
 	static void Log(float InValue);
