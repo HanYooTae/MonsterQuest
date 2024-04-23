@@ -62,7 +62,6 @@ void ACPlayer::SetupPlayerInputComponent(class UInputComponent* PlayerInputCompo
 
 	// Move
 	PlayerInputComponent->BindAxis("MoveForward", this, &ACPlayer::MoveForward);
-	PlayerInputComponent->BindAxis("MoveRight", this, &ACPlayer::MoveRight);
 
 	// Turn
 	PlayerInputComponent->BindAxis("Turn", this, &ACPlayer::TurnAtRate);
@@ -94,20 +93,6 @@ void ACPlayer::MoveForward(float Value)
 		const FRotator YawRotation(0, Rotation.Yaw, 0);
 
 		const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
-		AddMovementInput(Direction, Value);
-	}
-}
-
-void ACPlayer::MoveRight(float Value)
-{
-	if ( (Controller != nullptr) && (Value != 0.0f) )
-	{
-		const FRotator Rotation = Controller->GetControlRotation();
-		const FRotator YawRotation(0, Rotation.Yaw, 0);
-	
-		// get right vector 
-		const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
-		// add movement in that direction
 		AddMovementInput(Direction, Value);
 	}
 }

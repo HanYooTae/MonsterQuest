@@ -30,7 +30,6 @@ void UCActionData::BeginPlay(class ACharacter* InOwnerCharacter, UCActionData_Sp
 		Equipment->SetData(EquipmentData);
 		Equipment->SetActorLabel(GetCustomLabel(InOwnerCharacter, "Equipment"));
 
-		//Equipment->FinishSpawning()
 		UGameplayStatics::FinishSpawningActor(Equipment, transform);
 
 		if (!!Weapon)
