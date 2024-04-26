@@ -59,6 +59,8 @@ void ACPlayer::SetupPlayerInputComponent(class UInputComponent* PlayerInputCompo
 
 	// Draw Weapon
 	PlayerInputComponent->BindAction("Draw", IE_Pressed, this, &ACPlayer::DrawWeapon);
+	PlayerInputComponent->BindAction("NormalAttack", IE_Pressed, this, &ACPlayer::NormalAttack);
+	PlayerInputComponent->BindAction("SkillAttack", IE_Pressed, this, &ACPlayer::SkillAttack);
 
 	// Move
 	PlayerInputComponent->BindAxis("MoveForward", this, &ACPlayer::MoveForward);
@@ -70,6 +72,7 @@ void ACPlayer::SetupPlayerInputComponent(class UInputComponent* PlayerInputCompo
 
 void ACPlayer::TurnAtRate(float Rate)
 {
+	CheckFalse(Status->IsCanMove());
 	AddControllerYawInput(Rate * BaseTurnRate * GetWorld()->GetDeltaSeconds());
 }
 
@@ -85,8 +88,18 @@ void ACPlayer::DrawWeapon()
 	Action->SetSwordMode();
 }
 
+void ACPlayer::NormalAttack()
+{
+	Action->DoAction();
+}
+
+void ACPlayer::SkillAttack()
+{
+}
+
 void ACPlayer::MoveForward(float Value)
 {
+	CheckFalse(Status->IsCanMove());
 	if ((Controller != nullptr) && (Value != 0.0f))
 	{
 		const FRotator Rotation = Controller->GetControlRotation();

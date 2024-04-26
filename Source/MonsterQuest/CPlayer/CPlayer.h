@@ -49,6 +49,8 @@ protected:
 
 protected:
 	void DrawWeapon();
+	void NormalAttack();
+	void SkillAttack();
 
 protected:
 	// APawn interface
