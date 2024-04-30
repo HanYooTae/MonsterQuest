@@ -33,6 +33,7 @@ protected:
 
 	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "Animation")
 		bool Falling;
+
 	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "Animation")
 		EActionType ActionType;
 
