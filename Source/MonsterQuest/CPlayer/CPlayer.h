@@ -13,13 +13,6 @@ class ACPlayer : public ACharacter
 {
 	GENERATED_BODY()
 
-	/** Camera boom positioning the camera behind the character */
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
-	class USpringArmComponent* CameraBoom;
-
-	/** Follow camera */
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
-	class UCameraComponent* FollowCamera;
 public:
 	ACPlayer();
 
@@ -63,8 +56,20 @@ public:
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
 
+protected:
+	void OnZoom(float InAxis);
+
 public:
 	FCharacterBeginOverlapSignature OnCharacterBeginOverlap;
+
+public:
+	/** Camera boom positioning the camera behind the character */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
+		class USpringArmComponent* CameraBoom;
+
+	/** Follow camera */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
+		class UCameraComponent* FollowCamera;
 
 private:    // Character Component
 	UPROPERTY(VisibleDefaultsOnly)
@@ -78,5 +83,8 @@ private:    // Character Component
 
 	UPROPERTY(VisibleDefaultsOnly)
 		class UCActionComponent* Action;
+
+	UPROPERTY(VisibleDefaultsOnly)
+		class UCOptionComponent* Option;
 };
 

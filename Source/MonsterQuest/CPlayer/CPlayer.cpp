@@ -4,6 +4,7 @@
 #include "ActorComponents/CStateComponent.h"
 #include "ActorComponents/CMontagesComponent.h"
 #include "ActorComponents/CActionComponent.h"
+#include "ActorComponents/COptionComponent.h"
 
 #include "HeadMountedDisplayFunctionLibrary.h"
 #include "Camera/CameraComponent.h"
@@ -22,6 +23,7 @@ ACPlayer::ACPlayer()
 	CHelpers::CreateActorComponent(this, &Status, "Status");
 	CHelpers::CreateActorComponent(this, &Montages, "Montages");
 	CHelpers::CreateActorComponent(this, &State, "State");
+	CHelpers::CreateActorComponent(this, &Option, "Option");
 
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
 
@@ -68,6 +70,9 @@ void ACPlayer::SetupPlayerInputComponent(class UInputComponent* PlayerInputCompo
 	// Turn
 	PlayerInputComponent->BindAxis("Turn", this, &ACPlayer::TurnAtRate);
 	PlayerInputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
+
+	// Zoom
+	PlayerInputComponent->BindAxis("Zoom", this, &ACPlayer::OnZoom);
 }
 
 void ACPlayer::TurnAtRate(float Rate)
@@ -108,4 +113,11 @@ void ACPlayer::MoveForward(float Value)
 		const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
 		AddMovementInput(Direction, Value);
 	}
+}
+
+void ACPlayer::OnZoom(float InAxis)
+{
+	float rate = Option->GetZoomSpeed() * InAxis * GetWorld()->GetDeltaSeconds();
+	CameraBoom->TargetArmLength += rate;
+	CameraBoom->TargetArmLength = FMath::Clamp(CameraBoom->TargetArmLength, Option->GetZoomMin(), Option->GetZoomMax());
 }
