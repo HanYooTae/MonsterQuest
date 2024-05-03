@@ -10,6 +10,7 @@
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/InputComponent.h"
+#include "Components/StaticMeshComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/Controller.h"
 #include "GameFramework/SpringArmComponent.h"
@@ -24,6 +25,12 @@ ACPlayer::ACPlayer()
 	CHelpers::CreateActorComponent(this, &Montages, "Montages");
 	CHelpers::CreateActorComponent(this, &State, "State");
 	CHelpers::CreateActorComponent(this, &Option, "Option");
+
+	CHelpers::CreateSceneComponent(this, &Backpack, "Backpack", GetMesh());
+	UStaticMesh* staticMesh;
+	CHelpers::GetAsset<UStaticMesh>(&staticMesh, "StaticMesh'/Game/Weapons/Backpack/Backpack.Backpack'");
+	Backpack->SetStaticMesh(staticMesh);
+	Backpack->SetupAttachment(GetMesh(), "Backpack");
 
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
 

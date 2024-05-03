@@ -86,5 +86,8 @@ private:    // Character Component
 
 	UPROPERTY(VisibleDefaultsOnly)
 		class UCOptionComponent* Option;
+
+	UPROPERTY(VisibleDefaultsOnly)
+		class UStaticMeshComponent* Backpack;
 };
 
