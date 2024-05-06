@@ -41,7 +41,12 @@ protected:
 	void LookUpAtRate(float Rate);
 
 protected:
-	void DrawWeapon();
+	void DrawSword();
+	void DrawPistol();
+	void DrawRifle();
+	void DrawSniper();
+
+
 	void NormalAttack();
 	void SkillAttack();
 

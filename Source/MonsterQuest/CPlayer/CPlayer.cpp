@@ -67,9 +67,12 @@ void ACPlayer::SetupPlayerInputComponent(class UInputComponent* PlayerInputCompo
 	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
 
 	// Draw Weapon
-	PlayerInputComponent->BindAction("Draw", IE_Pressed, this, &ACPlayer::DrawWeapon);
-	PlayerInputComponent->BindAction("NormalAttack", IE_Pressed, this, &ACPlayer::NormalAttack);
-	PlayerInputComponent->BindAction("SkillAttack", IE_Pressed, this, &ACPlayer::SkillAttack);
+	PlayerInputComponent->BindAction("Sword", IE_Pressed, this, &ACPlayer::DrawSword);
+	PlayerInputComponent->BindAction("Pistol", IE_Pressed, this, &ACPlayer::DrawPistol);
+	PlayerInputComponent->BindAction("Rifle", IE_Pressed, this, &ACPlayer::DrawRifle);
+	PlayerInputComponent->BindAction("Sniper", IE_Pressed, this, &ACPlayer::DrawSniper);
+	PlayerInputComponent->BindAction("Attack", IE_Pressed, this, &ACPlayer::NormalAttack);
+	//PlayerInputComponent->BindAction("SkillAttack", IE_Pressed, this, &ACPlayer::SkillAttack);
 
 	// Move
 	PlayerInputComponent->BindAxis("MoveForward", this, &ACPlayer::MoveForward);
@@ -93,11 +96,32 @@ void ACPlayer::LookUpAtRate(float Rate)
 	AddControllerPitchInput(Rate * BaseLookUpRate * GetWorld()->GetDeltaSeconds());
 }
 
-void ACPlayer::DrawWeapon()
+void ACPlayer::DrawSword()
 {
 	CheckFalse(State->IsIdleMode());
 
 	Action->SetSwordMode();
+}
+
+void ACPlayer::DrawPistol()
+{
+	CheckFalse(State->IsIdleMode());
+
+	Action->SetPistolMode();
+}
+
+void ACPlayer::DrawRifle()
+{
+	CheckFalse(State->IsIdleMode());
+
+	Action->SetRifleMode();
+}
+
+void ACPlayer::DrawSniper()
+{
+	CheckFalse(State->IsIdleMode());
+
+	Action->SetSniperMode();
 }
 
 void ACPlayer::NormalAttack()
