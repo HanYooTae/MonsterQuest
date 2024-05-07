@@ -37,6 +37,9 @@ protected:
 	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "Animation")
 		EActionType ActionType;
 
+	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Guns")
+		bool bFiring;
+
 private:
 	class ACharacter* OwnerCharacter;
 };
