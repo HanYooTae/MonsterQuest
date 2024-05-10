@@ -1,11 +1,11 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Actions/Weapons/CWeapon.h"
+#include "Actions/Weapons/CWeapon_Guns.h"
 #include "CWeapon_Pistol.generated.h"
 
 UCLASS()
-class MONSTERQUEST_API ACWeapon_Pistol : public ACWeapon
+class MONSTERQUEST_API ACWeapon_Pistol : public ACWeapon_Guns
 {
 	GENERATED_BODY()
 	
