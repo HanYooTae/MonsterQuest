@@ -28,22 +28,18 @@ ACBullet::ACBullet()
 	CHelpers::GetAsset<UMaterialInstanceConstant>(&material, "MaterialInstanceConstant'/Game/Materials/M_Bullet_Inst.M_Bullet_Inst'");
 	Mesh->SetMaterial(0, material);
 
+	InitialLifeSpan = 3.f;
 
-	Projectile->InitialSpeed = 2e+4f; //2 * 10 ^ 4
-	Projectile->MaxSpeed = 2e+4f; //2 * 10 ^ 4
-	Projectile->ProjectileGravityScale = 0;
+	Projectile->InitialSpeed = 2000.f;
+	Projectile->MaxSpeed = 4000.f;
+	Projectile->ProjectileGravityScale = 0.f;
 }
 
 void ACBullet::BeginPlay()
 {
-	Super::BeginPlay();
-	
 	Capsule->OnComponentBeginOverlap.AddDynamic(this, &ACBullet::OnComponentBeginOverlap);
-}
 
-void ACBullet::Shoot(const FVector& InDirection)
-{
-	Projectile->Velocity = InDirection * Projectile->InitialSpeed;
+	Super::BeginPlay();
 }
 
 void ACBullet::OnComponentBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
