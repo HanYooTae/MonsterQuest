@@ -47,8 +47,8 @@ struct FDoActionData : public FEquipmentData
 	UPROPERTY(EditAnywhere)
 		TSubclassOf<UMatineeCameraShake> ShakeClass;
 
-	/*UPROPERTY(EditAnywhere)
-		TSubclassOf<class ACBullet> ProjectileClass;*/
+	UPROPERTY(EditAnywhere)
+		TSubclassOf<class ACBullet> ProjectileClass;
 };
 
 UCLASS()
