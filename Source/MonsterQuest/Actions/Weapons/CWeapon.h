@@ -29,6 +29,12 @@ public:		// 무기 장착 or 해제 시 socket변경
 	UFUNCTION(BlueprintImplementableEvent)
 		void OnUnequip();
 
+	UFUNCTION(BlueprintImplementableEvent)
+		void BeginDoAction();
+
+	UFUNCTION(BlueprintImplementableEvent)
+		void EndDoAction();
+
 public:
 	void OnCollision();
 	void OffCollision();

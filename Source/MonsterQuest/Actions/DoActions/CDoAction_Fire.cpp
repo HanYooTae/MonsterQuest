@@ -8,13 +8,10 @@
 
 #include "GameFramework/Character.h"
 #include "MatineeCameraShake.h"
-#include "Camera/CameraComponent.h"
 
 #include "Global.h"
 
-ACDoAction_Fire::ACDoAction_Fire()
-{
-}
+ACDoAction_Fire::ACDoAction_Fire() {}
 
 void ACDoAction_Fire::BeginPlay()
 {
@@ -45,6 +42,8 @@ void ACDoAction_Fire::Begin_DoAction()
 	// Spawn Projectile
 	CheckNull(Datas[0].ProjectileClass);
 
+	CLog::Log(Datas[0].ProjectileClass);
+
 	// 카메라의 위치, 회전
 	FVector location;
 	FRotator rotation;
@@ -69,26 +68,13 @@ void ACDoAction_Fire::Begin_DoAction()
 			ESpawnActorCollisionHandlingMethod::AlwaysSpawn
 		);
 
+	CLog::Log(Bullet);
 	Bullet->FinishSpawning(transform);
-
-	// 충돌처리
-	Bullet->OnBeginOverlap.AddDynamic(this, &ACDoAction_Fire::OnBulletBeginOverlap);
+	CLog::Log(Bullet);
 }
 
 void ACDoAction_Fire::End_DoAction()
 {
 	StateComp->SetIdleMode();
 	StatusComp->SetMove();
-}
-
-void ACDoAction_Fire::OnBulletBeginOverlap(FHitResult hitResult)
-{
-	FDamageEvent damageEvent;
-	hitResult.GetActor()->TakeDamage
-	(
-		Datas[0].power,
-		damageEvent,
-		OwnerCharacter->GetController(),
-		Bullet
-	);
 }

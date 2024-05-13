@@ -21,14 +21,8 @@ public:
 public:
 	UFUNCTION()
 		virtual void DoAction() override;
-	UFUNCTION()
-		virtual void Begin_DoAction() override;
-	UFUNCTION()
-		virtual void End_DoAction() override;
-
-private:
-	UFUNCTION()
-		void OnBulletBeginOverlap(FHitResult hitResult);
+	virtual void Begin_DoAction() override;
+	virtual void End_DoAction() override;
 
 private:
 	class UCActionComponent* ActionComp;
