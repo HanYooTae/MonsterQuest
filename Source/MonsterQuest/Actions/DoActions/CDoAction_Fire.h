@@ -21,8 +21,10 @@ public:
 public:
 	UFUNCTION()
 		virtual void DoAction() override;
-	virtual void Begin_DoAction() override;
-	virtual void End_DoAction() override;
+	UFUNCTION()
+		virtual void Begin_DoAction() override;
+	UFUNCTION()
+		virtual void End_DoAction() override;
 
 private:
 	UFUNCTION()

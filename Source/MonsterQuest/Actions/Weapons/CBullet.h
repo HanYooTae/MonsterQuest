@@ -22,6 +22,9 @@ private:
 protected:
 	virtual void BeginPlay() override;
 
+public:
+	void Shoot(const FVector& InDirection);
+
 private:
 	UPROPERTY(VisibleDefaultsOnly)
 		class UCapsuleComponent* Capsule;

@@ -8,10 +8,13 @@
 
 #include "GameFramework/Character.h"
 #include "MatineeCameraShake.h"
+#include "Camera/CameraComponent.h"
 
 #include "Global.h"
 
-ACDoAction_Fire::ACDoAction_Fire() {}
+ACDoAction_Fire::ACDoAction_Fire()
+{
+}
 
 void ACDoAction_Fire::BeginPlay()
 {

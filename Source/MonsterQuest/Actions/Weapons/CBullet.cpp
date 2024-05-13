@@ -16,7 +16,8 @@ ACBullet::ACBullet()
 	Capsule->SetRelativeRotation(FRotator(90, 0, 0));
 	Capsule->SetCapsuleHalfHeight(50);
 	Capsule->SetCapsuleRadius(2);
-	Capsule->SetCollisionProfileName("BlockAllDynamic");
+	//Capsule->SetCollisionProfileName("BlockAllDynamic");
+	//Capsule->IgnoreActorWhenMoving(GetOwner(), true);
 
 	UStaticMesh* mesh;
 	CHelpers::GetAsset<UStaticMesh>(&mesh, "StaticMesh'/Game/Meshes/Sphere.Sphere'");
@@ -40,6 +41,11 @@ void ACBullet::BeginPlay()
 	Capsule->OnComponentBeginOverlap.AddDynamic(this, &ACBullet::OnComponentBeginOverlap);
 
 	Super::BeginPlay();
+}
+
+void ACBullet::Shoot(const FVector& InDirection)
+{
+	Projectile->Velocity = InDirection * Projectile->InitialSpeed;
 }
 
 void ACBullet::OnComponentBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
