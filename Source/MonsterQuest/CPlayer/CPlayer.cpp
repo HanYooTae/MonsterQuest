@@ -6,6 +6,9 @@
 #include "ActorComponents/CActionComponent.h"
 #include "ActorComponents/COptionComponent.h"
 
+#include "Actions/Weapons/CWeapon_Guns.h"
+#include "Widgets/HUD/CUserWidget_CrossHair.h"
+
 #include "HeadMountedDisplayFunctionLibrary.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
@@ -25,6 +28,8 @@ ACPlayer::ACPlayer()
 	CHelpers::CreateActorComponent(this, &Montages, "Montages");
 	CHelpers::CreateActorComponent(this, &State, "State");
 	CHelpers::CreateActorComponent(this, &Option, "Option");
+
+	CHelpers::GetClass<UCUserWidget_CrossHair>(&CrossHairClass, "WidgetBlueprint'/Game/Widgets/HUD/WB_CrossHair.WB_CrossHair_C'");
 
 	CHelpers::CreateSceneComponent(this, &Backpack, "Backpack", GetMesh());
 	UStaticMesh* staticMesh;
@@ -57,6 +62,24 @@ ACPlayer::ACPlayer()
 	FollowCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FollowCamera"));
 	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName); // Attach the camera to the end of the boom and let the boom adjust to match the controller orientation
 	FollowCamera->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
+}
+
+void ACPlayer::BeginPlay()
+{
+	Super::BeginPlay();
+
+	if (!!CrossHairClass)
+	{
+		CrossHair = CreateWidget<UCUserWidget_CrossHair, APlayerController>(this->GetController<APlayerController>(), CrossHairClass);
+		CrossHair->AddToViewport();
+		CrossHair->SetVisibility(ESlateVisibility::Hidden);
+	}
+}
+
+void ACPlayer::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
 }
 
 void ACPlayer::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)

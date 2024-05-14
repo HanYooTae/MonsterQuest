@@ -2,6 +2,9 @@
 #include "ActorComponents/CStatusComponent.h"
 #include "ActorComponents/CStateComponent.h"
 
+#include "CPlayer/CPlayer.h"
+#include "Widgets/HUD/CUserWidget_CrossHair.h"
+
 #include "GameFramework/Character.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
@@ -14,6 +17,7 @@ void ACEquipment::BeginPlay()
 	Super::BeginPlay();
 	
 	OwnerCharacter = Cast<ACharacter>(GetOwner());
+	Player = Cast<ACPlayer>(OwnerCharacter);
 
 	StateComp = CHelpers::GetComponent<UCStateComponent>(OwnerCharacter);
 	StatusComp = CHelpers::GetComponent<UCStatusComponent>(OwnerCharacter);
@@ -51,8 +55,17 @@ void ACEquipment::Equip_Implementation()
 	}
 }
 
-void ACEquipment::Begin_Equip_Implementation()
+void ACEquipment::Begin_Sword_Equip_Implementation()
 {
+	if (OnBeginSwordEquip.IsBound())
+		OnBeginSwordEquip.Broadcast();
+}
+
+void ACEquipment::Begin_Equip_Implementation()
+{	
+	if (!!Player->CrossHair)
+		Player->CrossHair->SetVisibility(ESlateVisibility::Visible);
+
 	if (OnBeginEquip.IsBound())
 		OnBeginEquip.Broadcast();
 }
@@ -71,6 +84,9 @@ void ACEquipment::Unequip_Implementation()
 
 	OwnerCharacter->bUseControllerRotationYaw = false;
 	OwnerCharacter->GetCharacterMovement()->bOrientRotationToMovement = true;
+
+	if (!!Player->CrossHair)
+		Player->CrossHair->SetVisibility(ESlateVisibility::Hidden);
 
 	if (OnUnequip.IsBound())
 		OnUnequip.Broadcast();

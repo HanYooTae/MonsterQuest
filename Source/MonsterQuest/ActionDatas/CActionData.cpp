@@ -34,6 +34,7 @@ void UCActionData::BeginPlay(class ACharacter* InOwnerCharacter, UCActionData_Sp
 
 		if (!!Weapon)
 		{
+			Equipment->OnBeginSwordEquip.AddDynamic(Weapon, &ACWeapon::OnSwordEquip);
 			Equipment->OnBeginEquip.AddDynamic(Weapon, &ACWeapon::OnEquip);
 			Equipment->OnUnequip.AddDynamic(Weapon, &ACWeapon::OnUnequip);
 		}

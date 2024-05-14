@@ -16,6 +16,12 @@ class ACPlayer : public ACharacter
 public:
 	ACPlayer();
 
+protected:
+	virtual void BeginPlay() override;
+
+public:
+	virtual void Tick(float DeltaTime) override;
+
 	/** Base turn rate, in deg/sec. Other scaling may affect final turn rate. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
 	float BaseTurnRate;
@@ -49,7 +55,7 @@ protected:
 
 	void NormalAttack();
 	void SkillAttack();
-
+	
 protected:
 	// APawn interface
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
@@ -94,5 +100,12 @@ private:    // Character Component
 
 	UPROPERTY(VisibleDefaultsOnly)
 		class UStaticMeshComponent* Backpack;
+
+public:
+	UPROPERTY(EditDefaultsOnly, Category = "HUD")
+		TSubclassOf<class UCUserWidget_CrossHair> CrossHairClass;
+
+public:
+	class UCUserWidget_CrossHair* CrossHair;
 };
 

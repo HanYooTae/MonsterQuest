@@ -3,8 +3,10 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "ActionDatas/CActionData.h"
+#include "ActorComponents/CActionComponent.h"
 #include "CEquipment.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FBeginSwordEquipSignature);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FBeginEquipSignature);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FUnequipSignature);
 
@@ -31,6 +33,10 @@ public:
 
 	// Attach to hand socket
 	UFUNCTION(BlueprintNativeEvent)
+		void Begin_Sword_Equip();
+	void Begin_Sword_Equip_Implementation();
+
+	UFUNCTION(BlueprintNativeEvent)
 		void Begin_Equip();
 	void Begin_Equip_Implementation();
 
@@ -51,8 +57,13 @@ protected:
 		class UCStateComponent* StateComp;
 	UPROPERTY(BlueprintReadOnly)
 		class UCStatusComponent* StatusComp;
+	UPROPERTY(EditAnywhere)
+		class ACPlayer* Player;
 
 public:
+	UPROPERTY(BlueprintAssignable)
+		FBeginSwordEquipSignature OnBeginSwordEquip;
+
 	UPROPERTY(BlueprintAssignable)
 		FBeginEquipSignature OnBeginEquip;
 
