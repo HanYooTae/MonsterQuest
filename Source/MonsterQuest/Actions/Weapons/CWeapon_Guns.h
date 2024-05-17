@@ -24,7 +24,7 @@ public:
 	FORCEINLINE bool IsAutoFire() { return bAutoFire; }
 
 	bool CanFire();
-	void Begin_Fire();
+	void Begin_Fire() override;
 	void End_Fire();
 
 	UFUNCTION()

@@ -39,6 +39,9 @@ public:		// 무기 장착 or 해제 시 socket변경
 		void EndDoAction();
 
 public:
+	virtual void Begin_Fire() {};
+
+public:
 	void OnCollision();
 	void OffCollision();
 

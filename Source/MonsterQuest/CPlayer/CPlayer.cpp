@@ -6,7 +6,7 @@
 #include "ActorComponents/CActionComponent.h"
 #include "ActorComponents/COptionComponent.h"
 
-#include "Actions/Weapons/CWeapon_Guns.h"
+#include "Actions/Weapons/CWeapon.h"
 #include "Widgets/HUD/CUserWidget_CrossHair.h"
 
 #include "HeadMountedDisplayFunctionLibrary.h"
@@ -28,6 +28,7 @@ ACPlayer::ACPlayer()
 	CHelpers::CreateActorComponent(this, &Montages, "Montages");
 	CHelpers::CreateActorComponent(this, &State, "State");
 	CHelpers::CreateActorComponent(this, &Option, "Option");
+	CHelpers::CreateActorComponent<ACWeapon>(this, &Weapon, "Weapon");
 
 	CHelpers::GetClass<UCUserWidget_CrossHair>(&CrossHairClass, "WidgetBlueprint'/Game/Widgets/HUD/WB_CrossHair.WB_CrossHair_C'");
 
@@ -95,7 +96,7 @@ void ACPlayer::SetupPlayerInputComponent(class UInputComponent* PlayerInputCompo
 	PlayerInputComponent->BindAction("Rifle", IE_Pressed, this, &ACPlayer::DrawRifle);
 	PlayerInputComponent->BindAction("Sniper", IE_Pressed, this, &ACPlayer::DrawSniper);
 	PlayerInputComponent->BindAction("Attack", IE_Pressed, this, &ACPlayer::NormalAttack);
-	//PlayerInputComponent->BindAction("Fire", IE_Pressed, this, &ACWeapon_Guns::Begin_Fire);
+	PlayerInputComponent->BindAction("Fire", IE_Pressed, Weapon, &ACWeapon::Begin_Fire);
 
 	// Move
 	PlayerInputComponent->BindAxis("MoveForward", this, &ACPlayer::MoveForward);

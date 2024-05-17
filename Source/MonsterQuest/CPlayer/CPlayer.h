@@ -101,6 +101,10 @@ private:    // Character Component
 	UPROPERTY(VisibleDefaultsOnly)
 		class UStaticMeshComponent* Backpack;
 
+protected:
+	UPROPERTY(VisibleDefaultsOnly)
+		class ACWeapon* Weapon;
+
 public:
 	UPROPERTY(EditDefaultsOnly, Category = "HUD")
 		TSubclassOf<class UCUserWidget_CrossHair> CrossHairClass;
