@@ -6,14 +6,9 @@
 
 ACWeapon_Rifle::ACWeapon_Rifle()
 {
-	Weapon = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Rifle"));
-	RootComponent = Weapon;
-
-	static ConstructorHelpers::FObjectFinder<USkeletalMesh> WEAPON(TEXT("SkeletalMesh'/Game/Weapons/Rifle/SK_AR4.SK_AR4'"));
-	if (WEAPON.Succeeded())
-	{
-		Weapon->SetSkeletalMesh(WEAPON.Object);
-	}
+	USkeletalMesh* mesh;
+	CHelpers::GetAsset<USkeletalMesh>(&mesh, "SkeletalMesh'/Game/Weapons/Rifle/SK_AR4.SK_AR4'");
+	Weapon->SetSkeletalMesh(mesh);
 }
 
 void ACWeapon_Rifle::BeginPlay()

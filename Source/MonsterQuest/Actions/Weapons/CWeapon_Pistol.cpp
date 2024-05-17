@@ -6,14 +6,9 @@
 
 ACWeapon_Pistol::ACWeapon_Pistol()
 {
-	Weapon = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Pistol"));
-	RootComponent = Weapon;
-
-	static ConstructorHelpers::FObjectFinder<USkeletalMesh> WEAPON(TEXT("SkeletalMesh'/Game/Weapons/Pistol/Pistols_A.Pistols_A'"));
-	if (WEAPON.Succeeded())
-	{
-		Weapon->SetSkeletalMesh(WEAPON.Object);
-	}
+	USkeletalMesh* mesh;
+	CHelpers::GetAsset<USkeletalMesh>(&mesh, "SkeletalMesh'/Game/Weapons/Pistol/Pistols_A.Pistols_A'");
+	Weapon->SetSkeletalMesh(mesh);
 }
 
 void ACWeapon_Pistol::BeginPlay()

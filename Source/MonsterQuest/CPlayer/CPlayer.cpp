@@ -95,7 +95,7 @@ void ACPlayer::SetupPlayerInputComponent(class UInputComponent* PlayerInputCompo
 	PlayerInputComponent->BindAction("Rifle", IE_Pressed, this, &ACPlayer::DrawRifle);
 	PlayerInputComponent->BindAction("Sniper", IE_Pressed, this, &ACPlayer::DrawSniper);
 	PlayerInputComponent->BindAction("Attack", IE_Pressed, this, &ACPlayer::NormalAttack);
-	//PlayerInputComponent->BindAction("SkillAttack", IE_Pressed, this, &ACPlayer::SkillAttack);
+	//PlayerInputComponent->BindAction("Fire", IE_Pressed, this, &ACWeapon_Guns::Begin_Fire);
 
 	// Move
 	PlayerInputComponent->BindAxis("MoveForward", this, &ACPlayer::MoveForward);

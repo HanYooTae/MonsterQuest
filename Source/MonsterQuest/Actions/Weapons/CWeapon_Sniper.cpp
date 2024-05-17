@@ -6,14 +6,9 @@
 
 ACWeapon_Sniper::ACWeapon_Sniper()
 {
-	Weapon = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Sniper"));
-	RootComponent = Weapon;
-
-	static ConstructorHelpers::FObjectFinder<USkeletalMesh> WEAPON(TEXT("SkeletalMesh'/Game/Weapons/Sniper/SK_KA47.SK_KA47'"));
-	if (WEAPON.Succeeded())
-	{
-		Weapon->SetSkeletalMesh(WEAPON.Object);
-	}
+	USkeletalMesh* mesh;
+	CHelpers::GetAsset<USkeletalMesh>(&mesh, "SkeletalMesh'/Game/Weapons/Sniper/SK_KA47.SK_KA47'");
+	Weapon->SetSkeletalMesh(mesh);
 }
 
 void ACWeapon_Sniper::BeginPlay()

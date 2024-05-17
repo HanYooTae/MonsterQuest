@@ -30,16 +30,41 @@ public:
 	UFUNCTION()
 		void OnFiring();
 
-protected:
-	class UCUserWidget_CrossHair* CrossHair;
-
-	UPROPERTY(EditDefaultsOnly, Category = "HUD")
-		TSubclassOf<class UCUserWidget_CrossHair> CrossHairClass;
-
 private:
 	bool bFiring;
 	bool bAutoFire = true;
 
 private:
 	FTimerHandle AutoFireHandle;
+
+protected:
+	class UCUserWidget_CrossHair* CrossHair;
+
+	UPROPERTY(EditDefaultsOnly, Category = "HUD")
+		TSubclassOf<class UCUserWidget_CrossHair> CrossHairClass;
+
+protected:
+	UPROPERTY(EditDefaultsOnly, Category = "Fire")
+		FName EjectBoneName;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Fire")
+		class UParticleSystem* EjectParticle;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Fire")
+		FName MuzzleBoneName;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Fire")
+		class UParticleSystem* FlashParticle;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Fire")
+		class USoundWave* FireSound;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Fire")
+		TSubclassOf<class ACBullet> BulletClass;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Fire")
+		TSubclassOf<class UMatineeCameraShake> CameraShakeClass;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Fire")
+		float AutoFireInterval = 0.15f;
 };
