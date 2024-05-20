@@ -10,7 +10,7 @@ enum class EActionType : uint8
 	Unarmed, Sword, Pistol, Rifle, Sniper, Max
 };
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FActionTypeChangedSignature, EActionType, InPrevType, EActionType, InNewType);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FActionTypeChangedSignature, EActionType, InNewType);
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class MONSTERQUEST_API UCActionComponent : public UActorComponent

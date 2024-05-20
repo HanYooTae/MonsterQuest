@@ -35,7 +35,7 @@ void UCAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 	Falling = OwnerCharacter->GetCharacterMovement()->IsFalling();
 }
 
-void UCAnimInstance::OnActionTypeChanged(EActionType InPrevType, EActionType InNewType)
+void UCAnimInstance::OnActionTypeChanged(EActionType InNewType)
 {
 	ActionType = InNewType;
 }

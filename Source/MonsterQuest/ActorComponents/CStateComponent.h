@@ -10,7 +10,7 @@ enum class EStateType : uint8
 	Idle, Equip, Action, Hitted, Dead, Max
 };
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FStateTypeChangedSignature, EStateType, InPrevType, EStateType, InNewType);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FStateTypeChangedSignature, EStateType, InNewType);
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class MONSTERQUEST_API UCStateComponent : public UActorComponent

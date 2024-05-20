@@ -82,11 +82,10 @@ void UCActionComponent::SetMode(EActionType InNewType)
 
 void UCActionComponent::ChangeType(EActionType InNewType)
 {
-	EActionType prev = Type;
 	Type = InNewType;
 
 	if (OnActionTypeChanged.IsBound())
-		OnActionTypeChanged.Broadcast(prev, InNewType);
+		OnActionTypeChanged.Broadcast(InNewType);
 }
 
 void UCActionComponent::DoAction()
