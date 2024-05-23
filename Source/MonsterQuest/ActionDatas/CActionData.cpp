@@ -50,12 +50,6 @@ void UCActionData::BeginPlay(class ACharacter* InOwnerCharacter, UCActionData_Sp
 
 		UGameplayStatics::FinishSpawningActor(DoAction, transform);
 
-		// Equipment에 있는 주소가 DoAction으로 참조됨 (같은 주소를 사용함)
-		if (!!Equipment)
-		{
-			DoAction->SetEquippedThis(Equipment->IsEquippedThis());
-		}
-
 		if (!!Weapon)
 		{
 			Weapon->OnBeginOverlap.AddDynamic(DoAction, &ACDoAction::OnBeginOverlap);

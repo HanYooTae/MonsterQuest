@@ -21,7 +21,6 @@ public:
 
 public:
 	FORCEINLINE void SetDatas(TArray<FDoActionData> InDatas) { Datas = InDatas; }
-	FORCEINLINE void SetEquippedThis(const bool* InEquippedThis) { bEquippedThis = InEquippedThis; }
 
 public:
 	virtual void DoAction() {};
@@ -51,5 +50,4 @@ protected:
 
 protected:
 	TArray<FDoActionData> Datas;
-	const bool* bEquippedThis;
 };
