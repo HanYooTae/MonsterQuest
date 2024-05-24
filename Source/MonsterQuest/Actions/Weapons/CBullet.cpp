@@ -43,6 +43,11 @@ void ACBullet::BeginPlay()
 	Super::BeginPlay();
 }
 
+void ACBullet::Shoot(const FVector& InDirection)
+{
+	Projectile->Velocity = InDirection * Projectile->InitialSpeed;
+}
+
 void ACBullet::OnComponentBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	CheckTrue(OtherActor == GetOwner());

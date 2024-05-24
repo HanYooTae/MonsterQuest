@@ -29,4 +29,24 @@ private:
 	class UCActionComponent* ActionComp;
 
 	class ACBullet* Bullet;
+
+	class ACWeapon* Weapon;
+
+protected:
+	UPROPERTY(EditDefaultsOnly, Category = "Fire")
+		TSubclassOf<class ACBullet> BulletClass;
+
+protected:
+	UPROPERTY(EditDefaultsOnly, Category = "Recoil")
+		float RecoilAngle = 0.75f;
+
+protected:
+	UPROPERTY(EditDefaultsOnly, Category = "Trace")
+		float HitDistance = 3000;
+
+protected:
+	UPROPERTY(EditDefaultsOnly, Category = "Fire")
+		FName MuzzleBoneName;
+
+
 };
