@@ -35,7 +35,6 @@ void ACEquipment::Equip_Implementation()
 	if (!!EquipmentData.AnimMontage)
 	{
 		OwnerCharacter->PlayAnimMontage(EquipmentData.AnimMontage, EquipmentData.PlayRate, EquipmentData.StartSection);
-		CLog::Log(EquipmentData.AnimMontage);
 	}
 
 	else

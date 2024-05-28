@@ -48,6 +48,9 @@ protected:
 	UPROPERTY(BlueprintReadOnly)
 		class UCStateComponent* StateComp;
 
+	UPROPERTY(BlueprintReadOnly)
+		class UCActionComponent* ActionComp;
+
 protected:
 	TArray<FDoActionData> Datas;
 };

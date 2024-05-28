@@ -93,7 +93,7 @@ void ACDoAction_Sword::OnBeginOverlap(ACharacter* InAttacker, AActor* InCauser, 
 	UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), effect, transform);
 
 	FDamageEvent damageEvent;
-	InOtherCharacter->TakeDamage(Datas[ComboCount].power, damageEvent, InAttacker->GetController(), InCauser);
+	InOtherCharacter->TakeDamage(Datas[ComboCount].Power, damageEvent, InAttacker->GetController(), InCauser);
 }
 
 void ACDoAction_Sword::OnEndOverlap(ACharacter* InAttacker, AActor* InCauser, ACharacter* InOtherCharacter)

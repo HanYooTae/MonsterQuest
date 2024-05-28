@@ -2,6 +2,7 @@
 
 #include "ActorComponents/CStateComponent.h"
 #include "ActorComponents/CStatusComponent.h"
+#include "ActorComponents/CActionComponent.h"
 
 #include "GameFramework/Character.h"
 
@@ -18,6 +19,7 @@ void ACDoAction::BeginPlay()
 
 	StatusComp = Cast<UCStatusComponent>(OwnerCharacter->GetComponentByClass(UCStatusComponent::StaticClass()));
 	StateComp = Cast<UCStateComponent>(OwnerCharacter->GetComponentByClass(UCStateComponent::StaticClass()));
+	ActionComp = Cast<UCActionComponent>(OwnerCharacter->GetComponentByClass(UCActionComponent::StaticClass()));
 
 	Super::BeginPlay();
 }

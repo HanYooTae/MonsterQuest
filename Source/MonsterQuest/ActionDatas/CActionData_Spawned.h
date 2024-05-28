@@ -32,8 +32,8 @@ struct FDoActionData : public FEquipmentData
 {
 	GENERATED_BODY()
 
-		UPROPERTY(EditAnywhere)
-		float power = 1.f;
+	UPROPERTY(EditAnywhere)
+		float Power = 1.f;
 
 	UPROPERTY(EditAnywhere)
 		float HitStop;

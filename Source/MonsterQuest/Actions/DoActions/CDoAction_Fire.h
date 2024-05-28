@@ -25,9 +25,7 @@ public:
 
 	UFUNCTION() void OnBulletBeginOverlap(FHitResult hitResult);
 
-private:
-	class UCActionComponent* ActionComp;
-
+public:
 	class ACBullet* Bullet;
 
 	class ACWeapon* Weapon;
@@ -47,6 +45,4 @@ protected:
 protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Fire")
 		FName MuzzleBoneName;
-
-
 };
