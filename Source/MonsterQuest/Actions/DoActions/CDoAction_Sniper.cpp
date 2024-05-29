@@ -5,7 +5,10 @@
 
 #include "global.h"
 
-ACDoAction_Sniper::ACDoAction_Sniper() {}
+ACDoAction_Sniper::ACDoAction_Sniper()
+{
+	CHelpers::GetClass<UMatineeCameraShake>(&CameraShakeClass, "Blueprint'/Game/Weapons/Sniper/BP_CameraShake_Sniper.BP_CameraShake_Sniper_C'");
+}
 
 void ACDoAction_Sniper::BeginPlay()
 {

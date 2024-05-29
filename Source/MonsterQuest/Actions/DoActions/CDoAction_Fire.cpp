@@ -8,12 +8,14 @@
 
 #include "GameFramework/Character.h"
 #include "Camera/CameraComponent.h"
+#include "Sound/SoundWave.h"
+#include "Camera/CameraShake.h"
 
 #include "Global.h"
 
 ACDoAction_Fire::ACDoAction_Fire()
 {
-
+	CHelpers::GetAsset<USoundWave>(&FireSound, "SoundWave'/Game/Sounds/S_RifleShoot.S_RifleShoot'");
 }
 
 void ACDoAction_Fire::BeginPlay()
@@ -86,6 +88,16 @@ void ACDoAction_Fire::Begin_DoAction()
 
 		ACBullet* bullet = GetWorld()->SpawnActor<ACBullet>(BulletClass, spawnLocation, direction.Rotation());
 		bullet->Shoot(direction);
+	}
+
+	if (!!FireSound)
+		UGameplayStatics::PlaySoundAtLocation(GetWorld(), FireSound, muzzleLocation);
+
+	if (!!CameraShakeClass)
+	{
+		APlayerController* controller = OwnerCharacter->GetController<APlayerController>();
+		if (!!controller)
+			controller->PlayerCameraManager->StartCameraShake(CameraShakeClass);
 	}
 
 	// 충돌처리

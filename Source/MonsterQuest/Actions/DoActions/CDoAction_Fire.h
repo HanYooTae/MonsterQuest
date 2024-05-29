@@ -45,4 +45,10 @@ protected:
 protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Fire")
 		FName MuzzleBoneName;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Fire")
+		class USoundWave* FireSound;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Fire")
+		TSubclassOf<class UMatineeCameraShake> CameraShakeClass;
 };
