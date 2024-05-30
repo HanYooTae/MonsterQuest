@@ -10,6 +10,9 @@ class MONSTERQUEST_API ACDoAction_Sword : public ACDoAction
 	GENERATED_BODY()
 	
 public:
+	ACDoAction_Sword();
+
+public:
 	UFUNCTION()
 		virtual void DoAction() override;
 	UFUNCTION()
@@ -30,6 +33,13 @@ public:
 private:
 	UFUNCTION()
 		void RestoreTimeDilation();
+
+protected:
+	UPROPERTY(EditDefaultsOnly, Category = "Sword")
+		class USoundWave* SwordSound;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Sword")
+		class USoundWave* FinishComboSound;
 
 private:
 	int32 ComboCount;

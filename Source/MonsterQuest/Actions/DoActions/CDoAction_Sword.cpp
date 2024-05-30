@@ -1,11 +1,18 @@
 #include "Actions/DoActions/CDoAction_Sword.h"
 
 #include "GameFramework/Character.h"
+#include "Sound/SoundWave.h"
 
 #include "ActorComponents/CStateComponent.h"
 #include "ActorComponents/CStatusComponent.h"
 
 #include "Global.h"
+
+ACDoAction_Sword::ACDoAction_Sword()
+{
+	CHelpers::GetAsset<USoundWave>(&SwordSound, "SoundWave'/Game/Sounds/PaladinAttackVoice.PaladinAttackVoice'");
+	CHelpers::GetAsset<USoundWave>(&FinishComboSound, "SoundWave'/Game/Sounds/wield.wield'");
+}
 
 void ACDoAction_Sword::DoAction()
 {
@@ -35,11 +42,15 @@ void ACDoAction_Sword::DoAction()
 void ACDoAction_Sword::Begin_DoAction()
 {
 	Super::Begin_DoAction();
-	CLog::Log(ComboCount);
+
+	if (!!SwordSound)
+		UGameplayStatics::PlaySoundAtLocation(GetWorld(), SwordSound, GetActorLocation());
+
+	if (ComboCount != 2 && !!FinishComboSound)
+		UGameplayStatics::PlaySoundAtLocation(GetWorld(), FinishComboSound, GetActorLocation());
+
 	CheckFalse(bSucceed);
 	bSucceed = false;
-
-	OwnerCharacter->StopAnimMontage();
 
 	ComboCount++;
 	ComboCount = FMath::Clamp(ComboCount, 0, Datas.Num() - 1);
@@ -50,8 +61,6 @@ void ACDoAction_Sword::Begin_DoAction()
 void ACDoAction_Sword::End_DoAction()
 {
 	Super::End_DoAction();
-
-	OwnerCharacter->StopAnimMontage(Datas[ComboCount].AnimMontage);
 
 	ComboCount = 0;
 
