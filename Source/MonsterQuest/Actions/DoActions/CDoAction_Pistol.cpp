@@ -5,10 +5,7 @@
 
 #include "global.h"
 
-ACDoAction_Pistol::ACDoAction_Pistol()
-{
-	CHelpers::GetClass<UMatineeCameraShake>(&CameraShakeClass, "Blueprint'/Game/Weapons/Pistol/BP_CameraShake_Pistol.BP_CameraShake_Pistol_C'");
-}
+ACDoAction_Pistol::ACDoAction_Pistol() {}
 
 void ACDoAction_Pistol::BeginPlay()
 {

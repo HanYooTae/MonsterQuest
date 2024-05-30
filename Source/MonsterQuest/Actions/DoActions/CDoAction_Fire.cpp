@@ -90,14 +90,17 @@ void ACDoAction_Fire::Begin_DoAction()
 		bullet->Shoot(direction);
 	}
 
+	// Sound
 	if (!!FireSound)
 		UGameplayStatics::PlaySoundAtLocation(GetWorld(), FireSound, muzzleLocation);
 
-	if (!!CameraShakeClass)
+	// Camera Shake
+	TSubclassOf<UMatineeCameraShake> shakeClass = Datas[0].ShakeClass;
+	if (!!shakeClass)
 	{
-		APlayerController* controller = OwnerCharacter->GetController<APlayerController>();
-		if (!!controller)
-			controller->PlayerCameraManager->StartCameraShake(CameraShakeClass);
+		APlayerController* controller = UGameplayStatics::GetPlayerController(GetWorld(), 0);
+		CheckNull(controller);
+		controller->PlayerCameraManager->StartCameraShake(shakeClass);
 	}
 
 	// 충돌처리

@@ -5,10 +5,7 @@
 
 #include "global.h"
 
-ACDoAction_Rifle::ACDoAction_Rifle()
-{
-	CHelpers::GetClass<UMatineeCameraShake>(&CameraShakeClass, "Blueprint'/Game/Weapons/Rifle/BP_CameraShake_Rifle.BP_CameraShake_Rifle_C'");
-}
+ACDoAction_Rifle::ACDoAction_Rifle() {}
 
 void ACDoAction_Rifle::BeginPlay()
 {
