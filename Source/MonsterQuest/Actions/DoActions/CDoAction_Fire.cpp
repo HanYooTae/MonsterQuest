@@ -57,6 +57,31 @@ void ACDoAction_Fire::DoAction()
 
 void ACDoAction_Fire::Begin_DoAction()
 {
+	bFiring = true;
+
+	if (bAutoFire)
+	{
+		GetWorld()->GetTimerManager().SetTimer(AutoFireHandle, this, &ACDoAction_Fire::OnFiring, AutoFireInterval, true);
+
+		return;
+	}
+
+	OnFiring();
+}
+
+void ACDoAction_Fire::End_DoAction()
+{
+	StateComp->SetIdleMode();
+	StatusComp->SetMove();
+
+	if (bAutoFire)
+		GetWorld()->GetTimerManager().ClearTimer(AutoFireHandle);
+
+	bFiring = false;
+}
+
+void ACDoAction_Fire::OnFiring()
+{
 	// Spawn Projectile
 	CheckNull(Datas[0].ProjectileClass);
 
@@ -79,7 +104,7 @@ void ACDoAction_Fire::Begin_DoAction()
 	UKismetSystemLibrary::LineTraceSingle(GetWorld(), start, end, ETraceTypeQuery::TraceTypeQuery1, false, ignores, EDrawDebugTrace::None, hitResult, true);
 
 	FVector muzzleLocation = Weapon->Weapon->GetSocketLocation(MuzzleBoneName);
-	
+
 	CLog::Log(MuzzleBoneName.ToString());
 
 	if (!!BulletClass)
@@ -107,10 +132,12 @@ void ACDoAction_Fire::Begin_DoAction()
 	//Bullet->OnBeginOverlap.AddDynamic(this, &ACDoAction_Fire::OnBulletBeginOverlap);
 }
 
-void ACDoAction_Fire::End_DoAction()
+void ACDoAction_Fire::ToggleAutoFire()
 {
-	StateComp->SetIdleMode();
-	StatusComp->SetMove();
+	/*if (bAutoFire && bFiring)
+		End_DoAction();*/
+
+	bAutoFire = !bAutoFire;
 }
 
 void ACDoAction_Fire::OnBulletBeginOverlap(FHitResult hitResult)

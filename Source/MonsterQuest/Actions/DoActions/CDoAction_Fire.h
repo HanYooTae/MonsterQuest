@@ -23,16 +23,23 @@ public:
 	UFUNCTION() virtual void Begin_DoAction() override;
 	UFUNCTION() virtual void End_DoAction() override;
 
+	UFUNCTION()
+		void OnFiring();
+
+	void ToggleAutoFire();
+
 	UFUNCTION() void OnBulletBeginOverlap(FHitResult hitResult);
 
 public:
 	class ACBullet* Bullet;
-
 	class ACWeapon* Weapon;
 
 protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Fire")
 		TSubclassOf<class ACBullet> BulletClass;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Fire")
+		float AutoFireInterval = 0.15f;
 
 protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Recoil")
@@ -48,4 +55,11 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Fire")
 		class USoundWave* FireSound;
+
+private:
+	bool bFiring;
+	bool bAutoFire = true;
+
+private:
+	FTimerHandle AutoFireHandle;
 };

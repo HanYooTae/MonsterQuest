@@ -45,16 +45,6 @@ protected:
 	 * @param Rate	This is a normalized rate, i.e. 1.0 means 100% of desired turn rate
 	 */
 	void LookUpAtRate(float Rate);
-
-protected:
-	void DrawSword();
-	void DrawPistol();
-	void DrawRifle();
-	void DrawSniper();
-
-
-	void NormalAttack();
-	void SkillAttack();
 	
 protected:
 	// APawn interface
@@ -66,6 +56,17 @@ public:
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
+
+protected:
+	void DrawSword();
+	void DrawPistol();
+	void DrawRifle();
+	void DrawSniper();
+
+protected:
+	void NormalAttack();
+	void EndAttack();
+	void ToggleAutoFire();
 
 protected:
 	void OnZoom(float InAxis);

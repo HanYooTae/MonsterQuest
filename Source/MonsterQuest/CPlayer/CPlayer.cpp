@@ -7,6 +7,7 @@
 #include "ActorComponents/COptionComponent.h"
 
 #include "Actions/Weapons/CWeapon.h"
+#include "Actions/DoActions/CDoAction.h"
 #include "Widgets/HUD/CUserWidget_CrossHair.h"
 
 #include "HeadMountedDisplayFunctionLibrary.h"
@@ -97,8 +98,9 @@ void ACPlayer::SetupPlayerInputComponent(class UInputComponent* PlayerInputCompo
 	PlayerInputComponent->BindAction("Rifle", IE_Pressed, this, &ACPlayer::DrawRifle);
 	PlayerInputComponent->BindAction("Sniper", IE_Pressed, this, &ACPlayer::DrawSniper);
 	PlayerInputComponent->BindAction("Attack", IE_Pressed, this, &ACPlayer::NormalAttack);
-	PlayerInputComponent->BindAction("Fire", IE_Pressed, Weapon, &ACWeapon::Begin_Fire);
-
+	PlayerInputComponent->BindAction("Attack", IE_Released, this, &ACPlayer::EndAttack);
+	PlayerInputComponent->BindAction("AutoFire", IE_Pressed, this, &ACPlayer::ToggleAutoFire);
+	
 	// Move
 	PlayerInputComponent->BindAxis("MoveForward", this, &ACPlayer::MoveForward);
 
@@ -154,8 +156,14 @@ void ACPlayer::NormalAttack()
 	Action->DoAction();
 }
 
-void ACPlayer::SkillAttack()
+void ACPlayer::EndAttack()
 {
+	Action->GetCurrentData()->GetDoAction()->End_DoAction();
+}
+
+void ACPlayer::ToggleAutoFire()
+{
+	Action->GetCurrentData()->GetDoAction()->ToggleAutoFire();
 }
 
 void ACPlayer::MoveForward(float Value)

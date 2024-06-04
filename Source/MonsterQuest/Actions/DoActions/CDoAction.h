@@ -30,6 +30,7 @@ public:
 public:		// 원거리 무기 전용 함수
 	virtual void OnAim() {};
 	virtual void OffAim() {};
+	virtual void ToggleAutoFire() {};
 
 public:
 	UFUNCTION()
