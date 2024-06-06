@@ -44,6 +44,18 @@ void ACDoAction_Fire::DoAction()
 		OwnerCharacter->PlayAnimMontage(Datas[0].AnimMontage, Datas[0].PlayRate, Datas[0].StartSection);
 	}
 
+	CheckTrue(bFiring);
+
+	bFiring = true;
+
+	// 연사모드
+	if (bAutoFire)
+	{
+		GetWorld()->GetTimerManager().SetTimer(AutoFireHandle, this, &ACDoAction_Fire::Begin_DoAction, 0.1f, true);
+
+		return;
+	}
+
 	else
 	{
 		// 몽타주가 없는 공격 시
@@ -56,31 +68,6 @@ void ACDoAction_Fire::DoAction()
 }
 
 void ACDoAction_Fire::Begin_DoAction()
-{
-	bFiring = true;
-
-	if (bAutoFire)
-	{
-		GetWorld()->GetTimerManager().SetTimer(AutoFireHandle, this, &ACDoAction_Fire::OnFiring, AutoFireInterval, true);
-
-		return;
-	}
-
-	OnFiring();
-}
-
-void ACDoAction_Fire::End_DoAction()
-{
-	StateComp->SetIdleMode();
-	StatusComp->SetMove();
-
-	if (bAutoFire)
-		GetWorld()->GetTimerManager().ClearTimer(AutoFireHandle);
-
-	bFiring = false;
-}
-
-void ACDoAction_Fire::OnFiring()
 {
 	// Spawn Projectile
 	CheckNull(Datas[0].ProjectileClass);
@@ -132,12 +119,20 @@ void ACDoAction_Fire::OnFiring()
 	//Bullet->OnBeginOverlap.AddDynamic(this, &ACDoAction_Fire::OnBulletBeginOverlap);
 }
 
-void ACDoAction_Fire::ToggleAutoFire()
+void ACDoAction_Fire::End_DoAction()
 {
-	/*if (bAutoFire && bFiring)
-		End_DoAction();*/
+	bFiring = false;
 
-	bAutoFire = !bAutoFire;
+	StateComp->SetIdleMode();
+	StatusComp->SetMove();
+
+	if (bAutoFire && AutoFireHandle.IsValid())
+		GetWorld()->GetTimerManager().ClearTimer(AutoFireHandle);
+}
+
+void ACDoAction_Fire::OnFiring()
+{
+	
 }
 
 void ACDoAction_Fire::OnBulletBeginOverlap(FHitResult hitResult)
