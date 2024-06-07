@@ -12,9 +12,6 @@ class MONSTERQUEST_API ACDoAction_Fire : public ACDoAction
 public:
 	ACDoAction_Fire();
 
-
-	FORCEINLINE bool IsAutoFire() { return bAutoFire; }
-	FORCEINLINE virtual void ToggleAutoFire() { bAutoFire = !bAutoFire; }
 protected:
 	virtual void BeginPlay() override;
 
@@ -25,9 +22,6 @@ public:
 	UFUNCTION() virtual void DoAction() override;
 	UFUNCTION() virtual void Begin_DoAction() override;
 	UFUNCTION() virtual void End_DoAction() override;
-
-	UFUNCTION()
-		void OnFiring();
 
 	UFUNCTION() void OnBulletBeginOverlap(FHitResult hitResult);
 
@@ -59,7 +53,6 @@ protected:
 
 private:
 	bool bFiring;
-	bool bAutoFire = true;
 
 private:
 	FTimerHandle AutoFireHandle;

@@ -4,7 +4,9 @@
 #include "ActionDatas/CActionData.h"
 #include "Actions/Equipment/CEquipment.h"
 #include "Actions/DoActions/CDoAction.h"
+#include "Actions/DoActions/CDoAction_Fire.h"
 #include "Actions/Weapons/CWeapon.h"
+#include "Widgets/HUD/CUserWidget_HUD.h"
 
 #include "GameFramework/Character.h"
 
@@ -12,6 +14,9 @@
 
 UCActionComponent::UCActionComponent()
 {
+	PrimaryComponentTick.bCanEverTick = true;
+
+	CHelpers::GetClass<UCUserWidget_HUD>(&HUDClass, "WidgetBlueprint'/Game/Widgets/HUD/WB_HUD.WB_HUD_C'");
 }
 
 void UCActionComponent::BeginPlay()
@@ -25,6 +30,27 @@ void UCActionComponent::BeginPlay()
 		if (!!DataAssets[i])
 			DataAssets[i]->BeginPlay(ownerCharacter, &Datas[i]);
 	}
+
+	if (!!HUDClass)
+	{
+		HUD = CreateWidget<UCUserWidget_HUD, APlayerController>(Cast<ACharacter>(GetOwner())->GetController<APlayerController>(), HUDClass);
+		HUD->AddToViewport();
+		HUD->SetVisibility(ESlateVisibility::Hidden);
+	}
+}
+
+void UCActionComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+{
+	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+
+	if (!!HUD)
+	{
+		ACDoAction* doAction = GetCurrentData()->GetDoAction();
+		if (!!doAction)
+		{
+			doAction->IsAutoFire() ? HUD->OnAutoFire() : HUD->OffAutoFire();
+		}
+	}
 }
 
 void UCActionComponent::SetUnarmedMode()
@@ -34,11 +60,14 @@ void UCActionComponent::SetUnarmedMode()
 		Datas[(int32)Type]->GetEquipment()->Unequip();
 
 	ChangeType(EActionType::Unarmed);
+
+	HUD->SetVisibility(ESlateVisibility::Hidden);
 }
 
 void UCActionComponent::SetSwordMode()
 {
 	SetMode(EActionType::Sword);
+	HUD->SetVisibility(ESlateVisibility::Hidden);
 }
 
 void UCActionComponent::SetPistolMode()
@@ -78,6 +107,8 @@ void UCActionComponent::SetMode(EActionType InNewType)
 		Datas[(int32)InNewType]->GetEquipment()->Equip();
 
 	ChangeType(InNewType);
+
+	HUD->SetVisibility(ESlateVisibility::Visible);
 }
 
 void UCActionComponent::ChangeType(EActionType InNewType)

@@ -130,11 +130,6 @@ void ACDoAction_Fire::End_DoAction()
 		GetWorld()->GetTimerManager().ClearTimer(AutoFireHandle);
 }
 
-void ACDoAction_Fire::OnFiring()
-{
-	
-}
-
 void ACDoAction_Fire::OnBulletBeginOverlap(FHitResult hitResult)
 {
 	FDamageEvent damageEvent;

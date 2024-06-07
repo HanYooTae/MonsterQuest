@@ -20,6 +20,8 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 public:
+	FORCEINLINE bool IsAutoFire() { return bAutoFire; }
+	FORCEINLINE void ToggleAutoFire() { bAutoFire = !bAutoFire; }
 	FORCEINLINE void SetDatas(TArray<FDoActionData> InDatas) { Datas = InDatas; }
 
 public:
@@ -30,7 +32,6 @@ public:
 public:		// 원거리 무기 전용 함수
 	virtual void OnAim() {};
 	virtual void OffAim() {};
-	FORCEINLINE virtual void ToggleAutoFire() {};
 
 public:
 	UFUNCTION()
@@ -54,4 +55,7 @@ protected:
 
 protected:
 	TArray<FDoActionData> Datas;
+
+protected:
+	bool bAutoFire = true;
 };

@@ -23,6 +23,9 @@ public:
 protected:
 	virtual void BeginPlay() override;
 
+public:
+	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+
 public:		// Get Action
 	UFUNCTION(BlueprintPure)
 		class UCActionData_Spawned* GetCurrentData() { return Datas[(int32)Type]; }
@@ -92,6 +95,12 @@ public:
 		class UCActionData* DataAssets[(int32)EActionType::Max];
 
 private:
+	UPROPERTY(EditAnywhere, Category = "Weapon")
+		TSubclassOf<class UCUserWidget_HUD> HUDClass;
+
+private:
 	EActionType Type;
 	class UCActionData_Spawned* Datas[(int32)EActionType::Max];
+
+	class UCUserWidget_HUD* HUD;
 };
