@@ -67,6 +67,7 @@ protected:
 	void NormalAttack();
 	void EndAttack();
 	void ToggleAutoFire();
+	void ToggleReload();
 
 protected:
 	void OnZoom(float InAxis);

@@ -7,6 +7,7 @@
 #include "ActorComponents/COptionComponent.h"
 
 #include "Actions/Weapons/CWeapon.h"
+#include "Actions/Weapons/CWeapon_Sword.h"
 #include "Actions/DoActions/CDoAction.h"
 #include "Widgets/HUD/CUserWidget_CrossHair.h"
 
@@ -25,9 +26,9 @@ ACPlayer::ACPlayer()
 {
 	// Create CharacterComponent
 	CHelpers::CreateActorComponent(this, &Action, "Action");
+	CHelpers::CreateActorComponent(this, &State, "State");
 	CHelpers::CreateActorComponent(this, &Status, "Status");
 	CHelpers::CreateActorComponent(this, &Montages, "Montages");
-	CHelpers::CreateActorComponent(this, &State, "State");
 	CHelpers::CreateActorComponent(this, &Option, "Option");
 	CHelpers::CreateActorComponent<ACWeapon>(this, &Weapon, "Weapon");
 
@@ -100,6 +101,7 @@ void ACPlayer::SetupPlayerInputComponent(class UInputComponent* PlayerInputCompo
 	PlayerInputComponent->BindAction("Attack", IE_Pressed, this, &ACPlayer::NormalAttack);
 	PlayerInputComponent->BindAction("Attack", IE_Released, this, &ACPlayer::EndAttack);
 	PlayerInputComponent->BindAction("AutoFire", IE_Pressed, this, &ACPlayer::ToggleAutoFire);
+	PlayerInputComponent->BindAction("Reload", IE_Pressed, this, &ACPlayer::ToggleReload);
 	
 	// Move
 	PlayerInputComponent->BindAxis("MoveForward", this, &ACPlayer::MoveForward);
@@ -158,12 +160,23 @@ void ACPlayer::NormalAttack()
 
 void ACPlayer::EndAttack()
 {
+	// 이거 안하면 SwordAttack에 문제생김
+	CheckFalse(Action->GetCurrentData()->GetDoAction()->bCanEndAttack);
 	Action->GetCurrentData()->GetDoAction()->End_DoAction();
 }
 
 void ACPlayer::ToggleAutoFire()
 {
+	CheckNull(Action->GetCurrentData());
+	CheckNull(Action->GetCurrentData()->GetDoAction());
 	Action->GetCurrentData()->GetDoAction()->ToggleAutoFire();
+}
+
+void ACPlayer::ToggleReload()
+{
+	CheckNull(Action->GetCurrentData());
+	CheckNull(Action->GetCurrentData()->GetDoAction());
+	Action->GetCurrentData()->GetDoAction()->Reload();
 }
 
 void ACPlayer::MoveForward(float Value)

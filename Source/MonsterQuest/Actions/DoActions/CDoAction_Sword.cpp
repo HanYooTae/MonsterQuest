@@ -20,6 +20,8 @@ void ACDoAction_Sword::DoAction()
 
 	CheckFalse(Datas.Num() > 0);
 
+	bCanEndAttack = false;
+
 	// Combo Flag
 	if (bCanCombo == true)
 	{
@@ -56,6 +58,8 @@ void ACDoAction_Sword::Begin_DoAction()
 	ComboCount = FMath::Clamp(ComboCount, 0, Datas.Num() - 1);
 	OwnerCharacter->PlayAnimMontage(Datas[ComboCount].AnimMontage, Datas[ComboCount].PlayRate, Datas[ComboCount].StartSection);
 	Datas[ComboCount].bCanMove ? StatusComp->SetMove() : StatusComp->SetStop();
+
+	CLog::Log(ComboCount);
 }
 
 void ACDoAction_Sword::End_DoAction()

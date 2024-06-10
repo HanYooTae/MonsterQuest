@@ -32,6 +32,8 @@ public:
 public:		// 원거리 무기 전용 함수
 	virtual void OnAim() {};
 	virtual void OffAim() {};
+	virtual void Reload() {};
+	virtual void End_Reload() {};
 
 public:
 	UFUNCTION()
@@ -58,4 +60,7 @@ protected:
 
 protected:
 	bool bAutoFire = true;
+
+public:	// Sword공격 시, Player의 EndAttack을 return해주는 flag
+	bool bCanEndAttack = true;
 };

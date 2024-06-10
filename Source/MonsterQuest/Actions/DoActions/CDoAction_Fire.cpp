@@ -34,6 +34,8 @@ void ACDoAction_Fire::DoAction()
 {
 	CheckFalse(Datas.Num() > 0);
 
+	bCanEndAttack = true;
+
 	CheckFalse(StateComp->IsIdleMode());
 	StateComp->SetActionMode();
 
@@ -128,6 +130,16 @@ void ACDoAction_Fire::End_DoAction()
 
 	if (bAutoFire && AutoFireHandle.IsValid())
 		GetWorld()->GetTimerManager().ClearTimer(AutoFireHandle);
+}
+
+void ACDoAction_Fire::Reload()
+{
+	
+}
+
+void ACDoAction_Fire::End_Reload()
+{
+
 }
 
 void ACDoAction_Fire::OnBulletBeginOverlap(FHitResult hitResult)
