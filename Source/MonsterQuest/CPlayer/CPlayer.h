@@ -57,6 +57,9 @@ public:
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
 
+public:
+	UCActionComponent* GetAction() { return Action; }
+
 protected:
 	void DrawSword();
 	void DrawPistol();

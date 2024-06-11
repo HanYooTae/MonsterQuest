@@ -1,7 +1,7 @@
 #include "Notifies/AnimNotify_Reload.h"
 
 #include "CPlayer/CPlayer.h"
-#include "Actions/Weapons/CWeapon.h"
+#include "Actions/DoActions/CDoAction.h"
 
 #include "Global.h"
 
@@ -20,5 +20,14 @@ void UAnimNotify_Reload::Notify(USkeletalMeshComponent* MeshComp, UAnimSequenceB
 	ACPlayer* player = Cast<ACPlayer>(MeshComp->GetOwner());
 	CheckNull(player);
 
-	
+	ACDoAction* doAction = player->GetAction()->GetCurrentData()->GetDoAction();
+	CheckNull(doAction);
+
+	switch (ActionType)
+	{
+	case EMagazineActionType::Eject: doAction->Eject_Magazine(); break;
+	case EMagazineActionType::Spawn: doAction->Spawn_Magazine(); break;
+	case EMagazineActionType::Load: doAction->Load_Magazine(); break;
+	case EMagazineActionType::End: doAction->End_Reload(); break;
+	}
 }

@@ -137,6 +137,21 @@ void ACDoAction_Fire::Reload()
 	
 }
 
+void ACDoAction_Fire::Eject_Magazine()
+{
+
+}
+
+void ACDoAction_Fire::Spawn_Magazine()
+{
+	
+}
+
+void ACDoAction_Fire::Load_Magazine()
+{
+	
+}
+
 void ACDoAction_Fire::End_Reload()
 {
 
