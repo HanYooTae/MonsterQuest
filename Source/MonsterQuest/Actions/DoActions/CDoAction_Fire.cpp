@@ -134,7 +134,7 @@ void ACDoAction_Fire::End_DoAction()
 
 void ACDoAction_Fire::Reload()
 {
-	
+	End_DoAction();
 }
 
 void ACDoAction_Fire::Eject_Magazine()
