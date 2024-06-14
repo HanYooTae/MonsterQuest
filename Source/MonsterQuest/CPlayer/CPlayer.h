@@ -58,7 +58,7 @@ public:
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
 
 public:
-	UCActionComponent* GetAction() { return Action; }
+	class UCActionComponent* GetAction() { return Action; }
 
 protected:
 	void DrawSword();

@@ -45,6 +45,9 @@ struct FDoActionData : public FEquipmentData
 		FTransform EffectTransform;
 
 	UPROPERTY(EditAnywhere)
+		class UAnimMontage* ReloadMontage;
+
+	UPROPERTY(EditAnywhere)
 		TSubclassOf<UMatineeCameraShake> ShakeClass;
 
 	UPROPERTY(EditAnywhere)

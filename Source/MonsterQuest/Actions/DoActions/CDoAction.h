@@ -66,6 +66,8 @@ protected:
 protected:
 	bool bAutoFire = true;
 
-public:	// Sword공격 시, Player의 EndAttack을 return해주는 flag
-	bool bCanEndAttack = true;
+public:	
+	bool bCanEndAttack = true; // Sword공격 시, Player의 EndAttack을 return해주는 flag
+	bool bFiring; // 총을 쏠 수 있는 상태인지 아닌지
+	bool bReload;
 };

@@ -30,5 +30,6 @@ void ACMagazine::Eject()
 	bEject = true;
 
 	Mesh->SetVisibility(false);
+	Mesh_Empty->SetVisibility(true);
 	Mesh_Empty->SetSimulatePhysics(true);
 }

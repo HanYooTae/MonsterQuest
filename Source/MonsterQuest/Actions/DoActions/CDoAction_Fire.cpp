@@ -134,7 +134,14 @@ void ACDoAction_Fire::End_DoAction()
 
 void ACDoAction_Fire::Reload()
 {
+	bReload = true;
+
 	End_DoAction();
+
+	if (!!Datas[0].ReloadMontage)
+	{
+		OwnerCharacter->PlayAnimMontage(Datas[0].ReloadMontage, Datas[0].PlayRate, Datas[0].StartSection);
+	}
 }
 
 void ACDoAction_Fire::Eject_Magazine()
@@ -154,7 +161,7 @@ void ACDoAction_Fire::Load_Magazine()
 
 void ACDoAction_Fire::End_Reload()
 {
-
+	bReload = false;
 }
 
 void ACDoAction_Fire::OnBulletBeginOverlap(FHitResult hitResult)

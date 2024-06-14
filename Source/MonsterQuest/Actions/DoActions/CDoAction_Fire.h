@@ -59,8 +59,5 @@ protected:
 		class USoundWave* FireSound;
 
 private:
-	bool bFiring;
-
-private:
 	FTimerHandle AutoFireHandle;
 };

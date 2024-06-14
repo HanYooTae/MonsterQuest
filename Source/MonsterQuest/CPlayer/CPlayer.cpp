@@ -155,6 +155,7 @@ void ACPlayer::DrawSniper()
 
 void ACPlayer::NormalAttack()
 {
+	CheckTrue(Action->GetCurrentData()->GetDoAction()->bReload);
 	Action->DoAction();
 }
 
@@ -176,6 +177,7 @@ void ACPlayer::ToggleReload()
 {
 	CheckNull(Action->GetCurrentData());
 	CheckNull(Action->GetCurrentData()->GetDoAction());
+	CheckTrue(Action->GetCurrentData()->GetDoAction()->bReload);
 	Action->GetCurrentData()->GetDoAction()->Reload();
 }
 
