@@ -23,13 +23,6 @@ public:
 	UFUNCTION() virtual void Begin_DoAction() override;
 	UFUNCTION() virtual void End_DoAction() override;
 
-public:
-	UFUNCTION() virtual void Reload() override;
-	UFUNCTION() virtual void Eject_Magazine() override;
-	UFUNCTION() virtual void Spawn_Magazine() override;
-	UFUNCTION() virtual void Load_Magazine() override;
-	UFUNCTION() virtual void End_Reload() override;
-
 	UFUNCTION() void OnBulletBeginOverlap(FHitResult hitResult);
 
 public:

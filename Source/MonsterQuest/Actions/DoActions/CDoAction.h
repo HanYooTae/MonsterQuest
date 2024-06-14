@@ -34,13 +34,6 @@ public:		// 원거리 무기 전용 함수
 	virtual void OffAim() {};
 
 public:
-	virtual void Reload() {};
-	virtual void Eject_Magazine() {};
-	virtual void Spawn_Magazine() {};
-	virtual void Load_Magazine() {};
-	virtual void End_Reload() {};
-
-public:
 	UFUNCTION()
 		virtual void OnBeginOverlap(class ACharacter* InAttacker, class AActor* InCauser, class ACharacter* InOtherCharacter) {};
 

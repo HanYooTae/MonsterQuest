@@ -9,6 +9,7 @@
 #include "Actions/Weapons/CWeapon.h"
 #include "Actions/Weapons/CWeapon_Sword.h"
 #include "Actions/DoActions/CDoAction.h"
+#include "Actions/Reload/CReload.h"
 #include "Widgets/HUD/CUserWidget_CrossHair.h"
 
 #include "HeadMountedDisplayFunctionLibrary.h"
@@ -155,7 +156,7 @@ void ACPlayer::DrawSniper()
 
 void ACPlayer::NormalAttack()
 {
-	CheckTrue(Action->GetCurrentData()->GetDoAction()->bReload);
+	CheckTrue(Action->GetCurrentData()->GetReload()->bReload);
 	Action->DoAction();
 }
 
@@ -177,8 +178,8 @@ void ACPlayer::ToggleReload()
 {
 	CheckNull(Action->GetCurrentData());
 	CheckNull(Action->GetCurrentData()->GetDoAction());
-	CheckTrue(Action->GetCurrentData()->GetDoAction()->bReload);
-	Action->GetCurrentData()->GetDoAction()->Reload();
+	CheckTrue(Action->GetCurrentData()->GetReload()->bReload);
+	Action->GetCurrentData()->GetReload()->Reload();
 }
 
 void ACPlayer::MoveForward(float Value)

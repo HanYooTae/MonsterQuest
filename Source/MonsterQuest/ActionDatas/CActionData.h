@@ -33,7 +33,15 @@ public:
 	UPROPERTY(EditAnywhere, Category = "DoAction")
 		TArray<FDoActionData> DoActionDatas;
 
+	UPROPERTY(EditAnywhere, Category = "Reload")
+		TSubclassOf<class ACReload> ReloadClass;
+
+	// 콤보 공격이 있을 수 있기 때문에 TArray 사용
+	UPROPERTY(EditAnywhere, Category = "Reload")
+		FReloadData ReloadData;
+
 	class ACWeapon* Weapon;
 	class ACEquipment* Equipment;
 	class ACDoAction* DoAction;
+	class ACReload* Reload;
 };

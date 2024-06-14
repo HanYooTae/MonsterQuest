@@ -45,13 +45,43 @@ struct FDoActionData : public FEquipmentData
 		FTransform EffectTransform;
 
 	UPROPERTY(EditAnywhere)
-		class UAnimMontage* ReloadMontage;
-
-	UPROPERTY(EditAnywhere)
 		TSubclassOf<UMatineeCameraShake> ShakeClass;
 
 	UPROPERTY(EditAnywhere)
 		TSubclassOf<class ACBullet> ProjectileClass;
+};
+
+USTRUCT(BlueprintType)
+struct FReloadData
+{
+	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere)
+		TSubclassOf<class ACMagazine> MagazineClass;
+
+	UPROPERTY(EditAnywhere)
+		class UAnimMontage* ReloadMontage;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Magazine")
+		FName MagazineBoneName;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Magazine")
+		FName MagazineAttachSocketName;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Magazine")
+		uint8 MaxMagazineCount = 30;
+
+	UPROPERTY(EditAnywhere)
+		float PlayRate = 1.f;
+
+	UPROPERTY(EditAnywhere)
+		FName StartSection;
+
+	UPROPERTY(EditAnywhere)
+		bool bCanMove = true;
+
+	UPROPERTY(EditAnywhere)
+		bool bPawnControl = true;
 };
 
 UCLASS()
@@ -66,9 +96,11 @@ public:
 	FORCEINLINE class ACWeapon* GetWeapon() { return Weapon; }
 	FORCEINLINE class ACEquipment* GetEquipment() { return Equipment; }
 	FORCEINLINE class ACDoAction* GetDoAction() { return DoAction; }
+	FORCEINLINE class ACReload* GetReload() { return Reload; }
 
 private:
 	class ACWeapon* Weapon;
 	class ACEquipment* Equipment;
 	class ACDoAction* DoAction;
+	class ACReload* Reload;
 };

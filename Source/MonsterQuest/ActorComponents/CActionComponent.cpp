@@ -5,6 +5,7 @@
 #include "Actions/Equipment/CEquipment.h"
 #include "Actions/DoActions/CDoAction.h"
 #include "Actions/DoActions/CDoAction_Fire.h"
+#include "Actions/Reload/CReload.h"
 #include "Actions/Weapons/CWeapon.h"
 #include "Widgets/HUD/CUserWidget_HUD.h"
 
@@ -163,5 +164,8 @@ void UCActionComponent::End_Dead()
 
 		if (!!Datas[i] && !!Datas[i]->GetDoAction())
 			Datas[i]->GetDoAction()->Destroy();
+
+		if (!!Datas[i] && !!Datas[i]->GetReload())
+			Datas[i]->GetReload()->Destroy();
 	}
 }

@@ -3,6 +3,7 @@
 #include "Actions/Weapons/CWeapon.h"
 #include "Actions/Equipment/CEquipment.h"
 #include "Actions/DoActions/CDoAction.h"
+#include "Actions/Reload/CReload.h"
 
 #include "GameFramework/Character.h"
 
@@ -57,10 +58,22 @@ void UCActionData::BeginPlay(class ACharacter* InOwnerCharacter, UCActionData_Sp
 		}
 	}
 
+	Reload = nullptr;
+	if (!!ReloadClass)
+	{
+		Reload = InOwnerCharacter->GetWorld()->SpawnActorDeferred<ACReload>(ReloadClass, transform, InOwnerCharacter);
+
+		Reload->SetData(ReloadData);
+		Reload->SetActorLabel(GetCustomLabel(InOwnerCharacter, "Reload"));
+
+		UGameplayStatics::FinishSpawningActor(Reload, transform);
+	}
+
 	(*OutSpawned) = NewObject<UCActionData_Spawned>();
 	(*OutSpawned)->Weapon = Weapon;
 	(*OutSpawned)->Equipment = Equipment;
 	(*OutSpawned)->DoAction = DoAction;
+	(*OutSpawned)->Reload = Reload;
 }
 
 FString UCActionData::GetCustomLabel(ACharacter* InOwnerCharacter, FString InMiddleName)
