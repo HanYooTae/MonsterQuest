@@ -28,6 +28,7 @@ public:
 	virtual void DoAction() {};
 	virtual void Begin_DoAction() {};
 	virtual void End_DoAction() {};
+	virtual void Load_Magazine() {};
 
 public:		// 원거리 무기 전용 함수
 	virtual void OnAim() {};
@@ -63,4 +64,7 @@ public:
 	bool bCanEndAttack = true; // Sword공격 시, Player의 EndAttack을 return해주는 flag
 	bool bFiring; // 총을 쏠 수 있는 상태인지 아닌지
 	bool bReload;
+
+public:	// Magazine Count
+	uint8 CurrMagazineCount;
 };

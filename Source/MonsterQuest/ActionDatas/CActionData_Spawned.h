@@ -49,6 +49,9 @@ struct FDoActionData : public FEquipmentData
 
 	UPROPERTY(EditAnywhere)
 		TSubclassOf<class ACBullet> ProjectileClass;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Magazine")
+		uint8 MaxMagazineCount = 30;
 };
 
 USTRUCT(BlueprintType)
@@ -67,9 +70,6 @@ struct FReloadData
 
 	UPROPERTY(EditDefaultsOnly, Category = "Magazine")
 		FName MagazineAttachSocketName;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Magazine")
-		uint8 MaxMagazineCount = 30;
 
 	UPROPERTY(EditAnywhere)
 		float PlayRate = 1.f;

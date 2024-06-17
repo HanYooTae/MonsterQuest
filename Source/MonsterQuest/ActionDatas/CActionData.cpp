@@ -41,6 +41,17 @@ void UCActionData::BeginPlay(class ACharacter* InOwnerCharacter, UCActionData_Sp
 		}
 	}
 
+	Reload = nullptr;
+	if (!!ReloadClass)
+	{
+		Reload = InOwnerCharacter->GetWorld()->SpawnActorDeferred<ACReload>(ReloadClass, transform, InOwnerCharacter);
+
+		Reload->SetData(ReloadData);
+		Reload->SetActorLabel(GetCustomLabel(InOwnerCharacter, "Reload"));
+
+		UGameplayStatics::FinishSpawningActor(Reload, transform);
+	}
+
 	DoAction = nullptr;
 	if (!!DoActionClass)
 	{
@@ -57,18 +68,7 @@ void UCActionData::BeginPlay(class ACharacter* InOwnerCharacter, UCActionData_Sp
 			Weapon->OnEndOverlap.AddDynamic(DoAction, &ACDoAction::OnEndOverlap);
 		}
 	}
-
-	Reload = nullptr;
-	if (!!ReloadClass)
-	{
-		Reload = InOwnerCharacter->GetWorld()->SpawnActorDeferred<ACReload>(ReloadClass, transform, InOwnerCharacter);
-
-		Reload->SetData(ReloadData);
-		Reload->SetActorLabel(GetCustomLabel(InOwnerCharacter, "Reload"));
-
-		UGameplayStatics::FinishSpawningActor(Reload, transform);
-	}
-
+	
 	(*OutSpawned) = NewObject<UCActionData_Spawned>();
 	(*OutSpawned)->Weapon = Weapon;
 	(*OutSpawned)->Equipment = Equipment;

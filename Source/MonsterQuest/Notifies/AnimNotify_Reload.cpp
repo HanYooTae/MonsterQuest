@@ -2,6 +2,7 @@
 
 #include "CPlayer/CPlayer.h"
 #include "ActorComponents/CActionComponent.h"
+#include "Actions/DoActions/CDoAction.h"
 #include "Actions/Reload/CReload.h"
 
 #include "Global.h"
@@ -24,11 +25,14 @@ void UAnimNotify_Reload::Notify(USkeletalMeshComponent* MeshComp, UAnimSequenceB
 	ACReload* reload = player->GetAction()->GetCurrentData()->GetReload();
 	CheckNull(reload);
 
+	ACDoAction* action = player->GetAction()->GetCurrentData()->GetDoAction();
+	CheckNull(action);
+
 	switch (ActionType)
 	{
 	case EMagazineActionType::Eject: reload->Eject_Magazine(); break;
 	case EMagazineActionType::Spawn: reload->Spawn_Magazine(); break;
-	case EMagazineActionType::Load: reload->Load_Magazine(); break;
+	case EMagazineActionType::Load: action->Load_Magazine(); break;
 	case EMagazineActionType::End: reload->End_Reload(); break;
 	}
 }

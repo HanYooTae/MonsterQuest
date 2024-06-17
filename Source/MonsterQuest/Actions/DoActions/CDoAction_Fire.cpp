@@ -5,6 +5,7 @@
 #include "ActorComponents/CStatusComponent.h"
 #include "Actions/Weapons/CBullet.h"
 #include "Actions/Weapons/CWeapon.h"
+#include "Actions/Reload/CReload.h"
 
 #include "GameFramework/Character.h"
 #include "Camera/CameraComponent.h"
@@ -21,7 +22,6 @@ ACDoAction_Fire::ACDoAction_Fire()
 void ACDoAction_Fire::BeginPlay()
 {
 	Super::BeginPlay();
-
 }
 
 void ACDoAction_Fire::Tick(float DeltaTime)
@@ -66,7 +66,6 @@ void ACDoAction_Fire::DoAction()
 		// 몽타주가 없으니 Notify도 없으므로 바로 SetIdle
 		End_DoAction();
 	}
-	
 }
 
 void ACDoAction_Fire::Begin_DoAction()
@@ -117,6 +116,13 @@ void ACDoAction_Fire::Begin_DoAction()
 		controller->PlayerCameraManager->StartCameraShake(shakeClass);
 	}
 
+	CurrMagazineCount--;
+
+	if (CurrMagazineCount <= 0)
+		Reload->Reload();
+
+	CLog::Log(CurrMagazineCount);
+
 	// 충돌처리
 	//Bullet->OnBeginOverlap.AddDynamic(this, &ACDoAction_Fire::OnBulletBeginOverlap);
 }
@@ -130,6 +136,11 @@ void ACDoAction_Fire::End_DoAction()
 
 	if (bAutoFire && AutoFireHandle.IsValid())
 		GetWorld()->GetTimerManager().ClearTimer(AutoFireHandle);
+}
+
+void ACDoAction_Fire::Load_Magazine()
+{
+	CurrMagazineCount = Datas[0].MaxMagazineCount;
 }
 
 void ACDoAction_Fire::OnBulletBeginOverlap(FHitResult hitResult)

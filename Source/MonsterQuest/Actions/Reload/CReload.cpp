@@ -33,19 +33,19 @@ void ACReload::Reload()
 
 	ActionComp->GetCurrentData()->GetDoAction()->End_DoAction();
 
-	if (!!Data.ReloadMontage)
+	if (!!ReloadData.ReloadMontage)
 	{
-		OwnerCharacter->PlayAnimMontage(Data.ReloadMontage, Data.PlayRate, Data.StartSection);
+		OwnerCharacter->PlayAnimMontage(ReloadData.ReloadMontage, ReloadData.PlayRate, ReloadData.StartSection);
 	}
 }
 
 void ACReload::Eject_Magazine()
 {
-	CheckNull(Data.MagazineClass);
+	CheckNull(ReloadData.MagazineClass);
 
-	FTransform transform = Weapon->Weapon->GetSocketTransform(Data.MagazineBoneName);
+	FTransform transform = Weapon->Weapon->GetSocketTransform(ReloadData.MagazineBoneName);
 
-	ACMagazine* magazine = GetWorld()->SpawnActorDeferred<ACMagazine>(Data.MagazineClass, transform, nullptr, nullptr, ESpawnActorCollisionHandlingMethod::AlwaysSpawn);
+	ACMagazine* magazine = GetWorld()->SpawnActorDeferred<ACMagazine>(ReloadData.MagazineClass, transform, nullptr, nullptr, ESpawnActorCollisionHandlingMethod::AlwaysSpawn);
 	magazine->Eject();
 	magazine->SetLifeSpan(5);
 	magazine->FinishSpawning(transform);
@@ -53,18 +53,10 @@ void ACReload::Eject_Magazine()
 
 void ACReload::Spawn_Magazine()
 {
-	CheckNull(Data.MagazineClass);
+	CheckNull(ReloadData.MagazineClass);
 
-	Magazine = GetWorld()->SpawnActor<ACMagazine>(Data.MagazineClass);
-	Magazine->AttachToComponent(OwnerCharacter->GetMesh(), FAttachmentTransformRules(EAttachmentRule::KeepRelative, true), Data.MagazineAttachSocketName);
-}
-
-void ACReload::Load_Magazine()
-{
-	if (!!Magazine)
-		Magazine->Destroy();
-
-	//CurrMagazineCount = Data.MaxMagazineCount;
+	Magazine = GetWorld()->SpawnActor<ACMagazine>(ReloadData.MagazineClass);
+	Magazine->AttachToComponent(OwnerCharacter->GetMesh(), FAttachmentTransformRules(EAttachmentRule::KeepRelative, true), ReloadData.MagazineAttachSocketName);
 }
 
 void ACReload::End_Reload()

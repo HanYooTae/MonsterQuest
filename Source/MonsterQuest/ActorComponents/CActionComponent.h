@@ -98,7 +98,7 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Weapon")
 		TSubclassOf<class UCUserWidget_HUD> HUDClass;
 
-private:
+public:
 	EActionType Type;
 	class UCActionData_Spawned* Datas[(int32)EActionType::Max];
 

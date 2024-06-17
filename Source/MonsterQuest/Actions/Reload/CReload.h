@@ -17,17 +17,17 @@ protected:
 	virtual void BeginPlay() override;
 
 public:
-	FORCEINLINE void SetData(const FReloadData& InData) { Data = InData; }
+	FORCEINLINE void SetData(const FReloadData& InData) { ReloadData = InData; }
 
 public:
 	void Reload();
 	void Eject_Magazine();
 	void Spawn_Magazine();
-	void Load_Magazine();
 	void End_Reload();
 
 public:
 	class ACWeapon* Weapon;
+	class ACDoAction* DoAction;
 
 protected:
 	UPROPERTY(BlueprintReadOnly)
@@ -39,8 +39,8 @@ protected:
 	UPROPERTY(BlueprintReadOnly)
 		class UCActionComponent* ActionComp;
 
-private:
-	FReloadData Data;
+protected:
+	FReloadData ReloadData;
 	class ACMagazine* Magazine;
 
 public:

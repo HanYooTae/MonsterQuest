@@ -22,12 +22,15 @@ public:
 	UFUNCTION() virtual void DoAction() override;
 	UFUNCTION() virtual void Begin_DoAction() override;
 	UFUNCTION() virtual void End_DoAction() override;
+	UFUNCTION() virtual void Load_Magazine() override;
+
 
 	UFUNCTION() void OnBulletBeginOverlap(FHitResult hitResult);
 
 public:
 	class ACBullet* Bullet;
 	class ACWeapon* Weapon;
+	class ACReload* Reload;
 
 protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Fire")
@@ -53,4 +56,7 @@ protected:
 
 private:
 	FTimerHandle AutoFireHandle;
+
+protected:
+	FReloadData ReloadData;
 };
