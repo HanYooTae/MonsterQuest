@@ -25,9 +25,6 @@ private:
 	UPROPERTY(VisibleDefaultsOnly)
 		class UStaticMeshComponent* Mesh;
 
-	UPROPERTY(VisibleDefaultsOnly)
-		class UStaticMeshComponent* Mesh_Empty;
-
 private:
 	bool bEject;
 };

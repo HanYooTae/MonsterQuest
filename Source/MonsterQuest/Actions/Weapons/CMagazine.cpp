@@ -8,10 +8,8 @@ ACMagazine::ACMagazine()
 {
 	CHelpers::CreateActorComponent<USceneComponent>(this, &Root, "Root");
 	CHelpers::CreateSceneComponent<UStaticMeshComponent>(this, &Mesh, "Mesh", Root);
-	CHelpers::CreateSceneComponent<UStaticMeshComponent>(this, &Mesh_Empty, "Mesh_Empty", Root);
 
 	Mesh->SetCollisionProfileName("Magazine");
-	Mesh_Empty->SetCollisionProfileName("Magazine");
 }
 
 void ACMagazine::BeginPlay()
@@ -21,7 +19,6 @@ void ACMagazine::BeginPlay()
 	if (bEject == false)
 	{
 		Mesh->SetVisibility(true);
-		Mesh_Empty->SetVisibility(false);
 	}
 }
 
@@ -29,7 +26,6 @@ void ACMagazine::Eject()
 {
 	bEject = true;
 
-	Mesh->SetVisibility(false);
-	Mesh_Empty->SetVisibility(true);
-	Mesh_Empty->SetSimulatePhysics(true);
+	Mesh->SetVisibility(true);
+	Mesh->SetSimulatePhysics(true);
 }
