@@ -26,6 +26,9 @@ public:
 	void Load_Magazine();
 	void End_Reload();
 
+public:
+	class ACWeapon* Weapon;
+
 protected:
 	UPROPERTY(BlueprintReadOnly)
 		class ACharacter* OwnerCharacter;
@@ -38,7 +41,8 @@ protected:
 
 private:
 	FReloadData Data;
+	class ACMagazine* Magazine;
 
 public:
-	bool bReload;
+	bool bReload;	// CanReload
 };
