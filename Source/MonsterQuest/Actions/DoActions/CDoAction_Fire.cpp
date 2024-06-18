@@ -28,6 +28,17 @@ void ACDoAction_Fire::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	/*if (LastAddSpreadTime >= 0.0f)
+	{
+		if (GetWorld()->GetTimeSeconds() - LastAddSpreadTime >= AutoFireInterval + 0.25f)
+		{
+			CurrSpreadRadius = 0;
+			LastAddSpreadTime = 0;
+
+			if (!!CrossHair)
+				CrossHair->UpdateSpreadRange(CurrSpreadRadius, MaxSpreadAlignment);
+		}
+	}*/
 }
 
 void ACDoAction_Fire::DoAction()
@@ -53,7 +64,7 @@ void ACDoAction_Fire::DoAction()
 	// 연사모드
 	if (bAutoFire)
 	{
-		GetWorld()->GetTimerManager().SetTimer(AutoFireHandle, this, &ACDoAction_Fire::Begin_DoAction, 0.1f, true);
+		GetWorld()->GetTimerManager().SetTimer(AutoFireHandle, this, &ACDoAction_Fire::Begin_DoAction, AutoFireInterval, true);
 
 		return;
 	}
@@ -81,9 +92,9 @@ void ACDoAction_Fire::Begin_DoAction()
 
 	FVector start = transform.GetLocation() + direction;
 
-	direction = UKismetMathLibrary::RandomUnitVectorInConeInDegrees(direction, 0.75f);
+	direction = UKismetMathLibrary::RandomUnitVectorInConeInDegrees(direction, RecoilAngle);
 
-	FVector end = transform.GetLocation() + direction * 3000;
+	FVector end = transform.GetLocation() + direction * HitDistance;
 
 	TArray<AActor*> ignores;
 	ignores.Add(OwnerCharacter);

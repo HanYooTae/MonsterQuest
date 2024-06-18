@@ -55,6 +55,10 @@ protected:
 		class USoundWave* FireSound;
 
 private:
+	float CurrSpreadRadius;
+	float LastAddSpreadTime;
+
+private:
 	FTimerHandle AutoFireHandle;
 
 protected:
