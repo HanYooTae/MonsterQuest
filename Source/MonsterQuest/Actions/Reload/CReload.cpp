@@ -56,7 +56,7 @@ void ACReload::Spawn_Magazine()
 	CheckNull(ReloadData.MagazineClass);
 
 	Magazine = GetWorld()->SpawnActor<ACMagazine>(ReloadData.MagazineClass);
-	Magazine->AttachToComponent(OwnerCharacter->GetMesh(), FAttachmentTransformRules(EAttachmentRule::KeepRelative, true), ReloadData.MagazineAttachSocketName);
+	Magazine->AttachToComponent(Weapon->Weapon, FAttachmentTransformRules(EAttachmentRule::KeepRelative, true), ReloadData.MagazineAttachSocketName);
 }
 
 void ACReload::End_Reload()
