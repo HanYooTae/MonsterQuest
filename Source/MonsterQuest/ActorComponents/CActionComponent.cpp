@@ -50,6 +50,18 @@ void UCActionComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 		if (!!doAction)
 		{
 			doAction->IsAutoFire() ? HUD->OnAutoFire() : HUD->OffAutoFire();
+
+			uint8 currMagazineCount = doAction->GetCurrMagazineCount();
+			uint8 maxMagazineCount = 0;
+
+			for (const auto& max : doAction->GetDatas())
+			{
+				maxMagazineCount = max.MaxMagazineCount;
+				break;
+			}
+
+			HUD->UpdateMagazine(currMagazineCount, maxMagazineCount);
+			HUD->UpdateWeaponName(Type);
 		}
 	}
 }

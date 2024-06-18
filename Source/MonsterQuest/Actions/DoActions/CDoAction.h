@@ -22,7 +22,9 @@ public:
 public:
 	FORCEINLINE bool IsAutoFire() { return bAutoFire; }
 	FORCEINLINE void ToggleAutoFire() { bAutoFire = !bAutoFire; }
+	FORCEINLINE TArray<FDoActionData> GetDatas() { return Datas; }
 	FORCEINLINE void SetDatas(TArray<FDoActionData> InDatas) { Datas = InDatas; }
+	FORCEINLINE uint8 GetCurrMagazineCount() { return CurrMagazineCount; }
 
 public:
 	virtual void DoAction() {};

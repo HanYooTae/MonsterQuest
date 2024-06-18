@@ -15,4 +15,10 @@ public:
 
 	UFUNCTION(BlueprintImplementableEvent)
 		void OffAutoFire();
+
+	UFUNCTION(BlueprintImplementableEvent)
+		void UpdateWeaponName(EActionType InType);
+
+	UFUNCTION(BlueprintImplementableEvent)
+		void UpdateMagazine(uint8 InCount, uint8 InMax);
 };
