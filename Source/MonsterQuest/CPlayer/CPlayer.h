@@ -71,6 +71,8 @@ protected:
 	void EndAttack();
 	void ToggleAutoFire();
 	void ToggleReload();
+	void OnAim();
+	void OffAim();
 
 protected:
 	void OnZoom(float InAxis);

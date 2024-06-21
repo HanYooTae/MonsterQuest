@@ -17,6 +17,7 @@
 ACDoAction_Fire::ACDoAction_Fire()
 {
 	CHelpers::GetAsset<USoundWave>(&FireSound, "SoundWave'/Game/Sounds/S_RifleShoot.S_RifleShoot'");
+	CHelpers::GetAsset<UCurveFloat>(&AimCurve, "CurveFloat'/Game/Assets/Aim/CV_Aim.CV_Aim'");
 }
 
 void ACDoAction_Fire::BeginPlay()
@@ -152,6 +153,16 @@ void ACDoAction_Fire::End_DoAction()
 void ACDoAction_Fire::Load_Magazine()
 {
 	CurrMagazineCount = Datas[0].MaxMagazineCount;
+}
+
+void ACDoAction_Fire::OnAim()
+{
+	bAim = true;
+}
+
+void ACDoAction_Fire::OffAim()
+{
+	bAim = false;
 }
 
 void ACDoAction_Fire::OnBulletBeginOverlap(FHitResult hitResult)

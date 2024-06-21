@@ -99,10 +99,17 @@ void ACPlayer::SetupPlayerInputComponent(class UInputComponent* PlayerInputCompo
 	PlayerInputComponent->BindAction("Pistol", IE_Pressed, this, &ACPlayer::DrawPistol);
 	PlayerInputComponent->BindAction("Rifle", IE_Pressed, this, &ACPlayer::DrawRifle);
 	PlayerInputComponent->BindAction("Sniper", IE_Pressed, this, &ACPlayer::DrawSniper);
+
+	// Attack
 	PlayerInputComponent->BindAction("Attack", IE_Pressed, this, &ACPlayer::NormalAttack);
 	PlayerInputComponent->BindAction("Attack", IE_Released, this, &ACPlayer::EndAttack);
+
+	// Attack_Fire
 	PlayerInputComponent->BindAction("AutoFire", IE_Pressed, this, &ACPlayer::ToggleAutoFire);
 	PlayerInputComponent->BindAction("Reload", IE_Pressed, this, &ACPlayer::ToggleReload);
+	PlayerInputComponent->BindAction("Aim", IE_Pressed, this, &ACPlayer::OnAim);
+	PlayerInputComponent->BindAction("Aim", IE_Released, this, &ACPlayer::OffAim);
+	
 	
 	// Move
 	PlayerInputComponent->BindAxis("MoveForward", this, &ACPlayer::MoveForward);
@@ -182,6 +189,18 @@ void ACPlayer::ToggleReload()
 	CheckNull(Action->GetCurrentData()->GetDoAction());
 	CheckTrue(Action->GetCurrentData()->GetReload()->bReload);
 	Action->GetCurrentData()->GetReload()->Reload();
+}
+
+void ACPlayer::OnAim()
+{
+	CheckFalse(Action->GetCurrentData()->GetDoAction()->bAim);
+	Action->GetCurrentData()->GetDoAction()->OnAim();
+}
+
+void ACPlayer::OffAim()
+{
+	CheckTrue(Action->GetCurrentData()->GetDoAction()->bAim);
+	Action->GetCurrentData()->GetDoAction()->OffAim();
 }
 
 void ACPlayer::MoveForward(float Value)
