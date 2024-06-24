@@ -193,13 +193,13 @@ void ACPlayer::ToggleReload()
 
 void ACPlayer::OnAim()
 {
-	CheckFalse(Action->GetCurrentData()->GetDoAction()->bAim);
+	CheckNull(Action->GetCurrentData()->GetReload());
 	Action->GetCurrentData()->GetDoAction()->OnAim();
 }
 
 void ACPlayer::OffAim()
 {
-	CheckTrue(Action->GetCurrentData()->GetDoAction()->bAim);
+	CheckNull(Action->GetCurrentData()->GetReload());
 	Action->GetCurrentData()->GetDoAction()->OffAim();
 }
 

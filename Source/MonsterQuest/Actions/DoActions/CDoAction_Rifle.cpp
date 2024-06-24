@@ -17,3 +17,11 @@ void ACDoAction_Rifle::BeginPlay()
 	
 	CurrMagazineCount = Datas[0].MaxMagazineCount;
 }
+
+void ACDoAction_Rifle::OnAim()
+{
+}
+
+void ACDoAction_Rifle::OffAim()
+{
+}

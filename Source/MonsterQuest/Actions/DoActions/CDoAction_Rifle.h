@@ -14,4 +14,8 @@ public:
 
 protected:
 	virtual void BeginPlay() override;
+
+public:
+	virtual void OnAim() override;
+	virtual void OffAim() override;
 };
