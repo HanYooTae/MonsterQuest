@@ -148,6 +148,16 @@ void UCActionComponent::DoAction()
 
 void UCActionComponent::DoAim(bool InPressed)
 {
+	CheckFalse(IsRifleMode());
+
+	if (!!GetCurrentData())
+	{
+		ACDoAction* doAction = GetCurrentData()->GetDoAction();
+		if (!!doAction)
+		{
+			InPressed ? doAction->OnAim() : doAction->OffAim();
+		}
+	}
 }
 
 void UCActionComponent::OffAllCollisions()
