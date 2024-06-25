@@ -16,6 +16,13 @@ protected:
 	virtual void BeginPlay() override;
 
 public:
+	virtual void Tick(float DeltaTime) override;
+
+public:
 	virtual void OnAim() override;
 	virtual void OffAim() override;
+
+private:
+	UPROPERTY()
+		class UCAim* Aim;
 };

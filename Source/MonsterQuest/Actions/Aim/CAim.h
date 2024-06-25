@@ -16,10 +16,8 @@ public:
 	void BeginPlay(class ACharacter* InOwnerCharacter);
 	void Tick(float DeltaTime);
 
-	UFUNCTION()
-		void On();
-	UFUNCTION()
-		void Off();
+	UFUNCTION() void On();
+	UFUNCTION() void Off();
 
 public:
 	FORCEINLINE bool IsAvailable() { return SpringArm != nullptr && Camera != nullptr; }
@@ -41,6 +39,4 @@ private:
 
 	class UCurveFloat* Curve;
 	FTimeline Timeline;
-
-	class ACHUD* HUD;
 };

@@ -24,11 +24,6 @@ public:
 	UFUNCTION() virtual void End_DoAction() override;
 	UFUNCTION() virtual void Load_Magazine() override;
 
-public:
-	virtual void OnAim() override;
-	virtual void OffAim() override;
-
-
 	UFUNCTION() void OnBulletBeginOverlap(FHitResult hitResult);
 
 public:

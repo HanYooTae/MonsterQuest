@@ -155,16 +155,6 @@ void ACDoAction_Fire::Load_Magazine()
 	CurrMagazineCount = Datas[0].MaxMagazineCount;
 }
 
-void ACDoAction_Fire::OnAim()
-{
-	bAim = true;
-}
-
-void ACDoAction_Fire::OffAim()
-{
-	bAim = false;
-}
-
 void ACDoAction_Fire::OnBulletBeginOverlap(FHitResult hitResult)
 {
 	FDamageEvent damageEvent;

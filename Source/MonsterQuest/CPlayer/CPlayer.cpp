@@ -199,7 +199,7 @@ void ACPlayer::OnAim()
 void ACPlayer::OffAim()
 {
 	//CheckNull(Action->GetCurrentData()->GetReload());
-	Action->DoAim(true);
+	Action->DoAim(false);
 }
 
 void ACPlayer::MoveForward(float Value)
