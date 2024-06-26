@@ -17,12 +17,12 @@
 ACDoAction_Fire::ACDoAction_Fire()
 {
 	CHelpers::GetAsset<USoundWave>(&FireSound, "SoundWave'/Game/Sounds/S_RifleShoot.S_RifleShoot'");
-	CHelpers::GetAsset<UCurveFloat>(&AimCurve, "CurveFloat'/Game/Assets/Aim/CV_Aim.CV_Aim'");
 }
 
 void ACDoAction_Fire::BeginPlay()
 {
 	Super::BeginPlay();
+
 }
 
 void ACDoAction_Fire::Tick(float DeltaTime)

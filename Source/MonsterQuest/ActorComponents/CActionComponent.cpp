@@ -148,7 +148,7 @@ void UCActionComponent::DoAction()
 
 void UCActionComponent::DoAim(bool InPressed)
 {
-	CheckFalse(IsRifleMode());
+	//CheckFalse(IsRifleMode());
 
 	if (!!GetCurrentData())
 	{

@@ -32,9 +32,6 @@ public:
 	class ACReload* Reload;
 
 protected:
-	class UCurveFloat* AimCurve;
-
-protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Fire")
 		TSubclassOf<class ACBullet> BulletClass;
 
