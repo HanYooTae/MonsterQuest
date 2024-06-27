@@ -21,8 +21,4 @@ public:
 public:
 	virtual void OnAim() override;
 	virtual void OffAim() override;
-
-private:
-	UPROPERTY()
-		class UCAim* Aim;
 };

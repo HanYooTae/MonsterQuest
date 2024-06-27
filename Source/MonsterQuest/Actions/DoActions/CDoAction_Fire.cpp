@@ -6,6 +6,7 @@
 #include "Actions/Weapons/CBullet.h"
 #include "Actions/Weapons/CWeapon.h"
 #include "Actions/Reload/CReload.h"
+#include "Actions/Aim/CAim.h"
 
 #include "GameFramework/Character.h"
 #include "Camera/CameraComponent.h"

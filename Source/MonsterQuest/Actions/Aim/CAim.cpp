@@ -1,4 +1,5 @@
 #include "Actions/Aim/CAim.h"
+#include "CPlayer/CPlayer.h"
 
 #include "GameFramework/Character.h"
 #include "GameFramework/SpringArmComponent.h"
@@ -14,9 +15,6 @@ UCAim::UCAim()
 void UCAim::BeginPlay(ACharacter* InOwnerCharacter)
 {
 	OwnerCharacter = InOwnerCharacter;
-
-	CheckNull(SpringArm);
-	CheckNull(Camera);
 
 	SpringArm = Cast<USpringArmComponent>(OwnerCharacter->GetComponentByClass(USpringArmComponent::StaticClass()));
 	Camera = Cast<UCameraComponent>(OwnerCharacter->GetComponentByClass(UCameraComponent::StaticClass()));

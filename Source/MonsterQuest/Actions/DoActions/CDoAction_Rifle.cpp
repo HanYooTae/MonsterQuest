@@ -13,13 +13,13 @@ void ACDoAction_Rifle::BeginPlay()
 {
 	Super::BeginPlay();
 
+	Aim = NewObject<UCAim>();
+	Aim->BeginPlay(OwnerCharacter);
+
 	Weapon = ActionComp->DataAssets[(int8)EActionType::Rifle]->Weapon;
 	Reload = ActionComp->DataAssets[(int8)EActionType::Rifle]->Reload;
 	
 	CurrMagazineCount = Datas[0].MaxMagazineCount;
-
-	Aim = NewObject<UCAim>();
-	Aim->BeginPlay(OwnerCharacter);
 }
 
 void ACDoAction_Rifle::Tick(float DeltaTime)

@@ -69,4 +69,8 @@ public:
 
 public:	// Magazine Count
 	uint8 CurrMagazineCount;
+
+protected:
+	UPROPERTY()
+		class UCAim* Aim;
 };
