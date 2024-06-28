@@ -2,7 +2,7 @@
 
 #include "Actions/Weapons/CWeapon.h"
 #include "Actions/Reload/CReload.h"
-#include "Actions/Aim/CAim.h"
+#include "Actions/Aim/CAim_Rifle.h"
 #include "ActorComponents/CActionComponent.h"
 
 #include "global.h"
@@ -13,7 +13,7 @@ void ACDoAction_Rifle::BeginPlay()
 {
 	Super::BeginPlay();
 
-	Aim = NewObject<UCAim>();
+	Aim = NewObject<UCAim_Rifle>();
 	Aim->BeginPlay(OwnerCharacter);
 
 	Weapon = ActionComp->DataAssets[(int8)EActionType::Rifle]->Weapon;

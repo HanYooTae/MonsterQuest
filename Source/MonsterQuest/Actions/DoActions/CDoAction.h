@@ -72,5 +72,5 @@ public:	// Magazine Count
 
 protected:
 	UPROPERTY()
-		class UCAim* Aim;
+		class UCAim_Rifle* Aim;
 };

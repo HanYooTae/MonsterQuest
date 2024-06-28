@@ -1,4 +1,4 @@
-#include "Actions/Aim/CAim.h"
+#include "Actions/Aim/CAim_Rifle.h"
 #include "CPlayer/CPlayer.h"
 
 #include "GameFramework/Character.h"
@@ -7,12 +7,12 @@
 
 #include "Global.h"
 
-UCAim::UCAim()
+UCAim_Rifle::UCAim_Rifle()
 {
 	CHelpers::GetAsset<UCurveFloat>(&Curve, "CurveFloat'/Game/Assets/CV_Aim.CV_Aim'");
 }
 
-void UCAim::BeginPlay(ACharacter* InOwnerCharacter)
+void UCAim_Rifle::BeginPlay(ACharacter* InOwnerCharacter)
 {
 	OwnerCharacter = InOwnerCharacter;
 
@@ -24,12 +24,12 @@ void UCAim::BeginPlay(ACharacter* InOwnerCharacter)
 	Timeline.SetPlayRate(5.f);
 }
 
-void UCAim::Tick(float DeltaTime)
+void UCAim_Rifle::Tick(float DeltaTime)
 {
 	Timeline.TickTimeline(DeltaTime);
 }
 
-void UCAim::On()
+void UCAim_Rifle::On()
 {
 	CheckFalse(IsAvailable());
 	CheckTrue(bZooming);
@@ -41,7 +41,7 @@ void UCAim::On()
 	Timeline.PlayFromStart();
 }
 
-void UCAim::Off()
+void UCAim_Rifle::Off()
 {
 	CheckFalse(IsAvailable());
 	CheckFalse(bZooming);
@@ -53,7 +53,7 @@ void UCAim::Off()
 	Timeline.ReverseFromEnd();
 }
 
-void UCAim::Zooming(float Output)
+void UCAim_Rifle::Zooming(float Output)
 {
 	Camera->FieldOfView = Output;
 }

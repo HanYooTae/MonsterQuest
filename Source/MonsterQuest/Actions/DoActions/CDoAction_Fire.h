@@ -38,6 +38,12 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Fire")
 		float AutoFireInterval = 0.15f;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Fire")
+		FName MuzzleBoneName;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Fire")
+		class USoundWave* FireSound;
+
 protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Recoil")
 		float RecoilAngle = 0.75f;
@@ -47,11 +53,14 @@ protected:
 		float HitDistance = 3000;
 
 protected:
-	UPROPERTY(EditDefaultsOnly, Category = "Fire")
-		FName MuzzleBoneName;
+	UPROPERTY(EditDefaultsOnly, Category = "Particle")
+		class UParticleSystem* EjectParticle;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Fire")
-		class USoundWave* FireSound;
+	UPROPERTY(EditDefaultsOnly, Category = "Particle")
+		class UParticleSystem* FlashParticle;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Particle")
+		class UParticleSystem* HitParticle;
 
 private:
 	float CurrSpreadRadius;

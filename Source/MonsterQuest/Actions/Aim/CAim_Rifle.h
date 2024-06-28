@@ -3,15 +3,15 @@
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
 #include "Components/TimelineComponent.h"
-#include "CAim.generated.h"
+#include "CAim_Rifle.generated.h"
 
 UCLASS()
-class MONSTERQUEST_API UCAim : public UObject
+class MONSTERQUEST_API UCAim_Rifle : public UObject
 {
 	GENERATED_BODY()
 	
 public:
-	UCAim();
+	UCAim_Rifle();
 
 	void BeginPlay(class ACharacter* InOwnerCharacter);
 	void Tick(float DeltaTime);
