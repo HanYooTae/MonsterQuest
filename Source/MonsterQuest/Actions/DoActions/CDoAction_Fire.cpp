@@ -10,9 +10,10 @@
 
 #include "GameFramework/Character.h"
 #include "Camera/CameraComponent.h"
-#include "Sound/SoundWave.h"
 #include "Camera/CameraShake.h"
+#include "Sound/SoundWave.h"
 #include "Particles/ParticleSystem.h"
+#include "Materials/MaterialInstanceConstant.h"
 #include "Components/DecalComponent.h"
 
 #include "Global.h"
@@ -20,9 +21,12 @@
 ACDoAction_Fire::ACDoAction_Fire()
 {
 	CHelpers::GetAsset<USoundWave>(&FireSound, "SoundWave'/Game/Sounds/S_RifleShoot.S_RifleShoot'");
+
 	CHelpers::GetAsset<UParticleSystem>(&EjectParticle, "ParticleSystem'/Game/Effects/P_Eject_bullet.P_Eject_bullet'");
 	CHelpers::GetAsset<UParticleSystem>(&FlashParticle, "ParticleSystem'/Game/Effects/P_Muzzleflash.P_Muzzleflash'");
 	CHelpers::GetAsset<UParticleSystem>(&HitParticle, "ParticleSystem'/Game/Effects/P_Impact_Default.P_Impact_Default'");
+
+	CHelpers::GetAsset<UMaterialInstanceConstant>(&HitDecal, "MaterialInstanceConstant'/Game/Materials/M_Decal_Inst.M_Decal_Inst'");
 }
 
 void ACDoAction_Fire::BeginPlay()
@@ -109,6 +113,23 @@ void ACDoAction_Fire::Begin_DoAction()
 	FHitResult hitResult;
 	UKismetSystemLibrary::LineTraceSingle(GetWorld(), start, end, ETraceTypeQuery::TraceTypeQuery1, false, ignores, EDrawDebugTrace::None, hitResult, true);
 
+	if (hitResult.bBlockingHit)
+	{
+		FRotator rotator = hitResult.ImpactNormal.Rotation();
+
+		if (!!HitDecal)
+		{
+			UDecalComponent* decal = UGameplayStatics::SpawnDecalAtLocation(GetWorld(), HitDecal, FVector(5), hitResult.Location, rotator, 10);
+			decal->SetFadeScreenSize(0);
+		}
+
+		if (!!HitParticle)
+		{
+			FRotator impactRotation = UKismetMathLibrary::FindLookAtRotation(hitResult.Location, hitResult.TraceStart);
+			UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), HitParticle, hitResult.Location, impactRotation);
+		}
+	}
+
 	FVector muzzleLocation = Weapon->Weapon->GetSocketLocation(MuzzleBoneName);
 
 	CLog::Log(MuzzleBoneName.ToString());
@@ -143,13 +164,11 @@ void ACDoAction_Fire::Begin_DoAction()
 	if (!!EjectParticle)
 		UGameplayStatics::SpawnEmitterAttached(EjectParticle, Weapon->Weapon, "b_gun_shelleject", FVector::ZeroVector, FRotator::ZeroRotator, EAttachLocation::KeepRelativeOffset);
 
-		if (!!FlashParticle)
+	if (!!FlashParticle)
 		UGameplayStatics::SpawnEmitterAttached(FlashParticle, Weapon->Weapon, "Muzzle", FVector::ZeroVector, FRotator::ZeroRotator, EAttachLocation::KeepRelativeOffset);
 
-	
 
 
-	// HitParticle & Decal * Collisions
 	// 충돌처리
 	//Bullet->OnBeginOverlap.AddDynamic(this, &ACDoAction_Fire::OnBulletBeginOverlap);
 }

@@ -62,6 +62,9 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Particle")
 		class UParticleSystem* HitParticle;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Decal")
+		class UMaterialInstanceConstant* HitDecal;
+
 private:
 	float CurrSpreadRadius;
 	float LastAddSpreadTime;
