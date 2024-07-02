@@ -11,6 +11,7 @@
 #include "Actions/DoActions/CDoAction.h"
 #include "Actions/Reload/CReload.h"
 #include "Widgets/HUD/CUserWidget_CrossHair.h"
+#include "Widgets/HUD/CUserWidget_Information.h"
 
 #include "HeadMountedDisplayFunctionLibrary.h"
 #include "Camera/CameraComponent.h"
@@ -34,6 +35,7 @@ ACPlayer::ACPlayer()
 	CHelpers::CreateActorComponent<ACWeapon>(this, &Weapon, "Weapon");
 
 	CHelpers::GetClass<UCUserWidget_CrossHair>(&CrossHairClass, "WidgetBlueprint'/Game/Widgets/HUD/WB_CrossHair.WB_CrossHair_C'");
+	CHelpers::GetClass<UCUserWidget_Information>(&InformationClass, "WidgetBlueprint'/Game/Widgets/HUD/WB_Information.WB_Information_C'");
 
 	CHelpers::CreateSceneComponent(this, &Backpack, "Backpack", GetMesh());
 	UStaticMesh* staticMesh;
@@ -78,6 +80,13 @@ void ACPlayer::BeginPlay()
 		CrossHair = CreateWidget<UCUserWidget_CrossHair, APlayerController>(this->GetController<APlayerController>(), CrossHairClass);
 		CrossHair->AddToViewport();
 		CrossHair->SetVisibility(ESlateVisibility::Hidden);
+	}
+
+	if (!!InformationClass)
+	{
+		Information = CreateWidget<UCUserWidget_Information, APlayerController>(this->GetController<APlayerController>(), InformationClass);
+		Information->AddToViewport();
+		Information->SetVisibility(ESlateVisibility::Visible);
 	}
 }
 

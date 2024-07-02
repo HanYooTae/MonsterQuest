@@ -116,7 +116,11 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = "HUD")
 		TSubclassOf<class UCUserWidget_CrossHair> CrossHairClass;
 
+	UPROPERTY(EditDefaultsOnly, Category = "HUD")
+		TSubclassOf<class UCUserWidget_Information> InformationClass;
+
 public:
 	class UCUserWidget_CrossHair* CrossHair;
+	class UCUserWidget_Information* Information;
 };
 
