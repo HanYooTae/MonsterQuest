@@ -119,7 +119,7 @@ void ACDoAction_Fire::Begin_DoAction()
 
 		if (!!HitDecal)
 		{
-			UDecalComponent* decal = UGameplayStatics::SpawnDecalAtLocation(GetWorld(), HitDecal, FVector(5), hitResult.Location, rotator, 10);
+			UDecalComponent* decal = UGameplayStatics::SpawnDecalAtLocation(GetWorld(), HitDecal, FVector(5), hitResult.Location, rotator, 5);
 			decal->SetFadeScreenSize(0);
 		}
 
