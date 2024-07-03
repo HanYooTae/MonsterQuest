@@ -148,6 +148,7 @@ void UCActionComponent::DoAction()
 
 void UCActionComponent::DoAim(bool InPressed)
 {
+	CheckTrue(IsSwordMode());
 	CheckTrue(IsPistolMode());
 
 	if (!!GetCurrentData())
@@ -156,6 +157,7 @@ void UCActionComponent::DoAim(bool InPressed)
 		if (!!doAction)
 		{
 			InPressed ? doAction->OnAim() : doAction->OffAim();
+			bAim = InPressed;
 		}
 	}
 }

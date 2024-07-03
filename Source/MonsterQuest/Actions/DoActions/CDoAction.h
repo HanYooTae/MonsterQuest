@@ -25,7 +25,7 @@ public:
 	FORCEINLINE TArray<FDoActionData> GetDatas() { return Datas; }
 	FORCEINLINE void SetDatas(TArray<FDoActionData> InDatas) { Datas = InDatas; }
 	FORCEINLINE uint8 GetCurrMagazineCount() { return CurrMagazineCount; }
-
+	
 public:
 	virtual void DoAction() {};
 	virtual void Begin_DoAction() {};
@@ -65,12 +65,11 @@ protected:
 public:	
 	bool bCanEndAttack = true; // Sword공격 시, Player의 EndAttack을 return해주는 flag
 	bool bFiring; // 총을 쏠 수 있는 상태인지 아닌지
-	bool bAim;
 
 public:	// Magazine Count
 	uint8 CurrMagazineCount;
 
-protected:
+public:
 	UPROPERTY()
 		class UCAim_Rifle* Aim;
 };

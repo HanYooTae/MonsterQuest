@@ -35,6 +35,9 @@ protected:
 		bool Falling;
 
 	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "Animation")
+		bool bAiming;
+
+	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "Animation")
 		EActionType ActionType;
 
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Guns")
@@ -42,4 +45,5 @@ protected:
 
 private:
 	class ACharacter* OwnerCharacter;
+	class UCActionComponent* ActionComp;
 };

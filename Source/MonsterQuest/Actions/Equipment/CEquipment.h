@@ -23,6 +23,7 @@ protected:
 
 public:
 	FORCEINLINE void SetData(const FEquipmentData& InData) { EquipmentData = InData; }
+	FORCEINLINE bool IsEquipped() { return bEquipped; }
 
 public:
 	// Play Draw Montage
@@ -71,4 +72,7 @@ public:
 
 private:
 	FEquipmentData EquipmentData;
+
+private:
+	bool bEquipped;
 };

@@ -62,6 +62,8 @@ void ACEquipment::Begin_Sword_Equip_Implementation()
 
 void ACEquipment::Begin_Equip_Implementation()
 {	
+	bEquipped = true;
+
 	if (!!Player->CrossHair)
 		Player->CrossHair->SetVisibility(ESlateVisibility::Visible);
 
@@ -77,6 +79,8 @@ void ACEquipment::End_Equip_Implementation()
 
 void ACEquipment::Unequip_Implementation()
 {
+	bEquipped = false;
+
 	OwnerCharacter->bUseControllerRotationYaw = false;
 	OwnerCharacter->GetCharacterMovement()->bOrientRotationToMovement = true;
 

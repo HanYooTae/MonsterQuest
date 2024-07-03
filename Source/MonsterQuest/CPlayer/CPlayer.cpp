@@ -207,7 +207,6 @@ void ACPlayer::OnAim()
 
 void ACPlayer::OffAim()
 {
-	//CheckNull(Action->GetCurrentData()->GetReload());
 	Action->DoAim(false);
 }
 

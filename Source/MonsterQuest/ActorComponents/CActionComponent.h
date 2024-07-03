@@ -49,6 +49,9 @@ public:		// bool Type
 	UFUNCTION(BlueprintPure)
 		FORCEINLINE bool IsSniperMode() { return Type == EActionType::Sniper; }
 
+public:
+	FORCEINLINE bool IsAim() { return bAim; }
+
 public:		// Set Action NetMulticast
 	UFUNCTION(BlueprintCallable)
 		void SetUnarmedMode();
@@ -103,4 +106,7 @@ public:
 	class UCActionData_Spawned* Datas[(int32)EActionType::Max];
 
 	class UCUserWidget_HUD* HUD;
+
+private:
+	bool bAim;
 };

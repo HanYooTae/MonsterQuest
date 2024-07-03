@@ -1,4 +1,8 @@
 #include "CPlayer/CAnimInstance.h"
+#include "CPlayer/CPlayer.h"
+#include "ActorComponents/CActionComponent.h"
+#include "Actions/DoActions/CDoAction.h"
+#include "Actions/Aim/CAim_Rifle.h"
 
 #include "Global.h"
 
@@ -16,10 +20,10 @@ void UCAnimInstance::NativeBeginPlay()
 
 	OwnerCharacter = Cast<ACharacter>(TryGetPawnOwner());
 
-	UCActionComponent* actionComp = CHelpers::GetComponent<UCActionComponent>(OwnerCharacter);
-	CheckNull(actionComp);
+	ActionComp = CHelpers::GetComponent<UCActionComponent>(OwnerCharacter);
+	CheckNull(ActionComp);
 
-	actionComp->OnActionTypeChanged.AddDynamic(this, &UCAnimInstance::OnActionTypeChanged);
+	ActionComp->OnActionTypeChanged.AddDynamic(this, &UCAnimInstance::OnActionTypeChanged);
 }
 
 void UCAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
@@ -29,10 +33,14 @@ void UCAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 	OwnerCharacter = Cast<ACharacter>(TryGetPawnOwner());
 	CheckNull(OwnerCharacter);
 
+	ActionComp = CHelpers::GetComponent<UCActionComponent>(OwnerCharacter);
+	CheckNull(ActionComp);
+
 	Speed = OwnerCharacter->GetVelocity().Size2D();
 	Direction = CalculateDirection(OwnerCharacter->GetVelocity(), OwnerCharacter->GetControlRotation());
 	Pitch = OwnerCharacter->GetBaseAimRotation().Pitch;
 	Falling = OwnerCharacter->GetCharacterMovement()->IsFalling();
+	bAiming = ActionComp->IsAim();
 }
 
 void UCAnimInstance::OnActionTypeChanged(EActionType InNewType)
