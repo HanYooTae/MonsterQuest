@@ -81,6 +81,9 @@ public:
 	FCharacterBeginOverlapSignature OnCharacterBeginOverlap;
 
 public:
+	FORCEINLINE class USkeletalMeshComponent* GetArms() { return Arms; }
+
+public:
 	/** Camera boom positioning the camera behind the character */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 		class USpringArmComponent* CameraBoom;
@@ -88,6 +91,11 @@ public:
 	/** Follow camera */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 		class UCameraComponent* FollowCamera;
+
+private:
+	// Aim_Sniper_Arms
+	UPROPERTY(VisibleDefaultsOnly)
+		class USkeletalMeshComponent* Arms;
 
 private:    // Character Component
 	UPROPERTY(VisibleDefaultsOnly)

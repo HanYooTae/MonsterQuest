@@ -69,6 +69,14 @@ ACPlayer::ACPlayer()
 	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName); // Attach the camera to the end of the boom and let the boom adjust to match the controller orientation
 	FollowCamera->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
 	FollowCamera->SetRelativeLocation(FVector(-30, 50, 80));
+
+	CHelpers::CreateSceneComponent<USkeletalMeshComponent>(this, &Arms, "Arms", FollowCamera);
+	USkeletalMesh* mesh;
+	CHelpers::GetAsset<USkeletalMesh>(&mesh, "SkeletalMesh'/Game/Character_Arms/Mesh/SK_Mannequin_Arms.SK_Mannequin_Arms'");
+	Arms->SetSkeletalMesh(mesh);
+	Arms->SetRelativeLocation(FVector(-14.25f, -5.85f, -156.94f));
+	Arms->SetRelativeRotation(FRotator(-0.5f, -11.85f, -1.2f));
+	Arms->SetVisibility(false);
 }
 
 void ACPlayer::BeginPlay()
