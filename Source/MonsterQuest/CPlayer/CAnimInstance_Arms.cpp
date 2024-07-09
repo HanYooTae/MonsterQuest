@@ -25,7 +25,7 @@ void UCAnimInstance_Arms::NativeUpdateAnimation(float DeltaSeconds)
 	LeftHandTransform = ActionComp->GetArmsLeftHandTransform();
 }
 
-void UCAnimInstance_Arms::OnActionTypeChanged(EActionType InPrevType, EActionType InNewType)
+void UCAnimInstance_Arms::OnActionTypeChanged(EActionType InNewType)
 {
 	ActionType = InNewType;
 }

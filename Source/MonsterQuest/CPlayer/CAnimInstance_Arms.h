@@ -16,7 +16,7 @@ public:
 
 private:
 	UFUNCTION()
-		void OnActionTypeChanged(EActionType InPrevType, EActionType InNewType);
+		void OnActionTypeChanged(EActionType InNewType);
 
 protected:
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Guns")
