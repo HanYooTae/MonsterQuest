@@ -16,16 +16,16 @@ public:
 
 private:
 	UFUNCTION()
-		void OnWeaponTypeChanged(EActionType InPrevType, EActionType InNewType);
+		void OnActionTypeChanged(EActionType InPrevType, EActionType InNewType);
 
 protected:
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Guns")
-		EActionType ActionType = EActionType::Max;
+		EActionType ActionType = EActionType::Unarmed;
 
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Guns")
 		FTransform LeftHandTransform;
 
 private:
-	class ACPlayer* Owner;
+	class ACPlayer* Player;
 	class UCActionComponent* ActionComp;
 };

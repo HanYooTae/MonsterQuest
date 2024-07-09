@@ -90,6 +90,9 @@ public:		// Get Assets
 		void End_Dead();
 
 public:
+	FTransform GetArmsLeftHandTransform();
+
+public:
 	UPROPERTY(BlueprintAssignable)
 		FActionTypeChangedSignature OnActionTypeChanged;
 
