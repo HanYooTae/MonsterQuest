@@ -27,6 +27,10 @@ public:
 	UFUNCTION() void OnBulletBeginOverlap(FHitResult hitResult);
 
 public:
+	UFUNCTION() virtual void OnAim() override;
+	UFUNCTION() virtual void OffAim() override;
+
+public:
 	class ACBullet* Bullet;
 	class ACWeapon* Weapon;
 	class ACReload* Reload;

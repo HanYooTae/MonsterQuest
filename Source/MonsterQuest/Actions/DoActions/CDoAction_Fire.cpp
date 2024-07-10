@@ -33,11 +33,15 @@ void ACDoAction_Fire::BeginPlay()
 {
 	Super::BeginPlay();
 
+	Aim = NewObject<UCAim_Rifle>();
+	Aim->BeginPlay(OwnerCharacter);
 }
 
 void ACDoAction_Fire::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	Aim->Tick(DeltaTime);
 
 	/*if (LastAddSpreadTime >= 0.0f)
 	{
@@ -199,4 +203,16 @@ void ACDoAction_Fire::OnBulletBeginOverlap(FHitResult hitResult)
 		OwnerCharacter->GetController(),
 		Bullet
 	);
+}
+
+void ACDoAction_Fire::OnAim()
+{
+	CheckNull(Aim);
+	Aim->On();
+}
+
+void ACDoAction_Fire::OffAim()
+{
+	CheckNull(Aim);
+	Aim->Off();
 }

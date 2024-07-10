@@ -13,9 +13,6 @@ void ACDoAction_Rifle::BeginPlay()
 {
 	Super::BeginPlay();
 
-	Aim = NewObject<UCAim_Rifle>();
-	Aim->BeginPlay(OwnerCharacter);
-
 	Weapon = ActionComp->DataAssets[(int8)EActionType::Rifle]->Weapon;
 	Reload = ActionComp->DataAssets[(int8)EActionType::Rifle]->Reload;
 	
@@ -25,17 +22,5 @@ void ACDoAction_Rifle::BeginPlay()
 void ACDoAction_Rifle::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	Aim->Tick(DeltaTime);
-}
-
-void ACDoAction_Rifle::OnAim()
-{
-	CheckNull(Aim);
-	Aim->On();
-}
-
-void ACDoAction_Rifle::OffAim()
-{
-	CheckNull(Aim);
-	Aim->Off();
+	
 }

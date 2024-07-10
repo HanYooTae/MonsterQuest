@@ -48,6 +48,9 @@ protected:
 		class ACharacter* OwnerCharacter;
 
 	UPROPERTY(BlueprintReadOnly)
+		class ACPlayer* Player;
+
+	UPROPERTY(BlueprintReadOnly)
 		class UCStatusComponent* StatusComp;
 
 	UPROPERTY(BlueprintReadOnly)

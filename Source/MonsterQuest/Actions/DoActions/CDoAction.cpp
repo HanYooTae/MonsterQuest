@@ -1,5 +1,6 @@
 #include "Actions/DoActions/CDoAction.h"
 
+#include "CPlayer/CPlayer.h"
 #include "ActorComponents/CStateComponent.h"
 #include "ActorComponents/CStatusComponent.h"
 #include "ActorComponents/CActionComponent.h"
@@ -16,6 +17,7 @@ ACDoAction::ACDoAction()
 void ACDoAction::BeginPlay()
 {
 	OwnerCharacter = Cast<ACharacter>(GetOwner());
+	Player = Cast<ACPlayer>(OwnerCharacter);
 
 	StatusComp = Cast<UCStatusComponent>(OwnerCharacter->GetComponentByClass(UCStatusComponent::StaticClass()));
 	StateComp = Cast<UCStateComponent>(OwnerCharacter->GetComponentByClass(UCStateComponent::StaticClass()));

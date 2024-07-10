@@ -82,6 +82,7 @@ public:
 
 public:
 	FORCEINLINE class USkeletalMeshComponent* GetArms() { return Arms; }
+	FORCEINLINE class UStaticMeshComponent* GetBackpack() { return Backpack; }
 
 public:
 	/** Camera boom positioning the camera behind the character */
