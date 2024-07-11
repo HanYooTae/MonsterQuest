@@ -7,7 +7,7 @@
 UENUM(BlueprintType)
 enum class EMagazineActionType : uint8
 {
-	Eject, Spawn, Load, End
+	Eject, Load, End
 };
 
 UCLASS()

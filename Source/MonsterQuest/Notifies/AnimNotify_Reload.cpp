@@ -31,7 +31,6 @@ void UAnimNotify_Reload::Notify(USkeletalMeshComponent* MeshComp, UAnimSequenceB
 	switch (ActionType)
 	{
 	case EMagazineActionType::Eject: reload->Eject_Magazine(); break;
-	case EMagazineActionType::Spawn: reload->Spawn_Magazine(); break;
 	case EMagazineActionType::Load: action->Load_Magazine(); break;
 	case EMagazineActionType::End: reload->End_Reload(); break;
 	}

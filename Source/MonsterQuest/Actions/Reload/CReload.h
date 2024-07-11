@@ -22,7 +22,6 @@ public:
 public:
 	void Reload();
 	void Eject_Magazine();
-	void Spawn_Magazine();
 	void End_Reload();
 
 public:
