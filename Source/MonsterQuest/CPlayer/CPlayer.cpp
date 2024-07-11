@@ -38,10 +38,9 @@ ACPlayer::ACPlayer()
 	CHelpers::GetClass<UCUserWidget_Information>(&InformationClass, "WidgetBlueprint'/Game/Widgets/HUD/WB_Information.WB_Information_C'");
 
 	CHelpers::CreateSceneComponent(this, &Backpack, "Backpack", GetMesh());
-	UStaticMesh* staticMesh;
-	CHelpers::GetAsset<UStaticMesh>(&staticMesh, "StaticMesh'/Game/Weapons/Backpack/Backpack.Backpack'");
-	Backpack->SetStaticMesh(staticMesh);
-	Backpack->SetupAttachment(GetMesh(), "Backpack");
+	UStaticMesh* backpack;
+	CHelpers::GetAsset<UStaticMesh>(&backpack, "StaticMesh'/Game/Weapons/Backpack/Backpack.Backpack'");
+	Backpack->SetStaticMesh(backpack);
 
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
 
@@ -70,13 +69,12 @@ ACPlayer::ACPlayer()
 	FollowCamera->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
 	FollowCamera->SetRelativeLocation(FVector(-30, 50, 80));
 
-	CHelpers::CreateSceneComponent<USkeletalMeshComponent>(this, &Arms, "Arms", FollowCamera);
-	USkeletalMesh* mesh;
-	CHelpers::GetAsset<USkeletalMesh>(&mesh, "SkeletalMesh'/Game/Character_Arms/Mesh/SK_Mannequin_Arms.SK_Mannequin_Arms'");
-	Arms->SetSkeletalMesh(mesh);
-	Arms->SetRelativeLocation(FVector(-14.25f, -5.85f, -156.94f));
-	Arms->SetRelativeRotation(FRotator(-0.5f, -11.85f, -1.2f));
-	Arms->SetVisibility(false);
+	CHelpers::CreateSceneComponent(this, &DotSight, "DotSight", GetFollowCamera());
+	UStaticMesh* dotSight;
+	CHelpers::GetAsset<UStaticMesh>(&dotSight, "StaticMesh'/Game/Weapons/Accessories/SM_T4_Sight.SM_T4_Sight'");
+	DotSight->SetStaticMesh(dotSight);
+	DotSight->SetVisibility(false);
+	DotSight->SetRelativeLocation(FVector(20.485291, -0.000320, -4.300000));
 }
 
 void ACPlayer::BeginPlay()

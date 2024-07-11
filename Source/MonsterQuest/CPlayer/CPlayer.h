@@ -56,6 +56,7 @@ public:
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
+	FORCEINLINE class UStaticMeshComponent* GetDotSight() const { return DotSight; }
 
 public:
 	class UCActionComponent* GetAction() { return Action; }
@@ -81,7 +82,6 @@ public:
 	FCharacterBeginOverlapSignature OnCharacterBeginOverlap;
 
 public:
-	FORCEINLINE class USkeletalMeshComponent* GetArms() { return Arms; }
 	FORCEINLINE class UStaticMeshComponent* GetBackpack() { return Backpack; }
 
 public:
@@ -92,11 +92,6 @@ public:
 	/** Follow camera */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 		class UCameraComponent* FollowCamera;
-
-private:
-	// Aim_Sniper_Arms
-	UPROPERTY(VisibleDefaultsOnly)
-		class USkeletalMeshComponent* Arms;
 
 private:    // Character Component
 	UPROPERTY(VisibleDefaultsOnly)
@@ -131,5 +126,9 @@ public:
 public:
 	class UCUserWidget_CrossHair* CrossHair;
 	class UCUserWidget_Information* Information;
+
+	private:
+		UPROPERTY(VisibleDefaultsOnly)
+			class UStaticMeshComponent* DotSight;
 };
 
