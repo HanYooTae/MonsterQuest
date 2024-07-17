@@ -193,10 +193,3 @@ void UCActionComponent::End_Dead()
 			Datas[i]->GetReload()->Destroy();
 	}
 }
-
-FTransform UCActionComponent::GetArmsLeftHandTransform()
-{
-	CheckNullResult(GetCurrentData()->GetWeapon(), FTransform());
-
-	return GetCurrentData()->GetWeapon()->GetArmsLeftHandTransform();
-}

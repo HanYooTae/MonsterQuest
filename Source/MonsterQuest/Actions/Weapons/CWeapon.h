@@ -48,8 +48,6 @@ public:
 	UFUNCTION()
 		void EndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
-	FORCEINLINE FTransform GetArmsLeftHandTransform() { return ArmsLeftHandTransform; }
-
 public:
 	UPROPERTY(VisibleDefaultsOnly)
 		class USceneComponent* Root;
@@ -67,11 +65,4 @@ public:
 
 private:
 	TArray<class UShapeComponent*> Collisions;
-
-protected:
-	UPROPERTY(EditDefaultsOnly, Category = "Arms")
-		FTransform ArmsMeshTransform;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Arms")
-		FTransform ArmsLeftHandTransform;
 };
