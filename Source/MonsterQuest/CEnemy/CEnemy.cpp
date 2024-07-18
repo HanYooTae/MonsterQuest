@@ -32,3 +32,40 @@ void ACEnemy::BeginPlay()
 	Super::BeginPlay();
 	
 }
+
+float ACEnemy::TakeDamage(float Damage, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
+{
+	DamageValue = Super::TakeDamage(Damage, DamageEvent, EventInstigator, DamageCauser);
+
+	//Attacker = EventInstigator->GetCharacter();
+	//Causer = DamageCauser;
+
+	Status->DecreaseHealth(DamageValue);
+
+	// Dead
+	if (Status->IsDead())
+	{
+		Dead();
+		return DamageValue;
+	}
+
+	Hitted();
+
+	return DamageValue;
+}
+
+void ACEnemy::Hitted()
+{
+	State->SetHittedMode();
+
+	// Play Hit Montage
+	Montages->PlayHitted();
+}
+
+void ACEnemy::Dead()
+{
+}
+
+void ACEnemy::End_Dead()
+{
+}
