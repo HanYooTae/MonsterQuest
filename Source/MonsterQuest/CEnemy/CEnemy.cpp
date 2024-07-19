@@ -25,6 +25,9 @@ ACEnemy::ACEnemy()
 	GetMesh()->SetRelativeLocation(FVector(0, 0, -88));
 	GetMesh()->SetRelativeRotation(FRotator(0, -90, 0));
 
+	// -> MovementComp
+	GetCharacterMovement()->RotationRate = FRotator(0, 720, 0);
+	GetCharacterMovement()->MaxWalkSpeed = Status->GetRunSpeed();
 }
 
 void ACEnemy::BeginPlay()
