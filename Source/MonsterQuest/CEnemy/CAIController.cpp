@@ -32,18 +32,6 @@ ACAIController::ACAIController()
 	Perception->SetDominantSense(Sight->GetSenseImplementation());
 }
 
-void ACAIController::BeginPlay()
-{
-	Super::BeginPlay();
-
-}
-
-void ACAIController::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
-}
-
 void ACAIController::OnPossess(APawn* InPawn)
 {
 	Super::OnPossess(InPawn);
@@ -51,6 +39,7 @@ void ACAIController::OnPossess(APawn* InPawn)
 	PossessedEnemy = Cast<ACEnemy>(InPawn);
 	UseBlackboard(PossessedEnemy->GetBehaviorTree()->BlackboardAsset, Blackboard);
 
+	SetGenericTeamId(PossessedEnemy->GetTeamID());
 	Behavior->SetBlackboard(Blackboard);
 
 	RunBehaviorTree(PossessedEnemy->GetBehaviorTree());
@@ -63,6 +52,20 @@ void ACAIController::OnUnPossess()
 	Super::OnUnPossess();
 
 	Perception->OnPerceptionUpdated.Clear();
+}
+
+void ACAIController::BeginPlay()
+{
+	Super::BeginPlay();
+}
+
+void ACAIController::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+	CheckFalse(bDrawDebug);
+
+	FVector center = PossessedEnemy->GetActorLocation();
 }
 
 float ACAIController::GetSightRadius()
