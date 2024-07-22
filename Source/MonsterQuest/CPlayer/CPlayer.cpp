@@ -23,6 +23,7 @@
 #include "GameFramework/SpringArmComponent.h"
 
 #include "Global.h"
+#include "CPlayer.h"
 
 ACPlayer::ACPlayer()
 {
@@ -234,4 +235,9 @@ void ACPlayer::OnZoom(float InAxis)
 	float rate = Option->GetZoomSpeed() * InAxis * GetWorld()->GetDeltaSeconds();
 	CameraBoom->TargetArmLength += rate;
 	CameraBoom->TargetArmLength = FMath::Clamp(CameraBoom->TargetArmLength, Option->GetZoomMin(), Option->GetZoomMax());
+}
+
+FGenericTeamId ACPlayer::GetGenericTeamId() const
+{
+	return FGenericTeamId(PlayerTeamID);
 }

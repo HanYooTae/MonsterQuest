@@ -4,12 +4,13 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "GenericTeamAgentInterface.h"
 #include "CPlayer.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FCharacterBeginOverlapSignature);
 
 UCLASS(config=Game)
-class ACPlayer : public ACharacter
+class ACPlayer : public ACharacter, public IGenericTeamAgentInterface
 {
 	GENERATED_BODY()
 
@@ -79,6 +80,9 @@ protected:
 	void OnZoom(float InAxis);
 
 public:
+	virtual FGenericTeamId GetGenericTeamId() const override;
+
+public:
 	FCharacterBeginOverlapSignature OnCharacterBeginOverlap;
 
 public:
@@ -127,8 +131,13 @@ public:
 	class UCUserWidget_CrossHair* CrossHair;
 	class UCUserWidget_Information* Information;
 
-	private:
-		UPROPERTY(VisibleDefaultsOnly)
-			class UStaticMeshComponent* DotSight;
+private:
+	UPROPERTY(VisibleDefaultsOnly)
+		class UStaticMeshComponent* DotSight;
+
+private:
+	UPROPERTY(EditDefaultsOnly)
+		uint8 PlayerTeamID = 0;
+	FGenericTeamId TeamGeneicID;
 };
 
