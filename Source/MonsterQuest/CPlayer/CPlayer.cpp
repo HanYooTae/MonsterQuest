@@ -12,6 +12,7 @@
 #include "Actions/Reload/CReload.h"
 #include "Widgets/HUD/CUserWidget_CrossHair.h"
 #include "Widgets/HUD/CUserWidget_Information.h"
+#include "Widgets/HUD/CUserWidget_HUD.h"
 
 #include "HeadMountedDisplayFunctionLibrary.h"
 #include "Camera/CameraComponent.h"
@@ -37,6 +38,7 @@ ACPlayer::ACPlayer()
 
 	CHelpers::GetClass<UCUserWidget_CrossHair>(&CrossHairClass, "WidgetBlueprint'/Game/Widgets/HUD/WB_CrossHair.WB_CrossHair_C'");
 	CHelpers::GetClass<UCUserWidget_Information>(&InformationClass, "WidgetBlueprint'/Game/Widgets/HUD/WB_Information.WB_Information_C'");
+	CHelpers::GetClass<UCUserWidget_HUD>(&HUDClass, "WidgetBlueprint'/Game/Widgets/HUD/WB_HUD.WB_HUD_C'");
 
 	CHelpers::CreateSceneComponent(this, &Backpack, "Backpack", GetMesh());
 	UStaticMesh* backpack;
@@ -95,12 +97,39 @@ void ACPlayer::BeginPlay()
 		Information->AddToViewport();
 		Information->SetVisibility(ESlateVisibility::Visible);
 	}
+
+	if (!!HUDClass)
+	{
+		HUD = CreateWidget<UCUserWidget_HUD, APlayerController>(this->GetController<APlayerController>(), HUDClass);
+		HUD->AddToViewport();
+		HUD->SetVisibility(ESlateVisibility::Hidden);
+	}
 }
 
 void ACPlayer::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	if (!!HUD)
+	{
+		ACDoAction* doAction = GetAction()->GetCurrentData()->GetDoAction();
+		if (!!doAction)
+		{
+			doAction->IsAutoFire() ? HUD->OnAutoFire() : HUD->OffAutoFire();
+
+			uint8 currMagazineCount = doAction->GetCurrMagazineCount();
+			uint8 maxMagazineCount = 0;
+
+			for (const auto& max : doAction->GetDatas())
+			{
+				maxMagazineCount = max.MaxMagazineCount;
+				break;
+			}
+
+			HUD->UpdateMagazine(currMagazineCount, maxMagazineCount);
+			HUD->UpdateWeaponName(GetAction()->Type);
+		}
+	}
 }
 
 void ACPlayer::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
@@ -152,28 +181,28 @@ void ACPlayer::LookUpAtRate(float Rate)
 void ACPlayer::DrawSword()
 {
 	CheckFalse(State->IsIdleMode());
-
+	HUD->SetVisibility(ESlateVisibility::Hidden);
 	Action->SetSwordMode();
 }
 
 void ACPlayer::DrawPistol()
 {
 	CheckFalse(State->IsIdleMode());
-
+	HUD->SetVisibility(ESlateVisibility::Visible);
 	Action->SetPistolMode();
 }
 
 void ACPlayer::DrawRifle()
 {
 	CheckFalse(State->IsIdleMode());
-
+	HUD->SetVisibility(ESlateVisibility::Visible);
 	Action->SetRifleMode();
 }
 
 void ACPlayer::DrawSniper()
 {
 	CheckFalse(State->IsIdleMode());
-
+	HUD->SetVisibility(ESlateVisibility::Visible);
 	Action->SetSniperMode();
 }
 

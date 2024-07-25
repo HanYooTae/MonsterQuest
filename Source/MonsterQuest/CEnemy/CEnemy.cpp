@@ -3,7 +3,7 @@
 #include "ActorComponents/CStatusComponent.h"
 #include "ActorComponents/CStateComponent.h"
 #include "ActorComponents/CMontagesComponent.h"
-#include "ActorComponents/CEnemyActionComponent.h"
+#include "ActorComponents/CActionComponent.h"
 
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Components/WidgetComponent.h"
@@ -17,7 +17,7 @@ ACEnemy::ACEnemy()
 	/*CHelpers::CreateSceneComponent(this, &HealthWidget, "HealthWidget", GetMesh());*/
 
 	//Create Actor Component
-	CHelpers::CreateActorComponent(this, &EnemyAction, "Action");
+	CHelpers::CreateActorComponent(this, &Action, "Action");
 	CHelpers::CreateActorComponent(this, &Status, "Status");
 	CHelpers::CreateActorComponent(this, &Montages, "Montages");
 	CHelpers::CreateActorComponent(this, &State, "State");
@@ -123,7 +123,7 @@ void ACEnemy::Dead()
 	GetMesh()->AddForceAtLocation(force, start);*/
 
 	// Off All Collisions
-	EnemyAction->OffAllCollisions();
+	Action->OffAllCollisions();
 
 	// Destroy All(Attachment, Equipment, DoAction...)
 	Dissolve();
@@ -132,7 +132,7 @@ void ACEnemy::Dead()
 
 void ACEnemy::End_Dead()
 {
-	EnemyAction->End_Dead();
+	Action->End_Dead();
 
 	Destroy();
 }

@@ -127,9 +127,13 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = "HUD")
 		TSubclassOf<class UCUserWidget_Information> InformationClass;
 
+	UPROPERTY(EditAnywhere, Category = "Weapon")
+		TSubclassOf<class UCUserWidget_HUD> HUDClass;
+
 public:
 	class UCUserWidget_CrossHair* CrossHair;
 	class UCUserWidget_Information* Information;
+	class UCUserWidget_HUD* HUD;
 
 private:
 	UPROPERTY(VisibleDefaultsOnly)

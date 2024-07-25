@@ -33,14 +33,13 @@ void UCAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 	OwnerCharacter = Cast<ACharacter>(TryGetPawnOwner());
 	CheckNull(OwnerCharacter);
 
+	ActionComp = CHelpers::GetComponent<UCActionComponent>(OwnerCharacter);
+	CheckNull(ActionComp);
+
 	Speed = OwnerCharacter->GetVelocity().Size2D();
 	Direction = CalculateDirection(OwnerCharacter->GetVelocity(), OwnerCharacter->GetControlRotation());
 	Pitch = OwnerCharacter->GetBaseAimRotation().Pitch;
 	Falling = OwnerCharacter->GetCharacterMovement()->IsFalling();
-
-	ActionComp = CHelpers::GetComponent<UCActionComponent>(OwnerCharacter);
-	CheckNull(ActionComp);
-
 	bAiming = ActionComp->IsAim();
 }
 

@@ -8,6 +8,7 @@
 #include "Actions/Reload/CReload.h"
 #include "Actions/Weapons/CWeapon.h"
 #include "Widgets/HUD/CUserWidget_HUD.h"
+#include "CPlayer/CPlayer.h"
 
 #include "GameFramework/Character.h"
 
@@ -17,7 +18,6 @@ UCActionComponent::UCActionComponent()
 {
 	PrimaryComponentTick.bCanEverTick = true;
 
-	CHelpers::GetClass<UCUserWidget_HUD>(&HUDClass, "WidgetBlueprint'/Game/Widgets/HUD/WB_HUD.WB_HUD_C'");
 }
 
 void UCActionComponent::BeginPlay()
@@ -31,39 +31,12 @@ void UCActionComponent::BeginPlay()
 		if (!!DataAssets[i])
 			DataAssets[i]->BeginPlay(ownerCharacter, &Datas[i]);
 	}
-
-	if (!!HUDClass)
-	{
-		HUD = CreateWidget<UCUserWidget_HUD, APlayerController>(Cast<ACharacter>(GetOwner())->GetController<APlayerController>(), HUDClass);
-		HUD->AddToViewport();
-		HUD->SetVisibility(ESlateVisibility::Hidden);
-	}
 }
 
 void UCActionComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	if (!!HUD)
-	{
-		ACDoAction* doAction = GetCurrentData()->GetDoAction();
-		if (!!doAction)
-		{
-			doAction->IsAutoFire() ? HUD->OnAutoFire() : HUD->OffAutoFire();
-
-			uint8 currMagazineCount = doAction->GetCurrMagazineCount();
-			uint8 maxMagazineCount = 0;
-
-			for (const auto& max : doAction->GetDatas())
-			{
-				maxMagazineCount = max.MaxMagazineCount;
-				break;
-			}
-
-			HUD->UpdateMagazine(currMagazineCount, maxMagazineCount);
-			HUD->UpdateWeaponName(Type);
-		}
-	}
 }
 
 void UCActionComponent::SetUnarmedMode()
@@ -74,13 +47,14 @@ void UCActionComponent::SetUnarmedMode()
 
 	ChangeType(EActionType::Unarmed);
 
-	HUD->SetVisibility(ESlateVisibility::Hidden);
+	ACPlayer* player = Cast<ACPlayer>(GetOwner());
+
+	player->HUD->SetVisibility(ESlateVisibility::Hidden);
 }
 
 void UCActionComponent::SetSwordMode()
 {
 	SetMode(EActionType::Sword);
-	HUD->SetVisibility(ESlateVisibility::Hidden);
 }
 
 void UCActionComponent::SetPistolMode()
@@ -120,8 +94,6 @@ void UCActionComponent::SetMode(EActionType InNewType)
 		Datas[(int32)InNewType]->GetEquipment()->Equip();
 
 	ChangeType(InNewType);
-
-	HUD->SetVisibility(ESlateVisibility::Visible);
 }
 
 void UCActionComponent::ChangeType(EActionType InNewType)

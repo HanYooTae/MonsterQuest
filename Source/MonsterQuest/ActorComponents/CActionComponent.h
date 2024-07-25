@@ -97,15 +97,9 @@ public:
 	UPROPERTY(EditDefaultsOnly)
 		class UCActionData* DataAssets[(int32)EActionType::Max];
 
-private:
-	UPROPERTY(EditAnywhere, Category = "Weapon")
-		TSubclassOf<class UCUserWidget_HUD> HUDClass;
-
 public:
 	EActionType Type;
 	class UCActionData_Spawned* Datas[(int32)EActionType::Max];
-
-	class UCUserWidget_HUD* HUD;
 
 private:
 	bool bAim;

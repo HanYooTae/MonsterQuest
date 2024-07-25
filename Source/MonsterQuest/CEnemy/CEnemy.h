@@ -44,7 +44,7 @@ private: // Health Widget
 
 protected: //Actor Component
 	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly)
-		class UCEnemyActionComponent* EnemyAction;
+		class UCActionComponent* Action;
 
 private:
 	UPROPERTY(VisibleDefaultsOnly)
