@@ -53,6 +53,8 @@ void ACEnemy::BeginPlay()
 {
 	Super::BeginPlay();
 
+	Action->Type = EActionType::Sword;
+
 	//Widget Settings
 	/*HealthWidget->InitWidget();
 	UCEnemyHealthWidget* healthWidget = Cast<UCEnemyHealthWidget>(HealthWidget->GetUserWidgetObject());
