@@ -141,9 +141,9 @@ void ACDoAction_Fire::Begin_DoAction()
 	if (!!BulletClass)
 	{
 		FVector spawnLocation = muzzleLocation + direction * 100;
-
-		ACBullet* bullet = GetWorld()->SpawnActor<ACBullet>(BulletClass, spawnLocation, direction.Rotation());
-		bullet->Shoot(direction);
+		
+		Bullet = GetWorld()->SpawnActor<ACBullet>(BulletClass, spawnLocation, direction.Rotation());
+		Bullet->Shoot(direction);
 	}
 
 	// Sound
