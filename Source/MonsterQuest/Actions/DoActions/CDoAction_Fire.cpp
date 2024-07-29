@@ -171,8 +171,6 @@ void ACDoAction_Fire::Begin_DoAction()
 	if (!!FlashParticle)
 		UGameplayStatics::SpawnEmitterAttached(FlashParticle, Weapon->Weapon, "Muzzle", FVector::ZeroVector, FRotator::ZeroRotator, EAttachLocation::KeepRelativeOffset);
 
-
-
 	// 충돌처리
 	Bullet->OnBeginOverlap.AddDynamic(this, &ACDoAction_Fire::OnBulletBeginOverlap);
 }

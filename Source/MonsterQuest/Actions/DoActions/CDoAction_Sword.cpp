@@ -58,8 +58,6 @@ void ACDoAction_Sword::Begin_DoAction()
 	ComboCount = FMath::Clamp(ComboCount, 0, Datas.Num() - 1);
 	OwnerCharacter->PlayAnimMontage(Datas[ComboCount].AnimMontage, Datas[ComboCount].PlayRate, Datas[ComboCount].StartSection);
 	Datas[ComboCount].bCanMove ? StatusComp->SetMove() : StatusComp->SetStop();
-
-	CLog::Log(ComboCount);
 }
 
 void ACDoAction_Sword::End_DoAction()
@@ -99,11 +97,14 @@ void ACDoAction_Sword::OnBeginOverlap(ACharacter* InAttacker, AActor* InCauser, 
 
 	// Play Particles
 	UParticleSystem* effect = Datas[ComboCount].Effect;
-	CheckNull(effect);
-	FTransform transform = Datas[ComboCount].EffectTransform;
-	transform.AddToTranslation(InOtherCharacter->GetActorLocation());
+	if (!!effect)
+	{
+		FTransform transform = Datas[ComboCount].EffectTransform;
+		transform.AddToTranslation(InOtherCharacter->GetActorLocation());
+		
+		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), effect, transform);
+	}
 
-	UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), effect, transform);
 
 	FDamageEvent damageEvent;
 	InOtherCharacter->TakeDamage(Datas[ComboCount].Power, damageEvent, InAttacker->GetController(), InCauser);

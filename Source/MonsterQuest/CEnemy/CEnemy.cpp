@@ -1,5 +1,6 @@
 #include "CEnemy/CEnemy.h"
 
+#include "CEnemy/CAIController.h"
 #include "ActorComponents/CStatusComponent.h"
 #include "ActorComponents/CStateComponent.h"
 #include "ActorComponents/CMontagesComponent.h"
@@ -67,8 +68,8 @@ float ACEnemy::TakeDamage(float Damage, FDamageEvent const& DamageEvent, AContro
 {
 	DamageValue = Super::TakeDamage(Damage, DamageEvent, EventInstigator, DamageCauser);
 
-	//Attacker = EventInstigator->GetCharacter();
-	//Causer = DamageCauser;
+	Attacker = EventInstigator->GetCharacter();
+	Causer = DamageCauser;
 
 	Status->DecreaseHealth(DamageValue);
 
@@ -96,36 +97,33 @@ void ACEnemy::Hitted()
 	Montages->PlayHitted();
 
 	// Look at Attacker
-	/*FVector start = GetActorLocation();
+	FVector start = GetActorLocation();
 	FVector target = Attacker->GetActorLocation();
 	FRotator rotation = FRotator(0, UKismetMathLibrary::FindLookAtRotation(start, target).Yaw, 0);
-	SetActorRotation(rotation);*/
+	SetActorRotation(rotation);
 
 	// Hit Back
-
+	FVector direction = (start - target).GetSafeNormal();
+	LaunchCharacter(direction * LaunchValue * DamageValue, true, false);
 }
 
 void ACEnemy::Dead()
 {
+	CheckTrue(State->IsDeadMode());
+
 	//HealthWidget->SetVisibility(false);
 
-	dead = true;
 	State->SetDeadMode();
-	// Ragdoll
-	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-	GetMesh()->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
-	GetMesh()->SetSimulatePhysics(true);
-	GetMesh()->GlobalAnimRateScale = 0.f;
 
-	// Add Force
-	/*FVector start = GetActorLocation();
-	FVector target = Attacker->GetActorLocation();
-	FVector direction = (start - target).GetSafeNormal();
-	FVector force = direction * LaunchValue * DamageValue * 3000.f;
-	GetMesh()->AddForceAtLocation(force, start);*/
+	AController* controller = this->GetController();
+	controller->Destroy();
+
+	// Play Dead Montage
+	Montages->PlayDead();
 
 	// Off All Collisions
 	Action->OffAllCollisions();
+	GetCapsuleComponent()->SetCollisionProfileName("Spectator");
 
 	// Destroy All(Attachment, Equipment, DoAction...)
 	Dissolve();

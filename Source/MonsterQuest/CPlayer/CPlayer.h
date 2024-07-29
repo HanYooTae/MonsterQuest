@@ -79,6 +79,15 @@ protected:
 private:
 	virtual float TakeDamage(float Damage, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
 
+	UFUNCTION()
+		void Hitted();
+
+	UFUNCTION()
+		void Dead();
+
+	UFUNCTION()
+		void End_Dead();
+
 protected:
 	void OnZoom(float InAxis);
 

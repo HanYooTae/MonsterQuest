@@ -252,16 +252,45 @@ float ACPlayer::TakeDamage(float Damage, FDamageEvent const& DamageEvent, AContr
 
 	Status->DecreaseHealth(DamageValue);
 
-	//if (Status->IsDead())
-	//{
-	//	State->SetDeadMode();
-	//	//Dead
-	//	return DamageValue;
-	//}
-
-
+	if (Status->IsDead())
+	{
+		State->SetDeadMode();
+		Dead();
+		return DamageValue;
+	}
+	State->SetHittedMode();
+	Hitted();
 
 	return DamageValue;
+}
+
+void ACPlayer::Hitted()
+{
+	Montages->PlayHitted();
+}
+
+void ACPlayer::Dead()
+{
+	CheckFalse(State->IsDeadMode());
+
+	// Disable Input
+	APlayerController* controller = GetWorld()->GetFirstPlayerController();
+	CheckNull(controller);
+
+	DisableInput(controller);
+
+	Montages->PlayDead();
+
+	Action->OffAllCollisions();
+	GetCapsuleComponent()->SetCollisionProfileName("Spectator");
+
+	UKismetSystemLibrary::K2_SetTimer(this, "End_Dead", 5.0f, false);
+}
+
+void ACPlayer::End_Dead()
+{
+	Action->End_Dead();
+	this->Destroy();
 }
 
 void ACPlayer::MoveForward(float Value)
