@@ -76,6 +76,9 @@ protected:
 	void OnAim();
 	void OffAim();
 
+private:
+	virtual float TakeDamage(float Damage, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
+
 protected:
 	void OnZoom(float InAxis);
 
@@ -143,5 +146,8 @@ private:
 	UPROPERTY(EditDefaultsOnly)
 		uint8 PlayerTeamID = 0;
 	FGenericTeamId TeamGeneicID;
+
+private:
+	float DamageValue;
 };
 

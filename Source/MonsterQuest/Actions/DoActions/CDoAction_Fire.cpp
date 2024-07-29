@@ -174,7 +174,7 @@ void ACDoAction_Fire::Begin_DoAction()
 
 
 	// 충돌처리
-	//Bullet->OnBeginOverlap.AddDynamic(this, &ACDoAction_Fire::OnBulletBeginOverlap);
+	Bullet->OnBeginOverlap.AddDynamic(this, &ACDoAction_Fire::OnBulletBeginOverlap);
 }
 
 void ACDoAction_Fire::End_DoAction()

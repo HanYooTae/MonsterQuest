@@ -246,6 +246,24 @@ void ACPlayer::OffAim()
 	Action->DoAim(false);
 }
 
+float ACPlayer::TakeDamage(float Damage, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
+{
+	DamageValue = Super::TakeDamage(Damage, DamageEvent, EventInstigator, DamageCauser);
+
+	Status->DecreaseHealth(DamageValue);
+
+	//if (Status->IsDead())
+	//{
+	//	State->SetDeadMode();
+	//	//Dead
+	//	return DamageValue;
+	//}
+
+
+
+	return DamageValue;
+}
+
 void ACPlayer::MoveForward(float Value)
 {
 	CheckFalse(Status->IsCanMove());
