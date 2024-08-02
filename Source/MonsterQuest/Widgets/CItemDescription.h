@@ -14,12 +14,6 @@ public:
 		void SettingDescription(FCItemStruct item);*/
 
 public:
-	UImage* GetItemImage() { return ItemImage; }
-	UTextBlock* GetItemName() { return ItemName; }
-	UTextBlock* GetItemType() { return ItemType; }
-	UTextBlock* GetItemDescription() { return ItemDescription; }
-
-private:
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 		class UImage* ItemImage;
 
