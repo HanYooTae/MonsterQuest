@@ -4,6 +4,8 @@
 #include "Actions/Equipment/CEquipment.h"
 #include "Actions/DoActions/CDoAction.h"
 #include "Actions/Reload/CReload.h"
+#include "ItemDatas/CItemData.h"
+#include "ItemDatas/CItemStruct.h"
 
 #include "GameFramework/Character.h"
 
@@ -19,6 +21,15 @@ void UCActionData::BeginPlay(class ACharacter* InOwnerCharacter, UCActionData_Sp
 		Weapon = InOwnerCharacter->GetWorld()->SpawnActorDeferred<ACWeapon>(WeaponClass, transform, InOwnerCharacter);
 
 		Weapon->SetActorLabel(GetCustomLabel(InOwnerCharacter, "Weapon"));
+
+		UGameplayStatics::FinishSpawningActor(Weapon, transform);
+	}
+
+	if (!!ItemData)
+	{
+		Weapon = InOwnerCharacter->GetWorld()->SpawnActorDeferred<ACWeapon>(ItemData->Item.WeaponClass, transform, InOwnerCharacter);
+
+		Weapon->SetActorLabel(GetCustomLabel(InOwnerCharacter, "ItemWeapon"));
 
 		UGameplayStatics::FinishSpawningActor(Weapon, transform);
 	}

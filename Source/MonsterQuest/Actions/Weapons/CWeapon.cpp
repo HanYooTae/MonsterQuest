@@ -1,5 +1,7 @@
 #include "Actions/Weapons/CWeapon.h"
 
+#include "ItemDatas/CItemData.h"
+
 #include "GameFramework/Character.h"
 #include "Components/Shapecomponent.h"
 
@@ -32,9 +34,10 @@ void ACWeapon::Attachment(FName InSocketName)
 	AttachToComponent
 	(
 		OwnerCharacter->GetMesh(),
-		FAttachmentTransformRules(EAttachmentRule::KeepRelative, true),
+		FAttachmentTransformRules(EAttachmentRule::KeepRelative,true),
 		InSocketName
 	);
+	
 }
 
 void ACWeapon::OnCollision()

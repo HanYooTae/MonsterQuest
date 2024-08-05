@@ -18,6 +18,9 @@ private:
 
 public:
 	UPROPERTY(EditAnywhere, Category = "Weapon")
+		class UCItemData* ItemData;
+
+	UPROPERTY(EditAnywhere, Category = "Weapon")
 		TSubclassOf<class ACWeapon> WeaponClass;
 
 	UPROPERTY(EditAnywhere, Category = "Equipment")
