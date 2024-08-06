@@ -246,6 +246,14 @@ void ACPlayer::OffAim()
 	Action->DoAim(false);
 }
 
+void ACPlayer::Interact()
+{
+	if (OnInteract.IsBound())
+	{
+		OnInteract.Execute();
+	}
+}
+
 float ACPlayer::TakeDamage(float Damage, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
 {
 	DamageValue = Super::TakeDamage(Damage, DamageEvent, EventInstigator, DamageCauser);

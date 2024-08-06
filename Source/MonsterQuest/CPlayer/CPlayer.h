@@ -8,6 +8,7 @@
 #include "CPlayer.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FCharacterBeginOverlapSignature);
+DECLARE_DYNAMIC_DELEGATE(FInteractSignature);
 
 UCLASS(config=Game)
 class ACPlayer : public ACharacter, public IGenericTeamAgentInterface
@@ -75,6 +76,7 @@ protected:
 	void ToggleReload();
 	void OnAim();
 	void OffAim();
+	void Interact();
 
 private:
 	virtual float TakeDamage(float Damage, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
@@ -96,6 +98,7 @@ public:
 
 public:
 	FCharacterBeginOverlapSignature OnCharacterBeginOverlap;
+	FInteractSignature OnInteract;
 
 public:
 	FORCEINLINE class UStaticMeshComponent* GetBackpack() { return Backpack; }

@@ -53,8 +53,8 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 		TSubclassOf<class ACWeapon> WeaponClass;
 
-	/*UPROPERTY(BlueprintReadWrite, EditAnywhere)
-		TSubclassOf<class ACField_Weapon> FieldWeaponClass;*/
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+		TSubclassOf<class ACDropItem> CDropItemClass;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 		UTexture2D* Picture;

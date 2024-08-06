@@ -65,8 +65,4 @@ public:
 
 private:
 	TArray<class UShapeComponent*> Collisions;
-
-private:
-	UPROPERTY(EditDefaultsOnly)
-		class UCItemData* ItemData;
 };
