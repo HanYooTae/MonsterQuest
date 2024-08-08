@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "ItemDatas/CItemStruct.h"
 #include "CItemDescription.generated.h"
 
 UCLASS()
@@ -10,8 +11,8 @@ class MONSTERQUEST_API UCItemDescription : public UUserWidget
 	GENERATED_BODY()
 	
 public:
-	/*UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
-		void SettingDescription(FCItemStruct item);*/
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+		void SettingDescription(FItemStruct item);
 
 public:
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
