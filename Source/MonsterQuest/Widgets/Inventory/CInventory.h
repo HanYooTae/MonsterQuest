@@ -20,9 +20,6 @@ public:
 	void Detach();
 	uint8 AddItem(class UCItemData* item);
 
-private:
-	void Update();
-
 public:
 	UPROPERTY(meta = (BindWidget))
 		class UCEquipSlot* SwordEquipment;

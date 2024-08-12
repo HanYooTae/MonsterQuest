@@ -46,7 +46,3 @@ uint8 UCInventory::AddItem(UCItemData* item)
 {
 	return uint8();
 }
-
-void UCInventory::Update()
-{
-}
