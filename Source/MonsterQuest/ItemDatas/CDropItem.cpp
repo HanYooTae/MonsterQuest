@@ -68,4 +68,16 @@ void ACDropItem::EndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* Ot
 void ACDropItem::OnInteract()
 {
 	// Inventory
+	ACPlayer* player = Cast<ACPlayer>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
+	CheckNull(player);
+
+	if (player->Items.Num() == player->MaxItem)
+	{
+		CLog::Print("Inventory is Full");
+		return;
+	}
+
+	// Do Something
+
+	this->Destroy();
 }

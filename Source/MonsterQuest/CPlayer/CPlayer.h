@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "GenericTeamAgentInterface.h"
+#include "ItemDatas/CItemStruct.h"
 #include "CPlayer.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FCharacterBeginOverlapSignature);
@@ -167,5 +168,9 @@ private:
 
 private:
 	float DamageValue;
+
+public:
+	TArray<class UCItemData*> Items;
+	int32 MaxItem = 30;
 };
 
