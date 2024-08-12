@@ -76,6 +76,8 @@ protected:
 	void ToggleReload();
 	void OnAim();
 	void OffAim();
+
+	void InventoryFunc();
 	void Interact();
 
 private:
@@ -135,7 +137,7 @@ protected:
 	UPROPERTY(VisibleDefaultsOnly)
 		class ACWeapon* Weapon;
 
-public:
+public:  // Widget Class Reference
 	UPROPERTY(EditDefaultsOnly, Category = "HUD")
 		TSubclassOf<class UCUserWidget_CrossHair> CrossHairClass;
 
@@ -145,10 +147,14 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Weapon")
 		TSubclassOf<class UCUserWidget_HUD> HUDClass;
 
-public:
+	UPROPERTY(EditAnywhere, Category = "Inventory")
+		TSubclassOf<class UCInventory> InventoryClass;
+
+public:	// Widget
 	class UCUserWidget_CrossHair* CrossHair;
 	class UCUserWidget_Information* Information;
 	class UCUserWidget_HUD* HUD;
+	class UCInventory* Inventory;
 
 private:
 	UPROPERTY(VisibleDefaultsOnly)

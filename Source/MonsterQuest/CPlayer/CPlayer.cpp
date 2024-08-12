@@ -13,6 +13,7 @@
 #include "Widgets/HUD/CUserWidget_CrossHair.h"
 #include "Widgets/HUD/CUserWidget_Information.h"
 #include "Widgets/HUD/CUserWidget_HUD.h"
+#include "Widgets/Inventory/CInventory.h"
 
 #include "HeadMountedDisplayFunctionLibrary.h"
 #include "Camera/CameraComponent.h"
@@ -39,6 +40,7 @@ ACPlayer::ACPlayer()
 	CHelpers::GetClass<UCUserWidget_CrossHair>(&CrossHairClass, "WidgetBlueprint'/Game/Widgets/HUD/WB_CrossHair.WB_CrossHair_C'");
 	CHelpers::GetClass<UCUserWidget_Information>(&InformationClass, "WidgetBlueprint'/Game/Widgets/HUD/WB_Information.WB_Information_C'");
 	CHelpers::GetClass<UCUserWidget_HUD>(&HUDClass, "WidgetBlueprint'/Game/Widgets/HUD/WB_HUD.WB_HUD_C'");
+	CHelpers::GetClass<UCInventory>(&InventoryClass, "WidgetBlueprint'/Game/Widgets/Inventory/WB_CInventory.WB_CInventory_C'");
 
 	CHelpers::CreateSceneComponent(this, &Backpack, "Backpack", GetMesh());
 	UStaticMesh* backpack;
@@ -104,6 +106,13 @@ void ACPlayer::BeginPlay()
 		HUD->AddToViewport();
 		HUD->SetVisibility(ESlateVisibility::Hidden);
 	}
+
+	if (!!InventoryClass)
+	{
+		Inventory = CreateWidget<UCInventory, APlayerController>(this->GetController<APlayerController>(), InventoryClass);
+		Inventory->AddToViewport();
+		Inventory->SetVisibility(ESlateVisibility::Hidden);
+	}
 }
 
 void ACPlayer::Tick(float DeltaTime)
@@ -138,6 +147,10 @@ void ACPlayer::SetupPlayerInputComponent(class UInputComponent* PlayerInputCompo
 	check(PlayerInputComponent);
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
 	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
+
+	// Inventory
+	PlayerInputComponent->BindAction("Inventory", IE_Pressed, this, &ACPlayer::InventoryFunc);
+	PlayerInputComponent->BindAction("Interact", IE_Pressed, this, &ACPlayer::Interact);
 
 	// Draw Weapon
 	PlayerInputComponent->BindAction("Sword", IE_Pressed, this, &ACPlayer::DrawSword);
@@ -216,6 +229,7 @@ void ACPlayer::NormalAttack()
 
 void ACPlayer::EndAttack()
 {
+	CheckTrue(Action->IsUnarmedMode());
 	// 이거 안하면 SwordAttack에 문제생김
 	CheckFalse(Action->GetCurrentData()->GetDoAction()->bCanEndAttack);
 	Action->GetCurrentData()->GetDoAction()->End_DoAction();
@@ -244,6 +258,16 @@ void ACPlayer::OnAim()
 void ACPlayer::OffAim()
 {
 	Action->DoAim(false);
+}
+
+void ACPlayer::InventoryFunc()
+{
+	CheckNull(Inventory);
+
+	if (Inventory->IsVisible() == false)
+		Inventory->Attach();
+	else
+		Inventory->Detach();
 }
 
 void ACPlayer::Interact()

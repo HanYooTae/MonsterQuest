@@ -13,7 +13,7 @@ protected:
 	virtual void NativeConstruct() override;
 
 public:
-	FORCEINLINE bool IsOpened() { return Opened; }
+	FORCEINLINE bool IsVisible() { return bVisible; }
 
 public:
 	void Attach();
@@ -28,13 +28,19 @@ public:
 		class UCEquipSlot* SwordEquipment;
 
 	UPROPERTY(meta = (BindWidget))
-		class UCEquipSlot* BowEquipment;
+		class UCEquipSlot* PistolEquipment;
+
+	UPROPERTY(meta = (BindWidget))
+		class UCEquipSlot* RifleEquipment;
+
+	UPROPERTY(meta = (BindWidget))
+		class UCEquipSlot* SniperEquipment;
 
 	UPROPERTY(meta = (BindWidget))
 		class UUniformGridPanel* BagPannel;
 
 private:
 	class ACharacter* OwnerCharacter;
-	bool Opened = false;
+	bool bVisible = false;
 	uint32 MaxInventory = 30;
 };
