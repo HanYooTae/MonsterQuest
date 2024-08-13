@@ -191,6 +191,12 @@ void ACPlayer::LookUpAtRate(float Rate)
 	AddControllerPitchInput(Rate * BaseLookUpRate * GetWorld()->GetDeltaSeconds());
 }
 
+void ACPlayer::AddItem(UCItemData* item)
+{
+	int32 index = Inventory->AddItem(item);
+	Items.Insert(item, index);
+}
+
 void ACPlayer::DrawSword()
 {
 	CheckFalse(State->IsIdleMode());

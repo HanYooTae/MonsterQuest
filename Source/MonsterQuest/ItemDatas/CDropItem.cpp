@@ -77,7 +77,7 @@ void ACDropItem::OnInteract()
 		return;
 	}
 
-	// Do Something
+	player->AddItem(ItemData);
 
 	this->Destroy();
 }

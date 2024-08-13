@@ -39,5 +39,5 @@ public:
 private:
 	class ACharacter* OwnerCharacter;
 	bool bVisible = false;
-	uint32 MaxInventory = 30;
+	uint32 InventorySlot = 30;
 };

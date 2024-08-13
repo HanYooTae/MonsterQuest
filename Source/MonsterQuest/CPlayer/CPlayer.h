@@ -64,6 +64,9 @@ public:
 public:
 	class UCActionComponent* GetAction() { return Action; }
 
+public:
+	void AddItem(class UCItemData* item);
+
 protected:
 	void DrawSword();
 	void DrawPistol();

@@ -15,15 +15,16 @@ protected:
 public:
 	void SettingSlot(class UCItemData* InItem);
 	FORCEINLINE bool IsFilled() { return bFilled; }
+
+protected:
+	UFUNCTION(BlueprintCallable)
+		void EquipItem();
+
 private:
 	void EquipSword();
 	void EquipPistol();
 	void EquipRifle();
 	void EquipSniper();
-
-protected:
-	UFUNCTION(BlueprintCallable)
-		void EquipItem();
 
 private:
 	class ACharacter* OwnerCharacter;

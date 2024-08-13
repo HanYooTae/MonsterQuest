@@ -1,5 +1,12 @@
 #include "Widgets/Inventory/CInventory.h"
 
+#include "CPlayer/CPlayer.h"
+#include "Widgets/Inventory/CInventorySlot.h"
+#include "Widgets/Inventory/CEquipSlot.h"
+#include "ItemDatas/CItemData.h"
+
+#include "Components/UniformGridPanel.h"
+
 #include "Global.h"
 
 void UCInventory::NativeConstruct()
@@ -44,5 +51,15 @@ void UCInventory::Detach()
 
 uint8 UCInventory::AddItem(UCItemData* item)
 {
-	return uint8();
+	for (uint8 i = 0; i < InventorySlot; i++)
+	{
+		UCInventorySlot* slot = Cast<UCInventorySlot>(BagPannel->GetChildAt(i));
+		if (slot->IsFilled() == false)
+		{
+			slot->SettingSlot(item);
+			
+			return i;
+		}
+	}
+	return -1;
 }
