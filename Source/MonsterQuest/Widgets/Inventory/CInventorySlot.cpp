@@ -13,6 +13,9 @@ void UCInventorySlot::NativeConstruct()
 {
 	Super::NativeConstruct();
 
+	OwnerCharacter = Cast<ACharacter>(GetOwningPlayerPawn());
+	ACPlayer* player = Cast<ACPlayer>(OwnerCharacter);
+	Inventory = player->GetInventory();
 }
 
 void UCInventorySlot::SettingSlot(UCItemData* InItem)
@@ -27,6 +30,29 @@ void UCInventorySlot::SettingSlot(UCItemData* InItem)
 
 void UCInventorySlot::EquipItem()
 {
+	switch (Item->Item.WeaponType)
+	{
+		case EWeaponType::Sword:
+		{
+			EquipSword();
+			break;
+		}
+		case EWeaponType::Pistol:
+		{
+			EquipPistol();
+			break;
+		}
+		case EWeaponType::Rifle:
+		{
+			EquipRifle();
+			break;
+		}
+		case EWeaponType::Sniper:
+		{
+			EquipSniper();
+			break;
+		}
+	}
 }
 
 void UCInventorySlot::EquipSword()

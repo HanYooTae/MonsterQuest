@@ -13,6 +13,7 @@ void UCInventory::NativeConstruct()
 {
 	Super::NativeConstruct();
 
+	OwnerCharacter = Cast<ACharacter>(GetOwningPlayerPawn());
 }
 
 void UCInventory::Attach()

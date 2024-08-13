@@ -108,6 +108,7 @@ public:
 
 public:
 	FORCEINLINE class UStaticMeshComponent* GetBackpack() { return Backpack; }
+	FORCEINLINE class UCInventory* GetInventory() { return Inventory; }
 
 public:
 	/** Camera boom positioning the camera behind the character */
