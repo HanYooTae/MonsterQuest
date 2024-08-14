@@ -25,4 +25,10 @@ void UCEquipSlot::SettingSlot(UCItemData* InItem)
 
 void UCEquipSlot::UnEquipItem()
 {
+	bEquipped = false;
+
+	ACPlayer* player = Cast<ACPlayer>(OwnerCharacter);
+
+	player->AddItem(Item);
+	SlotImage->SetBrushFromTexture(DefaultImage);
 }
