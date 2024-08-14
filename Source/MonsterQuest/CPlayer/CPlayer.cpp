@@ -197,6 +197,11 @@ void ACPlayer::AddItem(UCItemData* item)
 	Items.Insert(item, index);
 }
 
+void ACPlayer::RemoveInventoryItem(UCItemData* InItem)
+{
+	Items.Remove(InItem);
+}
+
 void ACPlayer::DrawSword()
 {
 	CheckFalse(State->IsIdleMode());

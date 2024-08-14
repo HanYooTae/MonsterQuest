@@ -17,6 +17,10 @@ void UCEquipSlot::NativeConstruct()
 
 void UCEquipSlot::SettingSlot(UCItemData* InItem)
 {
+	SlotImage->SetBrushFromTexture(InItem->Item.Picture);
+
+	Item = InItem;
+	bEquipped = true;
 }
 
 void UCEquipSlot::UnEquipItem()

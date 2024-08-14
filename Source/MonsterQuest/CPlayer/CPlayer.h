@@ -66,6 +66,7 @@ public:
 
 public:
 	void AddItem(class UCItemData* item);
+	void RemoveInventoryItem(class UCItemData* InItem);
 
 protected:
 	void DrawSword();

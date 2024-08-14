@@ -57,16 +57,40 @@ void UCInventorySlot::EquipItem()
 
 void UCInventorySlot::EquipSword()
 {
+	ACPlayer* player = Cast<ACPlayer>(OwnerCharacter);
+
+	Inventory->SwordEquipment->SettingSlot(Item);
+	player->RemoveInventoryItem(Item);
+	SlotImage->SetColorAndOpacity(FLinearColor(1.0f, 1.0f, 1.0f, 0.0f));
+	bFilled = false;
 }
 
 void UCInventorySlot::EquipPistol()
 {
+	ACPlayer* player = Cast<ACPlayer>(OwnerCharacter);
+
+	Inventory->PistolEquipment->SettingSlot(Item);
+	player->RemoveInventoryItem(Item);
+	SlotImage->SetColorAndOpacity(FLinearColor(1.0f, 1.0f, 1.0f, 0.0f));
+	bFilled = false;
 }
 
 void UCInventorySlot::EquipRifle()
 {
+	ACPlayer* player = Cast<ACPlayer>(OwnerCharacter);
+
+	Inventory->RifleEquipment->SettingSlot(Item);
+	player->RemoveInventoryItem(Item);
+	SlotImage->SetColorAndOpacity(FLinearColor(1.0f, 1.0f, 1.0f, 0.0f));
+	bFilled = false;
 }
 
 void UCInventorySlot::EquipSniper()
 {
+	ACPlayer* player = Cast<ACPlayer>(OwnerCharacter);
+
+	Inventory->SniperEquipment->SettingSlot(Item);
+	player->RemoveInventoryItem(Item);
+	SlotImage->SetColorAndOpacity(FLinearColor(1.0f, 1.0f, 1.0f, 0.0f));
+	bFilled = false;
 }
