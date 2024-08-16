@@ -204,6 +204,7 @@ void ACPlayer::RemoveInventoryItem(UCItemData* InItem)
 
 void ACPlayer::DrawSword()
 {
+	CheckFalse(bSword);
 	CheckFalse(State->IsIdleMode());
 	HUD->SetVisibility(ESlateVisibility::Hidden);
 	Action->SetSwordMode();
@@ -211,6 +212,7 @@ void ACPlayer::DrawSword()
 
 void ACPlayer::DrawPistol()
 {
+	CheckFalse(bPistol);
 	CheckFalse(State->IsIdleMode());
 	HUD->SetVisibility(ESlateVisibility::Visible);
 	Action->SetPistolMode();
@@ -218,6 +220,7 @@ void ACPlayer::DrawPistol()
 
 void ACPlayer::DrawRifle()
 {
+	CheckFalse(bRifle);
 	CheckFalse(State->IsIdleMode());
 	HUD->SetVisibility(ESlateVisibility::Visible);
 	Action->SetRifleMode();
@@ -225,6 +228,7 @@ void ACPlayer::DrawRifle()
 
 void ACPlayer::DrawSniper()
 {
+	CheckFalse(bSniper);
 	CheckFalse(State->IsIdleMode());
 	HUD->SetVisibility(ESlateVisibility::Visible);
 	Action->SetSniperMode();

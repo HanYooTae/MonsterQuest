@@ -13,6 +13,8 @@ class MONSTERQUEST_API UCActionData : public UDataAsset
 public:
 	void BeginPlay(class ACharacter* InOwnerCharacter, UCActionData_Spawned** OutSpawned);
 
+	void SpawnPlayerItem(class ACharacter* InOwnerCharacter, UCActionData_Spawned** OutSpawned);
+
 private:
 	FString GetCustomLabel(class ACharacter* InOwnerCharacter, FString InMiddleName);
 

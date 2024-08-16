@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "ActorComponents/CActionComponent.h"
 #include "CEquipSlot.generated.h"
 
 UCLASS()
@@ -19,6 +20,9 @@ public:
 protected:
 	UFUNCTION(BlueprintCallable)
 		void UnEquipItem();
+
+private:
+	void DeleteWeapon(EActionType InActionType);
 
 private:
 	class ACharacter* OwnerCharacter;

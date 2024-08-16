@@ -4,6 +4,10 @@
 #include "Widgets/Inventory/CInventory.h"
 #include "Widgets/Inventory/CEquipSlot.h"
 #include "ItemDatas/CItemData.h"
+#include "ActorComponents/CActionComponent.h"
+#include "ActionDatas/CActionData.h"
+#include "ActionDatas/CActionData_Spawned.h"
+#include "Actions/Weapons/CWeapon.h"
 
 #include "Components/Image.h"
 
@@ -58,39 +62,71 @@ void UCInventorySlot::EquipItem()
 void UCInventorySlot::EquipSword()
 {
 	ACPlayer* player = Cast<ACPlayer>(OwnerCharacter);
+	CheckNull(player);
+
+	player->bSword = true;
+
+	UCActionData* actionData = player->GetAction()->DataAssets[(int32)EActionType::Sword];
+	CheckNull(actionData);
 
 	Inventory->SwordEquipment->SettingSlot(Item);
 	player->RemoveInventoryItem(Item);
 	SlotImage->SetColorAndOpacity(FLinearColor(1.0f, 1.0f, 1.0f, 0.0f));
 	bFilled = false;
+
+	actionData->SpawnPlayerItem(OwnerCharacter, &player->GetAction()->Datas[(int32)EActionType::Sword]);
 }
 
 void UCInventorySlot::EquipPistol()
 {
 	ACPlayer* player = Cast<ACPlayer>(OwnerCharacter);
+	CheckNull(player);
+
+	player->bPistol = true;
+
+	UCActionData* actionData = player->GetAction()->DataAssets[(int32)EActionType::Pistol];
+	CheckNull(actionData);
 
 	Inventory->PistolEquipment->SettingSlot(Item);
 	player->RemoveInventoryItem(Item);
 	SlotImage->SetColorAndOpacity(FLinearColor(1.0f, 1.0f, 1.0f, 0.0f));
 	bFilled = false;
+
+	actionData->SpawnPlayerItem(OwnerCharacter, &player->GetAction()->Datas[(int32)EActionType::Pistol]);
 }
 
 void UCInventorySlot::EquipRifle()
 {
 	ACPlayer* player = Cast<ACPlayer>(OwnerCharacter);
+	CheckNull(player);
+
+	player->bRifle = true;
+
+	UCActionData* actionData = player->GetAction()->DataAssets[(int32)EActionType::Rifle];
+	CheckNull(actionData);
 
 	Inventory->RifleEquipment->SettingSlot(Item);
 	player->RemoveInventoryItem(Item);
 	SlotImage->SetColorAndOpacity(FLinearColor(1.0f, 1.0f, 1.0f, 0.0f));
 	bFilled = false;
+
+	actionData->SpawnPlayerItem(OwnerCharacter, &player->GetAction()->Datas[(int32)EActionType::Rifle]);
 }
 
 void UCInventorySlot::EquipSniper()
 {
 	ACPlayer* player = Cast<ACPlayer>(OwnerCharacter);
+	CheckNull(player);
+
+	player->bSniper = true;
+
+	UCActionData* actionData = player->GetAction()->DataAssets[(int32)EActionType::Sniper];
+	CheckNull(actionData);
 
 	Inventory->SniperEquipment->SettingSlot(Item);
 	player->RemoveInventoryItem(Item);
 	SlotImage->SetColorAndOpacity(FLinearColor(1.0f, 1.0f, 1.0f, 0.0f));
 	bFilled = false;
+
+	actionData->SpawnPlayerItem(OwnerCharacter, &player->GetAction()->Datas[(int32)EActionType::Sniper]);
 }

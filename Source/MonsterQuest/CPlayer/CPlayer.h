@@ -177,5 +177,11 @@ private:
 public:
 	TArray<class UCItemData*> Items;
 	int32 MaxItem = 30;
+
+public:		// Whether Equipped Weapon or not
+	bool bSword = false;
+	bool bPistol = false;
+	bool bRifle = false;
+	bool bSniper = false;
 };
 
