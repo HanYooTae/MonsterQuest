@@ -5,6 +5,7 @@
 #include "ActorComponents/CStateComponent.h"
 #include "ActorComponents/CMontagesComponent.h"
 #include "ActorComponents/CActionComponent.h"
+#include "Widgets/Health/CEnemyHealthWidget.h"
 
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Components/WidgetComponent.h"
@@ -15,7 +16,7 @@
 ACEnemy::ACEnemy()
 {
 	//Create Scene Component
-	/*CHelpers::CreateSceneComponent(this, &HealthWidget, "HealthWidget", GetMesh());*/
+	CHelpers::CreateSceneComponent(this, &HealthWidget, "HealthWidget", GetMesh());
 
 	//Create Actor Component
 	CHelpers::CreateActorComponent(this, &Action, "Action");
@@ -42,12 +43,12 @@ ACEnemy::ACEnemy()
 	GetCharacterMovement()->MaxWalkSpeed = Status->GetRunSpeed();
 
 	// -> WidgetComp
-	/*TSubclassOf<UCEnemyHealthWidget> healthWidgetClass;
-	CHelpers::GetClass(&healthWidgetClass, "WidgetBlueprint'/Game/Widget/HealthWidget/WB_CEnemyHealthWidget.WB_CEnemyHealthWidget_C'");
+	TSubclassOf<UCEnemyHealthWidget> healthWidgetClass;
+	CHelpers::GetClass(&healthWidgetClass, "WidgetBlueprint'/Game/Widgets/Player/WB_CEnemyHealthWidget.WB_CEnemyHealthWidget_C'");
 	HealthWidget->SetWidgetClass(healthWidgetClass);
-	HealthWidget->SetRelativeLocation(FVector(0, 0, 180));
-	HealthWidget->SetDrawSize(FVector2D(120, 20));
-	HealthWidget->SetWidgetSpace(EWidgetSpace::Screen);*/
+	HealthWidget->SetRelativeLocation(FVector(0, 0, 220));
+	HealthWidget->SetDrawSize(FVector2D(180, 20));
+	HealthWidget->SetWidgetSpace(EWidgetSpace::Screen);
 }
 
 void ACEnemy::BeginPlay()
@@ -57,11 +58,11 @@ void ACEnemy::BeginPlay()
 	Action->Type = EActionType::Sword;
 
 	//Widget Settings
-	/*HealthWidget->InitWidget();
+	HealthWidget->InitWidget();
 	UCEnemyHealthWidget* healthWidget = Cast<UCEnemyHealthWidget>(HealthWidget->GetUserWidgetObject());
 
 	if (!!healthWidget)
-		healthWidget->UpdateHealth(Status->GetCurrentHealth(), Status->GetMaxHealth());*/
+		healthWidget->UpdateHealth(Status->GetCurrentHealth(), Status->GetMaxHealth());
 }
 
 float ACEnemy::TakeDamage(float Damage, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
@@ -89,9 +90,9 @@ void ACEnemy::Hitted()
 {
 	State->SetHittedMode();
 	// Apply Health Widget
-	/*UCEnemyHealthWidget* healthWidget = Cast<UCEnemyHealthWidget>(HealthWidget->GetUserWidgetObject());
+	UCEnemyHealthWidget* healthWidget = Cast<UCEnemyHealthWidget>(HealthWidget->GetUserWidgetObject());
 	if (!!healthWidget)
-		healthWidget->UpdateHealth(Status->GetCurrentHealth(), Status->GetMaxHealth());*/
+		healthWidget->UpdateHealth(Status->GetCurrentHealth(), Status->GetMaxHealth());
 
 	// Play Hit Montage
 	Montages->PlayHitted();
@@ -111,7 +112,7 @@ void ACEnemy::Dead()
 {
 	CheckTrue(State->IsDeadMode());
 
-	//HealthWidget->SetVisibility(false);
+	HealthWidget->SetVisibility(false);
 
 	State->SetDeadMode();
 
