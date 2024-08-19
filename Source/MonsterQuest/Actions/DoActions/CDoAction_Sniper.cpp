@@ -32,9 +32,13 @@ void ACDoAction_Sniper::OnAim()
 	Player->GetDotSight()->SetVisibility(true);
 	Player->CrossHair->SetVisibility(ESlateVisibility::Hidden);
 	Weapon->SetHidden(true);
-	ActionComp->DataAssets[(int8)EActionType::Sword]->Weapon->SetHidden(true);
-	ActionComp->DataAssets[(int8)EActionType::Pistol]->Weapon->SetHidden(true);
-	ActionComp->DataAssets[(int8)EActionType::Rifle]->Weapon->SetHidden(true);
+
+	if (!!ActionComp->DataAssets[(int8)EActionType::Sword]->Weapon)
+		ActionComp->DataAssets[(int8)EActionType::Sword]->Weapon->SetHidden(true);
+	if (!!ActionComp->DataAssets[(int8)EActionType::Pistol]->Weapon)
+		ActionComp->DataAssets[(int8)EActionType::Pistol]->Weapon->SetHidden(true);
+	if (!!ActionComp->DataAssets[(int8)EActionType::Rifle]->Weapon)
+		ActionComp->DataAssets[(int8)EActionType::Rifle]->Weapon->SetHidden(true);
 }
 
 void ACDoAction_Sniper::OffAim()
@@ -46,7 +50,10 @@ void ACDoAction_Sniper::OffAim()
 	Player->GetDotSight()->SetVisibility(false);
 	Player->CrossHair->SetVisibility(ESlateVisibility::Visible);
 	Weapon->SetHidden(false);
-	ActionComp->DataAssets[(int8)EActionType::Sword]->Weapon->SetHidden(false);
-	ActionComp->DataAssets[(int8)EActionType::Pistol]->Weapon->SetHidden(false);
-	ActionComp->DataAssets[(int8)EActionType::Rifle]->Weapon->SetHidden(false);
+	if (!!ActionComp->DataAssets[(int8)EActionType::Sword]->Weapon)
+		ActionComp->DataAssets[(int8)EActionType::Sword]->Weapon->SetHidden(false);
+	if (!!ActionComp->DataAssets[(int8)EActionType::Pistol]->Weapon)
+		ActionComp->DataAssets[(int8)EActionType::Pistol]->Weapon->SetHidden(false);
+	if (!!ActionComp->DataAssets[(int8)EActionType::Rifle]->Weapon)
+		ActionComp->DataAssets[(int8)EActionType::Rifle]->Weapon->SetHidden(false);
 }
