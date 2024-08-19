@@ -144,19 +144,23 @@ protected:
 		class ACWeapon* Weapon;
 
 public:  // Widget Class Reference
-	UPROPERTY(EditDefaultsOnly, Category = "HUD")
+	UPROPERTY(EditDefaultsOnly, Category = "Widget")
+		TSubclassOf<class UCPlayerHealthWidget> PlayerHealthWidgetClass;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Widget")
 		TSubclassOf<class UCUserWidget_CrossHair> CrossHairClass;
 
-	UPROPERTY(EditDefaultsOnly, Category = "HUD")
+	UPROPERTY(EditDefaultsOnly, Category = "Widget")
 		TSubclassOf<class UCUserWidget_Information> InformationClass;
 
-	UPROPERTY(EditAnywhere, Category = "Weapon")
+	UPROPERTY(EditAnywhere, Category = "Widget")
 		TSubclassOf<class UCUserWidget_HUD> HUDClass;
 
-	UPROPERTY(EditAnywhere, Category = "Inventory")
+	UPROPERTY(EditAnywhere, Category = "Widget")
 		TSubclassOf<class UCInventory> InventoryClass;
 
 public:	// Widget
+	class UCPlayerHealthWidget* PlayerHealthWidget;
 	class UCUserWidget_CrossHair* CrossHair;
 	class UCUserWidget_Information* Information;
 	class UCUserWidget_HUD* HUD;

@@ -10,6 +10,7 @@
 #include "Actions/Weapons/CWeapon_Sword.h"
 #include "Actions/DoActions/CDoAction.h"
 #include "Actions/Reload/CReload.h"
+#include "Widgets/Health/CPlayerHealthWidget.h"
 #include "Widgets/HUD/CUserWidget_CrossHair.h"
 #include "Widgets/HUD/CUserWidget_Information.h"
 #include "Widgets/HUD/CUserWidget_HUD.h"
@@ -37,6 +38,7 @@ ACPlayer::ACPlayer()
 	CHelpers::CreateActorComponent(this, &Option, "Option");
 	CHelpers::CreateActorComponent<ACWeapon>(this, &Weapon, "Weapon");
 
+	CHelpers::GetClass<UCPlayerHealthWidget>(&PlayerHealthWidgetClass, "WidgetBlueprint'/Game/Widgets/Player/WB_CPlayerHealthWidget.WB_CPlayerHealthWidget_C'");
 	CHelpers::GetClass<UCUserWidget_CrossHair>(&CrossHairClass, "WidgetBlueprint'/Game/Widgets/HUD/WB_CrossHair.WB_CrossHair_C'");
 	CHelpers::GetClass<UCUserWidget_Information>(&InformationClass, "WidgetBlueprint'/Game/Widgets/HUD/WB_Information.WB_Information_C'");
 	CHelpers::GetClass<UCUserWidget_HUD>(&HUDClass, "WidgetBlueprint'/Game/Widgets/HUD/WB_HUD.WB_HUD_C'");
@@ -86,9 +88,17 @@ void ACPlayer::BeginPlay()
 {
 	Super::BeginPlay();
 
+	if (!!PlayerHealthWidgetClass)
+	{
+		PlayerHealthWidget = CreateWidget<UCPlayerHealthWidget, APlayerController>(this->GetController<APlayerController>(), PlayerHealthWidgetClass);
+		CheckNull(PlayerHealthWidget);
+		PlayerHealthWidget->AddToViewport();
+	}
+
 	if (!!CrossHairClass)
 	{
 		CrossHair = CreateWidget<UCUserWidget_CrossHair, APlayerController>(this->GetController<APlayerController>(), CrossHairClass);
+		CheckNull(CrossHair);
 		CrossHair->AddToViewport();
 		CrossHair->SetVisibility(ESlateVisibility::Hidden);
 	}
@@ -96,6 +106,7 @@ void ACPlayer::BeginPlay()
 	if (!!InformationClass)
 	{
 		Information = CreateWidget<UCUserWidget_Information, APlayerController>(this->GetController<APlayerController>(), InformationClass);
+		CheckNull(Information);
 		Information->AddToViewport();
 		Information->SetVisibility(ESlateVisibility::Visible);
 	}
@@ -103,6 +114,7 @@ void ACPlayer::BeginPlay()
 	if (!!HUDClass)
 	{
 		HUD = CreateWidget<UCUserWidget_HUD, APlayerController>(this->GetController<APlayerController>(), HUDClass);
+		CheckNull(HUD);
 		HUD->AddToViewport();
 		HUD->SetVisibility(ESlateVisibility::Hidden);
 	}
@@ -110,6 +122,7 @@ void ACPlayer::BeginPlay()
 	if (!!InventoryClass)
 	{
 		Inventory = CreateWidget<UCInventory, APlayerController>(this->GetController<APlayerController>(), InventoryClass);
+		CheckNull(Inventory);
 		Inventory->AddToViewport();
 		Inventory->SetVisibility(ESlateVisibility::Hidden);
 	}
@@ -298,6 +311,7 @@ float ACPlayer::TakeDamage(float Damage, FDamageEvent const& DamageEvent, AContr
 	DamageValue = Super::TakeDamage(Damage, DamageEvent, EventInstigator, DamageCauser);
 
 	Status->DecreaseHealth(DamageValue);
+	PlayerHealthWidget->UpdateHealth();
 
 	if (Status->IsDead())
 	{
