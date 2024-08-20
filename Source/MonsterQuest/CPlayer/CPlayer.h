@@ -159,13 +159,21 @@ public:  // Widget Class Reference
 	UPROPERTY(EditAnywhere, Category = "Widget")
 		TSubclassOf<class UCInventory> InventoryClass;
 
+	UPROPERTY(EditAnywhere, Category = "Widget")
+		TSubclassOf<class UCLose> LoseWidgetClass;
+
+	UPROPERTY(EditAnywhere, Category = "Widget")
+		TSubclassOf<class UCClear> ClearWidgetClass;
+
 public:	// Widget
 	class UCPlayerHealthWidget* PlayerHealthWidget;
 	class UCUserWidget_CrossHair* CrossHair;
 	class UCUserWidget_Information* Information;
 	class UCUserWidget_HUD* HUD;
 	class UCInventory* Inventory;
-
+	class UCLose* LoseWidget;
+	class UCClear* ClearWidget;
+	
 private:
 	UPROPERTY(VisibleDefaultsOnly)
 		class UStaticMeshComponent* DotSight;

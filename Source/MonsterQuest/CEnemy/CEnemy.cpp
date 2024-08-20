@@ -44,7 +44,7 @@ ACEnemy::ACEnemy()
 
 	// -> WidgetComp
 	TSubclassOf<UCEnemyHealthWidget> healthWidgetClass;
-	CHelpers::GetClass(&healthWidgetClass, "WidgetBlueprint'/Game/Widgets/Player/WB_CEnemyHealthWidget.WB_CEnemyHealthWidget_C'");
+	CHelpers::GetClass(&healthWidgetClass, "WidgetBlueprint'/Game/Widgets/Health/WB_CEnemyHealthWidget.WB_CEnemyHealthWidget_C'");
 	HealthWidget->SetWidgetClass(healthWidgetClass);
 	HealthWidget->SetRelativeLocation(FVector(0, 0, 220));
 	HealthWidget->SetDrawSize(FVector2D(180, 20));

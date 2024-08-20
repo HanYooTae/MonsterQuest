@@ -15,6 +15,8 @@
 #include "Widgets/HUD/CUserWidget_Information.h"
 #include "Widgets/HUD/CUserWidget_HUD.h"
 #include "Widgets/Inventory/CInventory.h"
+#include "Widgets/Menu/CLose.h"
+#include "Widgets/Menu/CClear.h"
 
 #include "HeadMountedDisplayFunctionLibrary.h"
 #include "Camera/CameraComponent.h"
@@ -38,11 +40,14 @@ ACPlayer::ACPlayer()
 	CHelpers::CreateActorComponent(this, &Option, "Option");
 	CHelpers::CreateActorComponent<ACWeapon>(this, &Weapon, "Weapon");
 
-	CHelpers::GetClass<UCPlayerHealthWidget>(&PlayerHealthWidgetClass, "WidgetBlueprint'/Game/Widgets/Player/WB_CPlayerHealthWidget.WB_CPlayerHealthWidget_C'");
+	// Widget Classes
+	CHelpers::GetClass<UCPlayerHealthWidget>(&PlayerHealthWidgetClass, "WidgetBlueprint'/Game/Widgets/Health/WB_CPlayerHealthWidget.WB_CPlayerHealthWidget_C'");
 	CHelpers::GetClass<UCUserWidget_CrossHair>(&CrossHairClass, "WidgetBlueprint'/Game/Widgets/HUD/WB_CrossHair.WB_CrossHair_C'");
 	CHelpers::GetClass<UCUserWidget_Information>(&InformationClass, "WidgetBlueprint'/Game/Widgets/HUD/WB_Information.WB_Information_C'");
 	CHelpers::GetClass<UCUserWidget_HUD>(&HUDClass, "WidgetBlueprint'/Game/Widgets/HUD/WB_HUD.WB_HUD_C'");
 	CHelpers::GetClass<UCInventory>(&InventoryClass, "WidgetBlueprint'/Game/Widgets/Inventory/WB_CInventory.WB_CInventory_C'");
+	CHelpers::GetClass<UCLose>(&LoseWidgetClass, "WidgetBlueprint'/Game/Widgets/Menu/WB_CLose.WB_CLose_C'");
+	CHelpers::GetClass<UCClear>(&ClearWidgetClass, "WidgetBlueprint'/Game/Widgets/Menu/WB_CClear.WB_CClear_C'");
 
 	CHelpers::CreateSceneComponent(this, &Backpack, "Backpack", GetMesh());
 	UStaticMesh* backpack;
@@ -125,6 +130,22 @@ void ACPlayer::BeginPlay()
 		CheckNull(Inventory);
 		Inventory->AddToViewport();
 		Inventory->SetVisibility(ESlateVisibility::Hidden);
+	}
+
+	if (!!LoseWidgetClass)
+	{
+		LoseWidget = CreateWidget<UCLose, APlayerController>(this->GetController<APlayerController>(), LoseWidgetClass);
+		CheckNull(LoseWidget);
+		LoseWidget->AddToViewport();
+		LoseWidget->SetVisibility(ESlateVisibility::Hidden);
+	}
+
+	if (!!ClearWidgetClass)
+	{
+		ClearWidget = CreateWidget<UCClear, APlayerController>(this->GetController<APlayerController>(), ClearWidgetClass);
+		CheckNull(ClearWidget);
+		ClearWidget->AddToViewport();
+		ClearWidget->SetVisibility(ESlateVisibility::Hidden);
 	}
 }
 
@@ -350,6 +371,10 @@ void ACPlayer::Dead()
 
 void ACPlayer::End_Dead()
 {
+	LoseWidget->SetVisibility(ESlateVisibility::Visible);
+	APlayerController* controller = Cast<APlayerController>(Controller);
+	CheckNull(controller);
+	controller->bShowMouseCursor = true;
 	Action->End_Dead();
 	this->Destroy();
 }

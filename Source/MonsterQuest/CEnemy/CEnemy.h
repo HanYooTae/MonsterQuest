@@ -21,16 +21,15 @@ public:
 	UFUNCTION(BlueprintImplementableEvent)
 		void Dissolve();
 
-private:
+protected:
 	UFUNCTION()
 		void Hitted();
 
 	UFUNCTION()
 		void Dead();
 
-	UFUNCTION()
-		void End_Dead();
-
+	UFUNCTION(BlueprintCallable)
+		virtual void End_Dead();
 
 
 public:
