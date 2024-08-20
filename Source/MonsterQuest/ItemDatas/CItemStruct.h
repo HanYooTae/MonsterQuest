@@ -61,12 +61,6 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 		UTexture2D* WeaponIcon;
-
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-		UTexture2D* FirstSkillIcon;
-
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-		UTexture2D* SecondSkillIcon;
 };
 
 UCLASS()
