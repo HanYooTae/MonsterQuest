@@ -366,7 +366,7 @@ void ACPlayer::Dead()
 	Action->OffAllCollisions();
 	GetCapsuleComponent()->SetCollisionProfileName("Spectator");
 
-	UKismetSystemLibrary::K2_SetTimer(this, "End_Dead", 5.0f, false);
+	UKismetSystemLibrary::K2_SetTimer(this, "End_Dead", 3.0f, false);
 }
 
 void ACPlayer::End_Dead()
