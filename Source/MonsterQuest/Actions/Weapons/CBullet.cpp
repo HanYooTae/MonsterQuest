@@ -29,7 +29,7 @@ ACBullet::ACBullet()
 	CHelpers::GetAsset<UMaterialInstanceConstant>(&material, "MaterialInstanceConstant'/Game/Materials/M_Bullet_Inst.M_Bullet_Inst'");
 	Mesh->SetMaterial(0, material);
 
-	InitialLifeSpan = 3.f;
+	InitialLifeSpan = 1.f;
 
 	Projectile->InitialSpeed = 2000.f;
 	Projectile->MaxSpeed = 4000.f;
@@ -56,5 +56,5 @@ void ACBullet::OnComponentBeginOverlap(UPrimitiveComponent* OverlappedComponent,
 	if (OnBeginOverlap.IsBound())
 		OnBeginOverlap.Broadcast(SweepResult);
 	
-	//this->Destroy();
+	//Destroy();
 }

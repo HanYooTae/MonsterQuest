@@ -27,6 +27,8 @@ ACDoAction_Fire::ACDoAction_Fire()
 	CHelpers::GetAsset<UParticleSystem>(&HitParticle, "ParticleSystem'/Game/Effects/P_Impact_Default.P_Impact_Default'");
 
 	CHelpers::GetAsset<UMaterialInstanceConstant>(&HitDecal, "MaterialInstanceConstant'/Game/Materials/M_Decal_Inst.M_Decal_Inst'");
+
+	CHelpers::GetClass<ACBullet>(&BulletClass, "Blueprint'/Game/Weapons/BP_CBullet.BP_CBullet_C'");
 }
 
 void ACDoAction_Fire::BeginPlay()
@@ -189,7 +191,6 @@ void ACDoAction_Fire::OnBulletBeginOverlap(FHitResult hitResult)
 		OwnerCharacter->GetController(),
 		Bullet
 	);
-
 	Bullet->Destroy();
 }
 
