@@ -53,7 +53,6 @@ void ACDoAction_Sword::Begin_DoAction()
 
 	CheckFalse(bSucceed);
 	bSucceed = false;
-
 	ComboCount++;
 	ComboCount = FMath::Clamp(ComboCount, 0, Datas.Num() - 1);
 	OwnerCharacter->PlayAnimMontage(Datas[ComboCount].AnimMontage, Datas[ComboCount].PlayRate, Datas[ComboCount].StartSection);

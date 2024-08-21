@@ -63,7 +63,7 @@ protected:
 	TArray<FDoActionData> Datas;
 
 protected:
-	bool bAutoFire = true;
+	bool bAutoFire = false;
 
 public:	
 	bool bCanEndAttack = true; // Sword공격 시, Player의 EndAttack을 return해주는 flag

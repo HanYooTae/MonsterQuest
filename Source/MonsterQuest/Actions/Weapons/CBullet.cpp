@@ -56,5 +56,5 @@ void ACBullet::OnComponentBeginOverlap(UPrimitiveComponent* OverlappedComponent,
 	if (OnBeginOverlap.IsBound())
 		OnBeginOverlap.Broadcast(SweepResult);
 	
-	//Destroy();
+	//this->Destroy();
 }

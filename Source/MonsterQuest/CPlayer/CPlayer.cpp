@@ -158,8 +158,6 @@ void ACPlayer::Tick(float DeltaTime)
 		ACDoAction* doAction = GetAction()->GetCurrentData()->GetDoAction();
 		if (!!doAction)
 		{
-			doAction->IsAutoFire() ? HUD->OnAutoFire() : HUD->OffAutoFire();
-
 			uint8 currMagazineCount = doAction->GetCurrMagazineCount();
 			uint8 maxMagazineCount = 0;
 
@@ -289,6 +287,15 @@ void ACPlayer::ToggleAutoFire()
 	CheckNull(Action->GetCurrentData());
 	CheckNull(Action->GetCurrentData()->GetDoAction());
 	Action->GetCurrentData()->GetDoAction()->ToggleAutoFire();
+
+	if (!!HUD)
+	{
+		ACDoAction* doAction = GetAction()->GetCurrentData()->GetDoAction();
+		if (!!doAction)
+		{
+			doAction->IsAutoFire() ? HUD->OnAutoFire() : HUD->OffAutoFire();
+		}
+	}
 }
 
 void ACPlayer::ToggleReload()

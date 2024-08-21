@@ -42,18 +42,6 @@ void ACDoAction_Fire::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 	Aim->Tick(DeltaTime);
-
-	/*if (LastAddSpreadTime >= 0.0f)
-	{
-		if (GetWorld()->GetTimeSeconds() - LastAddSpreadTime >= AutoFireInterval + 0.25f)
-		{
-			CurrSpreadRadius = 0;
-			LastAddSpreadTime = 0;
-
-			if (!!CrossHair)
-				CrossHair->UpdateSpreadRange(CurrSpreadRadius, MaxSpreadAlignment);
-		}
-	}*/
 }
 
 void ACDoAction_Fire::DoAction()
@@ -201,6 +189,8 @@ void ACDoAction_Fire::OnBulletBeginOverlap(FHitResult hitResult)
 		OwnerCharacter->GetController(),
 		Bullet
 	);
+
+	Bullet->Destroy();
 }
 
 void ACDoAction_Fire::OnAim()
