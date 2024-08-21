@@ -21,7 +21,7 @@ ACAIController::ACAIController()
 
 	Sight = CreateDefaultSubobject<UAISenseConfig_Sight>("Sight");
 	Sight->SightRadius = 600.f;
-	Sight->LoseSightRadius = 800.f;
+	Sight->LoseSightRadius = 3000.f;
 	Sight->PeripheralVisionAngleDegrees = 180.f;
 	Sight->SetMaxAge(2.f);
 	Sight->DetectionByAffiliation.bDetectEnemies = true;
@@ -71,6 +71,11 @@ void ACAIController::Tick(float DeltaTime)
 float ACAIController::GetSightRadius()
 {
 	return Sight->SightRadius;
+}
+
+float ACAIController::GetLoseSightRadius()
+{
+	return Sight->LoseSightRadius;
 }
 
 void ACAIController::OnPerceptionUpdated(const TArray<AActor*>& UpdatedActors)

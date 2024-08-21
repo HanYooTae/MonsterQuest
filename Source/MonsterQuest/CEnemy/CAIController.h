@@ -23,6 +23,7 @@ public:
 
 public:
 	float GetSightRadius();
+	float GetLoseSightRadius();
 	FORCEINLINE float GetBehaviorRange() { return BehaviorRange; }
 
 private:
