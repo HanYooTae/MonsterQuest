@@ -1,6 +1,7 @@
 #include "Notifies/CAnimNotify_Hitted.h"
 
 #include "ActorComponents/CStateComponent.h"
+#include "ActorComponents/CStatusComponent.h"
 
 #include "Global.h"
 
@@ -17,5 +18,9 @@ void UCAnimNotify_Hitted::Notify(USkeletalMeshComponent* MeshComp, UAnimSequence
 
 	UCStateComponent* stateComp = CHelpers::GetComponent<UCStateComponent>(MeshComp->GetOwner());
 	CheckNull(stateComp);
+	UCStatusComponent* statusComp = CHelpers::GetComponent<UCStatusComponent>(MeshComp->GetOwner());
+	CheckNull(statusComp);
+
 	stateComp->SetIdleMode();
+	statusComp->SetMove();
 }
