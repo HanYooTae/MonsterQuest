@@ -18,6 +18,9 @@ protected:
 public:
 	virtual float TakeDamage(float Damage, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
 
+	UFUNCTION()
+		void TurnOffHealthWidget();
+
 	UFUNCTION(BlueprintImplementableEvent)
 		void Dissolve();
 

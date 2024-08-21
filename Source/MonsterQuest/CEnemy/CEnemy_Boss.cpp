@@ -28,5 +28,6 @@ void ACEnemy_Boss::Boss_Dead()
 
 	ACPlayer* player = Cast<ACPlayer>(controller->GetCharacter());
 	CheckNull(player);
+	player->ClearWidget->Attach();
 	player->ClearWidget->SetVisibility(ESlateVisibility::Visible);
 }

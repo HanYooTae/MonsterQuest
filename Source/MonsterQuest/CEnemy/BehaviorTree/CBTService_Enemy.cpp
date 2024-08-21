@@ -78,7 +78,7 @@ void UCBTService_Enemy::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeM
 	}
 
 	//-> Is in Sight Range
-	if (distance < controller->GetSightRadius())
+	if (distance < controller->GetLoseSightRadius())
 	{
 		behaviorComp->SetApproachMode();
 		return;

@@ -42,13 +42,14 @@ ACEnemy::ACEnemy()
 	GetCharacterMovement()->RotationRate = FRotator(0, 720, 0);
 	GetCharacterMovement()->MaxWalkSpeed = Status->GetRunSpeed();
 
-	// -> WidgetComp
+	// -> HealthWidget Settings
 	TSubclassOf<UCEnemyHealthWidget> healthWidgetClass;
 	CHelpers::GetClass(&healthWidgetClass, "WidgetBlueprint'/Game/Widgets/Health/WB_CEnemyHealthWidget.WB_CEnemyHealthWidget_C'");
 	HealthWidget->SetWidgetClass(healthWidgetClass);
 	HealthWidget->SetRelativeLocation(FVector(0, 0, 220));
 	HealthWidget->SetDrawSize(FVector2D(180, 20));
 	HealthWidget->SetWidgetSpace(EWidgetSpace::Screen);
+	HealthWidget->SetVisibility(false);
 }
 
 void ACEnemy::BeginPlay()
@@ -74,6 +75,8 @@ float ACEnemy::TakeDamage(float Damage, FDamageEvent const& DamageEvent, AContro
 
 	Status->DecreaseHealth(DamageValue);
 
+	HealthWidget->SetVisibility(true);
+
 	// Dead
 	if (Status->IsDead())
 	{
@@ -83,7 +86,14 @@ float ACEnemy::TakeDamage(float Damage, FDamageEvent const& DamageEvent, AContro
 
 	Hitted();
 
+	UKismetSystemLibrary::K2_SetTimer(this, "TurnOffHealthWidget", 5.0f, false);
+
 	return DamageValue;
+}
+
+void ACEnemy::TurnOffHealthWidget()
+{
+	HealthWidget->SetVisibility(false);
 }
 
 void ACEnemy::Hitted()
