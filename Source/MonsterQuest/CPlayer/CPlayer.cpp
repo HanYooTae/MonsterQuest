@@ -371,6 +371,7 @@ void ACPlayer::Dead()
 
 void ACPlayer::End_Dead()
 {
+	LoseWidget->Attach();
 	LoseWidget->SetVisibility(ESlateVisibility::Visible);
 	APlayerController* controller = Cast<APlayerController>(Controller);
 	CheckNull(controller);
