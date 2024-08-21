@@ -4,8 +4,6 @@
 
 void UCMenuBase::Attach()
 {
-	AddToViewport();
-
 	bIsFocusable = true;
 
 	FInputModeUIOnly inputMode;
