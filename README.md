@@ -19,7 +19,8 @@
 
 ### 아이템
 
-> + [아이템 구성]()
+> + [아이템 개요](https://github.com/HanYooTae/MonsterQuest/blob/main/Outline/Item/%EC%95%84%EC%9D%B4%ED%85%9C%20%EA%B0%9C%EC%9A%94.md)
+> + [아이템 구성](https://github.com/HanYooTae/MonsterQuest/blob/main/Outline/Item/%EC%95%84%EC%9D%B4%ED%85%9C%20%EA%B5%AC%EC%84%B1.md)
 
 
 ### 인벤토리
