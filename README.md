@@ -44,5 +44,4 @@
 
 ### 포탈
 
-> + [포탈 구성]()
-> + [포탈 이동]()
+> + [포탈 구성](https://github.com/HanYooTae/MonsterQuest/blob/main/Outline/Portal/%ED%8F%AC%ED%83%88%20%EA%B5%AC%EC%84%B1.md)
