@@ -37,13 +37,10 @@
 > + 플레이어
 >    + [플레이어 개요](https://github.com/HanYooTae/MonsterQuest/blob/main/Outline/Player/%ED%94%8C%EB%A0%88%EC%9D%B4%EC%96%B4%20%EA%B0%9C%EC%9A%94.md)
 >    + [플레이어 상호작용](https://github.com/HanYooTae/MonsterQuest/blob/main/Outline/Player/%ED%94%8C%EB%A0%88%EC%9D%B4%EC%96%B4%20%EC%83%81%ED%98%B8%EC%9E%91%EC%9A%A9.md)
->    + [플레이어 애니메이션 구성]()
 >
 > + 몬스터
+>    + [몬스터 개요]()
 >    + [몬스터 구성]()
->    + [몬스터 애니메이션 구성]()
-> + [플레이어와 몬스터 간의 상호작용]()
-
 
 ### 포탈
 
