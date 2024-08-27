@@ -36,9 +36,6 @@ private:
 	UPROPERTY(VisibleDefaultsOnly)
 		class UParticleSystemComponent* ParticleComponent;
 
-	UPROPERTY(VisibleDefaultsOnly)
-		class UParticleSystem* Particle;
-
 	UPROPERTY(EditAnywhere)
 		FName TransferLevelName;
 
