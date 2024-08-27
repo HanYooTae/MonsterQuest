@@ -1,6 +1,6 @@
 ## CActionComponent
 
-#### 캐릭터가 장착한 무기를 관라하는 컴포넌트
+#### 캐릭터가 장착한 무기를 관리하는 컴포넌트
 
 ```
 UENUM(BlueprintType)
