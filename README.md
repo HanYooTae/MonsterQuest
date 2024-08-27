@@ -35,7 +35,8 @@
 > + [사용자 정의 컴포넌트](https://github.com/HanYooTae/MonsterQuest/blob/main/Outline/ActorComponents/%EC%82%AC%EC%9A%A9%EC%9E%90%20%EC%A0%95%EC%9D%98%20%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8.md)
 >
 > + 플레이어
->    + [플레이어 구성]()
+>    + [플레이어 개요](https://github.com/HanYooTae/MonsterQuest/blob/main/Outline/Player/%ED%94%8C%EB%A0%88%EC%9D%B4%EC%96%B4%20%EA%B0%9C%EC%9A%94.md)
+>    + [플레이어 상호작용](https://github.com/HanYooTae/MonsterQuest/blob/main/Outline/Player/%ED%94%8C%EB%A0%88%EC%9D%B4%EC%96%B4%20%EC%83%81%ED%98%B8%EC%9E%91%EC%9A%A9.md)
 >    + [플레이어 애니메이션 구성]()
 >
 > + 몬스터
