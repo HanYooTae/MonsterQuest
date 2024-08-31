@@ -42,18 +42,29 @@
 
 ### 캐릭터
 
-> + #### 사용자 컴포넌트
->   사용자 컴포넌트는 플레이어와 몬스터를 구분하지 않고 사용하는 컴포넌트와, 구분하는 단일 사용 컴포넌트가 존재한다.
+> + #### 사용자 정의 컴포넌트
+>   사용자 정의 컴포넌트는 플레이어와 몬스터를 구분하지 않고 사용하는 컴포넌트와, 구분하는 단일 사용 컴포넌트가 존재한다.
 >     + [상세보기](https://github.com/HanYooTae/MonsterQuest/blob/main/Outline/ActorComponents/%EC%82%AC%EC%9A%A9%EC%9E%90%20%EC%A0%95%EC%9D%98%20%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8.md)
 >
-> + 플레이어
->    + [플레이어 개요](https://github.com/HanYooTae/MonsterQuest/blob/main/Outline/Player/%ED%94%8C%EB%A0%88%EC%9D%B4%EC%96%B4%20%EA%B0%9C%EC%9A%94.md)
->    + [플레이어 상호작용](https://github.com/HanYooTae/MonsterQuest/blob/main/Outline/Player/%ED%94%8C%EB%A0%88%EC%9D%B4%EC%96%B4%20%EC%83%81%ED%98%B8%EC%9E%91%EC%9A%A9.md)
+> + #### 플레이어
+>   
+>   + #### 플레이어 개요
+>     사용자 정의 컴포넌트의 기능을 제외한 플레이어의 모든 기능은 Widget을 기반으로 하고 있다.
+>      + [상세보기](https://github.com/HanYooTae/MonsterQuest/blob/main/Outline/Player/%ED%94%8C%EB%A0%88%EC%9D%B4%EC%96%B4%20%EA%B0%9C%EC%9A%94.md)
+>   + #### 플레이어 상호작용
+>     아이템을 장착하여 아이템의 정보, 장착, 공격 등의 정보를 월드 상에 Spawn시킬 수 있다.
+>      + [상세보기](https://github.com/HanYooTae/MonsterQuest/blob/main/Outline/Player/%ED%94%8C%EB%A0%88%EC%9D%B4%EC%96%B4%20%EC%83%81%ED%98%B8%EC%9E%91%EC%9A%A9.md)
 >
 > + 몬스터
->    + [몬스터 개요](https://github.com/HanYooTae/MonsterQuest/blob/main/Outline/Enemy/%EB%AA%AC%EC%8A%A4%ED%84%B0%20%EA%B0%9C%EC%9A%94.md)
->    + [몬스터 구성](https://github.com/HanYooTae/MonsterQuest/blob/main/Outline/Enemy/%EB%AA%AC%EC%8A%A4%ED%84%B0%20%EA%B5%AC%EC%84%B1.md)
+>   + #### 몬스터 개요
+>     몬스터는 크게 AI Controller와 Behavior Tree 2가지로 동작된다.
+>      + [상세보기](https://github.com/HanYooTae/MonsterQuest/blob/main/Outline/Enemy/%EB%AA%AC%EC%8A%A4%ED%84%B0%20%EA%B0%9C%EC%9A%94.md)
+>   + #### 몬스터 구성
+>     몬스터의 구성요소는 플레이어와 공통적인 부분들도 있지만 차별점도 존재한다.
+>      + [상세보기](https://github.com/HanYooTae/MonsterQuest/blob/main/Outline/Enemy/%EB%AA%AC%EC%8A%A4%ED%84%B0%20%EA%B5%AC%EC%84%B1.md)
 
 ### 포탈
 
-> + [포탈 구성](https://github.com/HanYooTae/MonsterQuest/blob/main/Outline/Portal/%ED%8F%AC%ED%83%88%20%EA%B5%AC%EC%84%B1.md)
+> + #### 포탈 구성
+>   포탈을 이용하여 다음 Stage로 넘어갈 수 있다.
+>   + [상세보기](https://github.com/HanYooTae/MonsterQuest/blob/main/Outline/Portal/%ED%8F%AC%ED%83%88%20%EA%B5%AC%EC%84%B1.md)
